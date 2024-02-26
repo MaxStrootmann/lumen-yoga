@@ -1,16 +1,33 @@
-import CldImage from "~/components/CldImage";
+import { FloatingNav } from "~/components/navbar";
+import CldImageExamples from "../components/ImageExample";
 
 export default function HomePage() {
+  const navItems = [
+    {
+      name: "Home",
+      link: "/",
+    },
+    {
+      name: "Recensies",
+      link: "/recensies",
+    },
+    {
+      name: "Kinderyoga",
+      link: "/kinderyoga",
+    },
+    {
+      name: "Over mij",
+      link: "/over-mij",
+    },
+    {
+      name: "Info",
+      link: "/Info",
+    },
+  ];
   return (
     <main>
-      <CldImage
-        width={3840}
-        height={2270}
-        alt="Yoga"
-        src="https://res.cloudinary.com/strootmann/image/upload/v1708871503/lumen-yoga/Strekken_4k_b9wusn.jpg"
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        quality={100}
-      ></CldImage>
+      <FloatingNav navItems={navItems}></FloatingNav>
+      <CldImageExamples></CldImageExamples>
     </main>
   );
 }
