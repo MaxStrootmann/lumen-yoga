@@ -8,6 +8,7 @@ import {
 } from "framer-motion";
 import { cn } from "~/utils/cn";
 import Link from "next/link";
+import CldImage from "./CldImage";
 
 export const FloatingNav = ({
   navItems,
@@ -51,22 +52,32 @@ export const FloatingNav = ({
           duration: 0.2,
         }}
         className={cn(
-          "fixed  inset-x-0 z-[5000] mx-auto flex items-center justify-center space-x-4 bg-white py-2 pl-8 pr-2",
+          "fixed  inset-x-0 z-[5000] flex items-center justify-between bg-white py-2 pl-8 pr-2",
           className,
         )}
       >
-        {navItems.map((navItem: any, idx: number) => (
-          <Link
-            key={`link=${idx}`}
-            href={navItem.link}
-            className={cn(
-              "dark:text-neutral-50 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 relative flex items-center space-x-1",
-            )}
-          >
-            <span className="block sm:hidden">{navItem.icon}</span>
-            <span className="hidden text-sm sm:block">{navItem.name}</span>
-          </Link>
-        ))}
+        <div className="relative h-16 w-full">
+          <CldImage
+            src="https://res.cloudinary.com/strootmann/image/upload/v1708871727/lumen-yoga/Lumen-Yoga_logo-vol_xg1uur.svg"
+            alt="Lumen yoga logo"
+            fill
+            sizes="100vw"
+          ></CldImage>
+        </div>
+        <menu className="space-x-4">
+          {navItems.map((navItem: any, idx: number) => (
+            <Link
+              key={`link=${idx}`}
+              href={navItem.link}
+              className={cn(
+                "dark:text-neutral-50 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 relative flex items-center space-x-1",
+              )}
+            >
+              <span className="block sm:hidden">{navItem.icon}</span>
+              <span className="hidden text-sm sm:block">{navItem.name}</span>
+            </Link>
+          ))}
+        </menu>
         <Link href={"/contact"}>
           <button className="border-neutral-200 relative rounded-full border px-4 py-2 text-sm font-medium text-black dark:border-white/[0.2] dark:text-white">
             <span>Contact</span>
