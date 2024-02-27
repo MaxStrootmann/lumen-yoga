@@ -13,6 +13,10 @@ export default {
       green: "#AED9B3",
     },
     extend: {
+      container: {
+        center: true,
+        padding: "1rem",
+      },
       fontFamily: {
         sans: [
           "Inter",
