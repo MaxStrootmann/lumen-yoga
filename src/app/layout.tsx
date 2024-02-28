@@ -1,3 +1,5 @@
+import Footer from "~/components/Footer";
+import { FloatingNav } from "~/components/navbar";
 import "~/styles/globals.css";
 
 export const metadata = {
@@ -17,9 +19,37 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const navItems = [
+    {
+      name: "Home",
+      link: "/",
+    },
+    {
+      name: "Recensies",
+      link: "/recensies",
+    },
+    {
+      name: "Kinderyoga",
+      link: "/kinderyoga",
+    },
+    {
+      name: "Over mij",
+      link: "/over-mij",
+    },
+    {
+      name: "Info",
+      link: "/Info",
+    },
+  ];
   return (
     <html lang="en">
-      <body className="font-sans">{children}</body>
+      <body className="font-sans">
+        <header>
+          <FloatingNav navItems={navItems}></FloatingNav>
+        </header>
+        <main>{children}</main>
+        <Footer />
+      </body>
     </html>
   );
 }

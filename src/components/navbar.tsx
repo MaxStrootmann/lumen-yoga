@@ -53,11 +53,11 @@ export const FloatingNav = ({
           duration: 0.2,
         }}
         className={cn(
-          "fixed  inset-x-0 z-[5000] flex items-center justify-between bg-white py-2 lg:px-12",
+          "fixed  inset-x-0 z-[5000] flex items-center justify-between bg-white py-3 lg:px-12",
           className,
         )}
       >
-        <div className="container flex items-center justify-between">
+        <nav className="container flex items-center justify-between">
           <CldImage
             src="https://res.cloudinary.com/strootmann/image/upload/v1708871727/lumen-yoga/Lumen-Yoga_logo-vol_xg1uur.svg"
             alt="Lumen yoga logo"
@@ -91,7 +91,7 @@ export const FloatingNav = ({
           <div className="flex items-center lg:hidden">
             <Hamburger></Hamburger>
           </div>
-        </div>
+        </nav>
       </motion.div>
     </AnimatePresence>
   );

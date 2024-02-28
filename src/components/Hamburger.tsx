@@ -5,6 +5,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
+import ContactButton from "./ContactButton";
 
 export default function Hamburger() {
   return (
@@ -20,7 +21,8 @@ export default function Hamburger() {
         <DropdownMenuItem>Kinderyoga</DropdownMenuItem>
         <DropdownMenuItem>Over Mij</DropdownMenuItem>
         <DropdownMenuItem>Info</DropdownMenuItem>
-        {/* <ContactButton></ContactButton> */}
+        <div className="p-2"></div>
+        <ContactButton href="/contact"></ContactButton>
       </DropdownMenuContent>
     </DropdownMenu>
   );
