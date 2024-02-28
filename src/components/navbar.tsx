@@ -9,6 +9,7 @@ import {
 import { cn } from "~/utils/cn";
 import Link from "next/link";
 import CldImage from "./CldImage";
+import Hamburger from "./Hamburger";
 
 export const FloatingNav = ({
   navItems,
@@ -52,7 +53,7 @@ export const FloatingNav = ({
           duration: 0.2,
         }}
         className={cn(
-          "fixed  inset-x-0 z-[5000] flex items-center justify-between bg-white px-12 py-2",
+          "fixed  inset-x-0 z-[5000] flex items-center justify-between bg-white py-2 lg:px-12",
           className,
         )}
       >
@@ -65,7 +66,7 @@ export const FloatingNav = ({
             className="h-11 w-auto md:h-16"
           ></CldImage>
 
-          <menu className="flex space-x-4">
+          <menu className="hidden space-x-4 lg:flex">
             {navItems.map((navItem: any, idx: number) => (
               <Link
                 key={`link=${idx}`}
@@ -87,6 +88,9 @@ export const FloatingNav = ({
               </button>
             </Link>
           </menu>
+          <div className="flex items-center lg:hidden">
+            <Hamburger></Hamburger>
+          </div>
         </div>
       </motion.div>
     </AnimatePresence>
