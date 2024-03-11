@@ -44,9 +44,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="font-sans">
-        <header>
-          <FloatingNav navItems={navItems}></FloatingNav>
-        </header>
+        <FloatingNav navItems={navItems}></FloatingNav>
         <main>{children}</main>
         <Footer />
       </body>

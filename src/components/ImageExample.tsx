@@ -3,8 +3,8 @@ import CldImage from "~/components/CldImage";
 export default function CldImageExamples() {
   return (
     <main>
-      {/* without using fill, you don't have the absolute positioning and having to wrap in relative div.
-      but now you do need to specify the w and h */}
+      {/* without fill you have to specify width and height, sizes 100vw generates a 
+      srcset for the whole viewport width */}
       <CldImage
         width={3840}
         height={2270}
@@ -13,8 +13,8 @@ export default function CldImageExamples() {
         sizes="100vw"
       ></CldImage>
 
-      {/* with fill, you don't need to specify the w and h, you can then use css to change the way
-      it behaves when resizing*/}
+      {/* with fill you don't need width and height but you do have to style it and wrap in
+      a relative div because it is position absolute by default */}
       <div className="relative h-72 w-full lg:h-[600px]">
         <CldImage
           alt="Yoga"

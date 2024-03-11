@@ -16,7 +16,7 @@ export default function Footer() {
         ></CldImage>
       </Link>
 
-      <ul className="flex flex-col justify-center gap-3 pt-4 text-center">
+      <ul className="flex flex-col justify-center gap-3 pt-5 text-center">
         <li>
           <Link href="/home" className="font-bold">
             Home
@@ -52,6 +52,17 @@ export default function Footer() {
           <FaFacebook size={30} />
         </li>
       </ul>
+
+      <p className="pt-5 text-center">
+        © {new Date().getFullYear()} Lumen Yoga{" "}
+        <span className="text-gray-400"> | </span> Website door{" "}
+        <Link
+          href="https://www.linkedin.com/in/max-strootmann/"
+          className="font-bold"
+        >
+          Max Strootmann
+        </Link>
+      </p>
     </footer>
   );
 }

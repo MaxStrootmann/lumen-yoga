@@ -1,6 +1,5 @@
-import { FloatingNav } from "~/components/navbar";
-import CldImageExamples from "../components/ImageExample";
+import Hero from "~/components/Hero";
 
 export default function HomePage() {
-  return <CldImageExamples></CldImageExamples>;
+  return <Hero></Hero>;
 }
