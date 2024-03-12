@@ -33,7 +33,6 @@ const config = {
           "Roboto",
           "Helvetica Neue",
           "Arial Nova",
-          "Nimbus Sans",
           "Arial",
           "sans-serif",
         ],

@@ -22,7 +22,7 @@ export default function Hamburger() {
         <DropdownMenuItem>Over Mij</DropdownMenuItem>
         <DropdownMenuItem>Info</DropdownMenuItem>
         <div className="p-2"></div>
-        <ContactButton></ContactButton>
+        <ContactButton size={"sm"} />
       </DropdownMenuContent>
     </DropdownMenu>
   );

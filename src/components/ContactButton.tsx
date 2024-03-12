@@ -1,12 +1,9 @@
-import { buttonVariants } from "@/components/ui/button";
+import { ButtonProps, buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 
-export default function ContactButton() {
+export default function ContactButton({ variant, size }: ButtonProps) {
   return (
-    <Link
-      href="/contact"
-      className={`${buttonVariants({ variant: "default" })} bg-yellow text-lg font-bold`}
-    >
+    <Link href="/contact" className={`${buttonVariants({ variant, size })} `}>
       Contact
     </Link>
   );

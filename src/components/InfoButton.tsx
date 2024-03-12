@@ -1,13 +1,10 @@
-import { buttonVariants } from "@/components/ui/button";
+import { ButtonProps, buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 
-export default function InfoButton() {
+export default function InfoButton({ variant, size }: ButtonProps) {
   return (
-    <Link
-      href="/kinderyoga"
-      className={`${buttonVariants({ variant: "default" })} text-lg`}
-    >
-      Contact
+    <Link href="/contact" className={`${buttonVariants({ variant, size })} `}>
+      Meer info...
     </Link>
   );
 }

@@ -10,6 +10,8 @@ import { cn } from "~/utils/cn";
 import Link from "next/link";
 import CldImage from "./CldImage";
 import Hamburger from "./Hamburger";
+import { Button } from "@/components/ui/button";
+import ContactButton from "./ContactButton";
 
 export const FloatingNav = ({
   navItems,
@@ -53,7 +55,7 @@ export const FloatingNav = ({
           duration: 0.2,
         }}
         className={cn(
-          "fixed  inset-x-0 z-[5000] flex items-center justify-between bg-white py-3 lg:px-12",
+          "fixed  inset-x-0 z-[5000] flex items-center justify-between bg-white py-3",
           className,
         )}
       >
@@ -75,18 +77,12 @@ export const FloatingNav = ({
                   "dark:text-neutral-50 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 relative flex items-center space-x-1",
                 )}
               >
-                <span className="block sm:hidden">{navItem.icon}</span>
-                <span className="hidden text-sm font-bold sm:block">
+                <span className="hidden whitespace-nowrap text-sm font-bold lg:block">
                   {navItem.name}
                 </span>
               </Link>
             ))}
-            <Link href={"/contact"}>
-              <button className="border-neutral-200 relative rounded-full border px-4 py-2 text-sm font-medium text-black dark:border-white/[0.2] dark:text-white">
-                <span>Contact</span>
-                <span className="from-transparent via-blue-500 to-transparent absolute inset-x-0 -bottom-px mx-auto h-px w-1/2  bg-gradient-to-r" />
-              </button>
-            </Link>
+            <ContactButton size={"sm"} />
           </menu>
           <div className="flex items-center lg:hidden">
             <Hamburger></Hamburger>

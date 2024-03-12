@@ -1,5 +1,5 @@
 import Footer from "~/components/Footer";
-import { FloatingNav } from "~/components/navbar";
+import { FloatingNav } from "~/components/Nav";
 import "~/styles/globals.css";
 
 export const metadata = {
