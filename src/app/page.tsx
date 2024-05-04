@@ -1,6 +1,7 @@
 import FixedImage from "~/components/FixedImage";
 import CldImage from "~/components/CldImage";
 import Hero from "~/components/Hero";
+import Quote from "~/components/Quote";
 
 export default function HomePage() {
   return (
@@ -16,6 +17,7 @@ export default function HomePage() {
           className="object-cover"
         />
       </FixedImage>
+      <Quote />
     </div>
   );
 }
