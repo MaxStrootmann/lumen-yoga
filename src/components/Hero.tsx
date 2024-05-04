@@ -32,7 +32,7 @@ export default function Hero() {
       <div className="flex justify-between pb-4 pt-24">
         <div className="flex flex-col px-4 md:p-20">
           <div className="flex-grow md:hidden"></div>
-          <p className="mt-auto max-w-[30ch] text-center text-xl font-bold md:text-5xl">
+          <p className="mt-auto max-w-[30ch] pb-2 pt-8 text-center text-xl font-bold md:text-5xl">
             "Eerst had ik stress en nu voel ik me helemaal rustig"
           </p>
         </div>
