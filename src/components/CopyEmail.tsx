@@ -13,7 +13,6 @@ import {
   TooltipProvider,
 } from "@/components/ui/tooltip";
 import { useState } from "react";
-import { set } from "zod";
 
 export default function Component() {
   const [copied, setCopied] = useState(false);
@@ -28,10 +27,12 @@ export default function Component() {
         <TooltipTrigger asChild>
           <Button onClick={copyToClipboard} size="link" variant="link">
             {copied ? (
-              "email gekopieerd"
+              "email gekopieerd! 🎉"
             ) : (
               <div className="flex items-center gap-1">
-                <span>ellen@lumenyoga.nl</span>
+                <span className="underline underline-offset-4">
+                  ellen@lumenyoga.nl
+                </span>
                 <ClipboardIcon />
               </div>
             )}

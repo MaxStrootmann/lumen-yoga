@@ -8,6 +8,7 @@ export const env = createEnv({
    */
   server: {
     NODE_ENV: z.enum(["development", "test", "production"]),
+    RESEND_API_KEY: z.string(),
   },
 
   /**
@@ -28,6 +29,7 @@ export const env = createEnv({
     NODE_ENV: process.env.NODE_ENV,
     NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME:
       process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+    RESEND_API_KEY: process.env.RESEND_API_KEY,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**

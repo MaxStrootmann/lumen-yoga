@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -17,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import sendEmail from "~/lib/sendEmail";
 
 export function MessageBox() {
   return (
@@ -53,6 +53,7 @@ export function ContactForm() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
+    sendEmail(values);
     console.log(values);
   }
 
@@ -64,7 +65,7 @@ export function ContactForm() {
           name="naam"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Naam</FormLabel>
+              <FormLabel>Naam:</FormLabel>
               <FormControl>
                 <Input placeholder="naam" {...field} />
               </FormControl>
@@ -77,7 +78,7 @@ export function ContactForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
+              <FormLabel>Email:</FormLabel>
               <FormControl>
                 <Input placeholder="email" {...field} />
               </FormControl>
@@ -90,12 +91,13 @@ export function ContactForm() {
           name="bericht"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Bericht</FormLabel>
+              <FormLabel>Bericht:</FormLabel>
               <FormControl>
                 <Textarea
                   className="pb-4"
                   placeholder="Schrijf hier je bericht"
                   id="message"
+                  {...field}
                 />
               </FormControl>
               <FormMessage />
