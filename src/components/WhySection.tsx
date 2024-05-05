@@ -1,7 +1,7 @@
 export default function WhySection() {
   return (
     <div className="flex items-stretch">
-      <div id="logo-and-text" className="">
+      <div id="logo-and-text" className="pb-4">
         <div className="px-4 pb-4 pt-12">
           <img
             src="https://res.cloudinary.com/strootmann/image/upload/v1708871726/lumen-yoga/Lumen-Yoga_logo-type_kv0iki.svg"

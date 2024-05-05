@@ -27,7 +27,7 @@ export default function IntroImages() {
           gravity="center"
         />
       </FixedImage>
-      <Quote />
+      <Quote text="Yoga! Het beste van de hele dag!" />
       <FixedImage>
         <CldImage
           src="https://res.cloudinary.com/strootmann/image/upload/v1708871503/lumen-yoga/Strekken_4k_b9wusn.jpg"
