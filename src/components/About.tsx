@@ -22,21 +22,22 @@ export default function About() {
               soort ontspanning. Naarmate ik vaker yoga oefende leerde ik mezelf
               steeds beter kennen. Mijn innerlijke kracht maar ook mijn strenge,
               negatieve kant. Verwachtingen die ik van mezelf had bij een
-              oefening: "ik moet toch wel met mijn neus bij mijn knieën komen".
-              Of een negatieve stem die opdoemt dat ik hoe dan ook in deze
-              houding moest blijven, want "ik ben toch een jonge vrouw".
+              oefening: &quot;ik moet toch wel met mijn neus bij mijn knieën
+              komen&quot;. Of een negatieve stem die opdoemt dat ik hoe dan ook
+              in deze houding moest blijven, want &quot;ik ben toch een jonge
+              vrouw&quot;.
             </p>
             <p className="px-4 pt-4">
               Door de yoga heb ik geleerd zachter voor mezelf te zijn en dit
               ondersteund mij met de dagelijkse dingen. De ene dag ga je minder
               diep in een yoga houding dan de andere dag. De ene dag doe je meer
               dan de andere en dat is prima. Na een drukke dag neem ik nu even
-              rust in plaats van door te pushen met wat er "moet" gebeuren die
-              dag. Daardoor lig ik 's avonds niet overprikkeld in bed. Dat
-              negatieve stemmetje duikt een stuk minder vaak op. En met
-              ademhalingsoefeningen lukt het mij om stressvolle situaties meer
-              de baas te zijn. Hierdoor kwam bij mij steeds vaker de vraag: Hoe
-              zou mijn leven eruit hebben gezien als ik deze vaardigheden al
+              rust in plaats van door te pushen met wat er &quot;moet&quot;
+              gebeuren die dag. Daardoor lig ik &apos;s avonds niet overprikkeld
+              in bed. Dat negatieve stemmetje duikt een stuk minder vaak op. En
+              met ademhalingsoefeningen lukt het mij om stressvolle situaties
+              meer de baas te zijn. Hierdoor kwam bij mij steeds vaker de vraag:
+              Hoe zou mijn leven eruit hebben gezien als ik deze vaardigheden al
               eerder had geleerd? Wat als we dit al leren aan onze kinderen?
             </p>
             <p className="px-4 pt-4">

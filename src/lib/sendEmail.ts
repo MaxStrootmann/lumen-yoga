@@ -29,7 +29,7 @@ export default async function sendEmail(contactProps: contact): Promise<void> {
       html: `<p>Naam: ${naam}</p><p>Email: ${email}</p><p>Bericht: ${bericht}</p>`,
     });
     console.log("Email sent");
-  } catch ({ error, email }: any) {
+  } catch (error) {
     await resend.emails.send({
       from: "CONTACT FORMULIER LUMEN ERROR <email@nngrafischontwerp.nl>",
       to:
@@ -37,7 +37,7 @@ export default async function sendEmail(contactProps: contact): Promise<void> {
           ? ["strootmann95@gmail.com", "ellen@lumenyoga.nl"]
           : ["strootmann95@gmail.com"],
       subject: `Kan email niet versturen - Lumen Yoga Contact`,
-      text: `Er is een fout opgetreden bij het versturen van de email voor bericht van ${email}. De benodigde data is niet gevonden.`,
+      text: `Er is een fout opgetreden bij het versturen van de email voor bericht van ${contactProps.email}. De benodigde data is niet gevonden.`,
     });
   }
 }

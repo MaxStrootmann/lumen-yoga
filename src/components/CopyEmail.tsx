@@ -18,7 +18,7 @@ export default function Component() {
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = () => {
-    navigator.clipboard.writeText("ellen@lumenyoga.nl");
+    void navigator.clipboard.writeText("ellen@lumenyoga.nl");
     setCopied(true);
   };
   return (
@@ -46,10 +46,9 @@ export default function Component() {
   );
 }
 
-function ClipboardIcon({ props }: any) {
+function ClipboardIcon() {
   return (
     <svg
-      {...props}
       xmlns="http://www.w3.org/2000/svg"
       width="16"
       height="16"

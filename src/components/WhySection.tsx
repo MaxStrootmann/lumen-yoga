@@ -1,9 +1,13 @@
+import Image from "next/image";
+
 export default function WhySection() {
   return (
     <div className="flex items-stretch">
       <div id="logo-and-text" className="pb-4">
         <div className="px-4 pb-4 pt-12">
-          <img
+          <Image
+            width={667}
+            height={122}
             src="https://res.cloudinary.com/strootmann/image/upload/v1708871726/lumen-yoga/Lumen-Yoga_logo-type_kv0iki.svg"
             alt="Lumen Yoga"
           />
@@ -37,8 +41,9 @@ export default function WhySection() {
           <p className="px-4 pt-4">
             Leerkrachten leren korte yoga interventies inzetten in de klas met
             een praktisch digitaal handboek als naslagwerk. We sluiten met de
-            yoga zoveel mogelijk aan bij de thema's en leerlijnen van de school.
-            Het voorkomt dat het als 'iets los' en als belastend wordt ervaren.
+            yoga zoveel mogelijk aan bij de thema&apos;s en leerlijnen van de
+            school. Het voorkomt dat het als &apos;iets los&apos; en als
+            belastend wordt ervaren.
             <strong>
               De lessen vinden plaats in het klaslokaal zelf, tafels en stoelen
               kunnen blijven staan. Er is geen gymlokaal nodig.

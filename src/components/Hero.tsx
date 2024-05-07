@@ -1,6 +1,7 @@
 import ContactButton from "./ContactButton";
 import InfoButton from "./InfoButton";
 import CldImage from "./CldImage";
+import Image from "next/image";
 
 export default function Hero() {
   return (
@@ -33,11 +34,13 @@ export default function Hero() {
         <div className="flex flex-col px-4 md:p-20">
           <div className="flex-grow md:hidden"></div>
           <p className="mt-auto max-w-[30ch] pb-2 pt-8 text-center text-xl font-bold md:text-5xl">
-            "Eerst had ik stress en nu voel ik me helemaal rustig"
+            &quot;Eerst had ik stress en nu voel ik me helemaal rustig&quot;
           </p>
         </div>
         <div className="relative w-[50vw] md:w-[33vw]">
-          <img
+          <Image
+            width={239}
+            height={342}
             alt="halve zon"
             className="absolute -top-20 right-0 w-full object-fill"
             src="https://res.cloudinary.com/strootmann/image/upload/v1708871728/lumen-yoga/halve_zon_mfcoaz.svg"

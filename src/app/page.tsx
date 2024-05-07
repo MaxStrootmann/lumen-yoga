@@ -1,13 +1,9 @@
-import { MdEmail, MdLocalPhone, MdLocationPin } from "react-icons/md";
 import Hero from "~/components/Hero";
 import IntroImages from "~/components/IntroImages";
 import WhySection from "~/components/WhySection";
 import Krijgers from "~/components/Krijgers";
 import About from "~/components/About";
 import Lespakketten from "~/components/Lespakketten";
-import CopyEmail from "~/components/CopyEmail";
-import Link from "next/link";
-import { ContactForm } from "~/components/ContactForm";
 import Contact from "~/components/Contact";
 
 export default function HomePage() {

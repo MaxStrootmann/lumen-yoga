@@ -10,8 +10,13 @@ import { cn } from "~/utils/cn";
 import Link from "next/link";
 import CldImage from "./CldImage";
 import Hamburger from "./Hamburger";
-import { Button } from "@/components/ui/button";
 import ContactButton from "./ContactButton";
+
+type NavItem = {
+  name: string;
+  link: string;
+  icon?: JSX.Element;
+};
 
 export const FloatingNav = ({
   navItems,
@@ -29,9 +34,8 @@ export const FloatingNav = ({
   const [visible, setVisible] = useState(true);
 
   useMotionValueEvent(scrollYProgress, "change", (current) => {
-    // Check if current is not undefined and is a number
     if (typeof current === "number") {
-      let direction = current! - scrollYProgress.getPrevious()!;
+      const direction = current - scrollYProgress.getPrevious()!;
 
       if (direction < 0 || (current === 1 && direction === 1)) {
         setVisible(true);
@@ -69,7 +73,7 @@ export const FloatingNav = ({
           ></CldImage>
 
           <menu className="hidden space-x-4 lg:flex">
-            {navItems.map((navItem: any, idx: number) => (
+            {navItems.map((navItem: NavItem, idx: number) => (
               <Link
                 key={`link=${idx}`}
                 href={navItem.link}

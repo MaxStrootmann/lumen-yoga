@@ -53,7 +53,7 @@ export function ContactForm() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    sendEmail(values);
+    void sendEmail(values);
     console.log(values);
   }
 
