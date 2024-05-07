@@ -12,6 +12,9 @@ export default function HomePage() {
       <Hero />
       <IntroImages />
       <WhySection />
+      <div className="md:hidden">
+        <Krijgers />
+      </div>
       <About />
       <Lespakketten />
       <Contact />
