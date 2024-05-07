@@ -24,21 +24,21 @@ export default function RootLayout({
       name: "Home",
       link: "/",
     },
-    {
-      name: "Recensies",
-      link: "/recensies",
-    },
+    // {
+    //   name: "Recensies",
+    //   link: "#recensies",
+    // },
     {
       name: "Kinderyoga",
-      link: "/kinderyoga",
+      link: "#kinderyoga",
     },
     {
       name: "Over mij",
-      link: "/over-mij",
+      link: "#over-mij",
     },
     {
       name: "Info",
-      link: "/Info",
+      link: "#info",
     },
   ];
   return (

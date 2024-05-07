@@ -2,7 +2,7 @@ import BoxIcon from "./BoxIcon";
 
 export default function Lespakketten() {
   return (
-    <div className="px-4">
+    <div className="px-4" id="info">
       <h2 className="pt-12 text-4xl font-bold">
         Praktische info over de lespakketten
       </h2>

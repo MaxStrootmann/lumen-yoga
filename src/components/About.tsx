@@ -4,7 +4,7 @@ import Quote from "./Quote";
 
 export default function About() {
   return (
-    <div>
+    <div id="over-mij">
       <div className="flex items-stretch">
         <div className="flex flex-col">
           <div className="flex-1 bg-yellow px-4"></div>

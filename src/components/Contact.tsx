@@ -5,7 +5,7 @@ import { ContactForm } from "./ContactForm";
 
 export default function Contact() {
   return (
-    <div className="px-4 ">
+    <div className="px-4" id="contact">
       <h2 className="pb-8 pt-12 text-4xl font-bold">
         Vraag een vrijblijvend gesprek aan
       </h2>

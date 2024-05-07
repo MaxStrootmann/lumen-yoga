@@ -12,7 +12,6 @@ export default function HomePage() {
       <Hero />
       <IntroImages />
       <WhySection />
-      <Krijgers />
       <About />
       <Lespakketten />
       <Contact />

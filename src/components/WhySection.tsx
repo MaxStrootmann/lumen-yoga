@@ -1,8 +1,9 @@
 import Image from "next/image";
+import Krijgers from "./Krijgers";
 
 export default function WhySection() {
   return (
-    <div className="flex items-stretch">
+    <div className="flex items-stretch" id="kinderyoga">
       <div id="logo-and-text" className="pb-4">
         <div className="px-4 pb-4 pt-12">
           <Image
@@ -71,6 +72,7 @@ export default function WhySection() {
         <div className="flex-1 bg-blue px-4"></div>
         <div className="flex-1 bg-green px-4"></div>
       </div>
+      <Krijgers />
     </div>
   );
 }
