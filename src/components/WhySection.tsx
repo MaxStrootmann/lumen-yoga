@@ -4,7 +4,7 @@ import CldImage from "./CldImage";
 
 export default function WhySection() {
   return (
-    <div className="grid-cols-2 md:grid">
+    <div className="custom-grid-why">
       <div className="col-span-2 hidden w-1/2 pb-8 pl-4 pr-8 pt-16 md:block">
         <Image
           width={667}
@@ -14,7 +14,7 @@ export default function WhySection() {
         />
       </div>
       <div className="flex items-stretch" id="kinderyoga">
-        <div id="logo-and-text" className="pb-4">
+        <div id="logo-and-text" className="mr-auto max-w-[70ch] pb-4">
           <div className="px-4 pb-4 pt-12 md:hidden">
             <Image
               width={667}
@@ -86,14 +86,14 @@ export default function WhySection() {
           <div className="flex-1 bg-green px-4"></div>
         </div>
       </div>
-      <div>
+      <div className="hidden md:block">
         <CldImage
           src="https://res.cloudinary.com/strootmann/image/upload/v1714821937/lumen-yoga/Krijgers_csawdv.jpg"
           alt="Krijgers"
           width={2000}
           height={2793}
           sizes="100vw"
-          className="hidden h-full object-cover md:block"
+          className="h-full object-cover"
         />
       </div>
     </div>
