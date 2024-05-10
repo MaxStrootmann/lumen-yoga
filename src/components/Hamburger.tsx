@@ -6,6 +6,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import ContactButton from "./ContactButton";
+import Link from "next/link";
 
 export default function Hamburger() {
   return (
@@ -16,10 +17,18 @@ export default function Hamburger() {
       <DropdownMenuContent
         onCloseAutoFocus={(event: Event) => event.preventDefault()}
       >
-        <DropdownMenuItem>Home</DropdownMenuItem>
-        <DropdownMenuItem>Kinderyoga</DropdownMenuItem>
-        <DropdownMenuItem>Over Mij</DropdownMenuItem>
-        <DropdownMenuItem>Info</DropdownMenuItem>
+        <Link href={"/"}>
+          <DropdownMenuItem>Home</DropdownMenuItem>
+        </Link>
+        <Link href={"#kinderyoga"}>
+          <DropdownMenuItem>Kinderyoga</DropdownMenuItem>
+        </Link>
+        <Link href={"#over-mij"}>
+          <DropdownMenuItem>Over Mij</DropdownMenuItem>
+        </Link>
+        <Link href={"#info"}>
+          <DropdownMenuItem>Info</DropdownMenuItem>
+        </Link>
         <div className="p-2"></div>
         <ContactButton size={"sm"} />
       </DropdownMenuContent>

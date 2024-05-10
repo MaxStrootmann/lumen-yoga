@@ -18,27 +18,22 @@ export default function Footer() {
 
       <ul className="flex flex-col justify-center gap-3 pt-5 text-center">
         <li>
-          <Link href="/home" className="font-bold">
+          <Link href="/" className="font-bold">
             Home
           </Link>
         </li>
         <li>
-          <Link href="/recensies" className="font-bold">
-            Recensies
-          </Link>
-        </li>
-        <li>
-          <Link href="/kinderyoga" className="font-bold">
+          <Link href="#kinderyoga" className="font-bold">
             Kinderyoga
           </Link>
         </li>
         <li>
-          <Link href="/over-mij" className="font-bold">
+          <Link href="#over-mij" className="font-bold">
             Over mij
           </Link>
         </li>
         <li>
-          <Link href="/info" className="font-bold">
+          <Link href="#info" className="font-bold">
             Info
           </Link>
         </li>
@@ -46,10 +41,16 @@ export default function Footer() {
 
       <ul className="mx-auto flex w-min gap-2 pr-1 pt-4">
         <li>
-          <FaInstagram size={32} />
+          <Link href={"https://www.instagram.com/lumen.yoga/"}>
+            <FaInstagram size={32} />
+          </Link>
         </li>
         <li>
-          <FaFacebook size={30} />
+          <Link
+            href={"https://www.facebook.com/profile.php?id=100091839270911"}
+          >
+            <FaFacebook size={30} />
+          </Link>
         </li>
       </ul>
 

@@ -50,8 +50,9 @@ export default function IntroImages() {
           height={2270}
           sizes="100vw"
           className="hidden object-cover lg:block"
+          quality="100"
           crop={{
-            width: "2500",
+            width: "3000",
             height: "2270",
             type: "fill",
             gravity: "center",

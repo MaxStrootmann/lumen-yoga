@@ -18,6 +18,12 @@
   }
 }
 
+@media (min-width: 1280px) {
+  html {
+    @apply container;
+  }
+}
+
 /* @media (min-width: 320px) {
   html {
     font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (640 - 320)));

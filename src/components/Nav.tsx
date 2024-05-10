@@ -64,13 +64,15 @@ export const FloatingNav = ({
         )}
       >
         <nav className="container flex items-center justify-between">
-          <CldImage
-            src="https://res.cloudinary.com/strootmann/image/upload/v1708871727/lumen-yoga/Lumen-Yoga_logo-vol_xg1uur.svg"
-            alt="Lumen yoga logo"
-            width={667}
-            height={430}
-            className="h-11 w-auto lg:h-16"
-          ></CldImage>
+          <Link href="/">
+            <CldImage
+              src="https://res.cloudinary.com/strootmann/image/upload/v1708871727/lumen-yoga/Lumen-Yoga_logo-vol_xg1uur.svg"
+              alt="Lumen yoga logo"
+              width={667}
+              height={430}
+              className="h-11 w-auto lg:h-16"
+            ></CldImage>
+          </Link>
 
           <menu className="hidden space-x-4 lg:flex">
             {navItems.map((navItem: NavItem, idx: number) => (
