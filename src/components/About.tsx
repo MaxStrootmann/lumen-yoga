@@ -6,7 +6,7 @@ export default function About() {
   return (
     <div>
       <div id="over-mij" className="custom-grid-about">
-        <div id="ellen-image" className="hidden md:block">
+        <div id="ellen-image" className="hidden lg:block">
           <CldImage
             src="https://res.cloudinary.com/strootmann/image/upload/v1708871503/lumen-yoga/Ellen_binnen_5_4k_ze0iyt.jpg"
             alt="Ellen Wissink"
@@ -68,7 +68,7 @@ export default function About() {
         </div>
       </div>
       {/* end of grid */}
-      <div className="hidden md:block">
+      <div className="hidden lg:block">
         <Quote text="Wat een fijne les, mijn hoofd is helemaal leeg!" />
       </div>
       <FixedImage>
@@ -78,7 +78,7 @@ export default function About() {
           width={1500}
           height={3000}
           sizes="100vw"
-          className="object-cover md:hidden"
+          className="object-cover lg:hidden"
           crop="fill"
           gravity="center"
         />
@@ -88,7 +88,7 @@ export default function About() {
           width={1920}
           height={2664}
           sizes="100vw"
-          className="hidden object-cover md:block"
+          className="hidden object-cover lg:block"
           crop={{
             width: 1920,
             height: 1500,
@@ -97,10 +97,10 @@ export default function About() {
           }}
         />
       </FixedImage>
-      <div className="md:hidden">
+      <div className="lg:hidden">
         <Quote text="Wat een fijne les, mijn hoofd is helemaal leeg!" />
       </div>
-      <div className="hidden h-8 items-stretch md:flex">
+      <div className="hidden h-8 items-stretch lg:flex">
         <div className="flex-1 bg-yellow px-4"></div>
         <div className="flex-1 bg-magenta px-4"></div>
         <div className="flex-1 bg-purple px-4"></div>

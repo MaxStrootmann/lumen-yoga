@@ -12,7 +12,7 @@ export default function IntroImages() {
           width={2600}
           height={5280}
           sizes="100vw"
-          className="object-cover md:hidden"
+          className="object-cover lg:hidden"
           crop="fill"
         />
         <CldImage
@@ -21,7 +21,7 @@ export default function IntroImages() {
           width={2800}
           height={5280}
           sizes="100vw"
-          className="hidden object-cover md:block"
+          className="hidden object-cover lg:block"
           crop={{
             width: "2800",
             height: "2600",
@@ -39,7 +39,7 @@ export default function IntroImages() {
           width={1100}
           height={2270}
           sizes="100vw"
-          className="object-cover md:hidden"
+          className="object-cover lg:hidden"
           crop="fill"
           gravity="center"
         />
@@ -49,7 +49,7 @@ export default function IntroImages() {
           width={3840}
           height={2270}
           sizes="100vw"
-          className="hidden object-cover md:block"
+          className="hidden object-cover lg:block"
           crop={{
             width: "2500",
             height: "2270",

@@ -11,7 +11,7 @@ export default function Krijgers() {
           width={1500}
           height={3000}
           sizes="100vw"
-          className="object-cover md:hidden"
+          className="object-cover lg:hidden"
           crop="fill"
           gravity="center"
         />
@@ -21,7 +21,7 @@ export default function Krijgers() {
           width={2000}
           height={1000}
           sizes="100vw"
-          className="hidden object-cover md:block"
+          className="hidden object-cover lg:block"
           crop="fill"
         />
       </FixedImage>

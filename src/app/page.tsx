@@ -13,14 +13,14 @@ export default function HomePage() {
       <Hero />
       <IntroImages />
       <WhySection />
-      <div className="md:hidden">
+      <div className="lg:hidden">
         <Krijgers />
       </div>
       <About />
-      <div className="md:hidden">
+      <div className="lg:hidden">
         <Ellen />
       </div>
-      <div className="flex h-8 items-stretch md:hidden">
+      <div className="flex h-8 items-stretch lg:hidden">
         <div className="flex-1 bg-yellow px-4"></div>
         <div className="flex-1 bg-magenta px-4"></div>
         <div className="flex-1 bg-purple px-4"></div>

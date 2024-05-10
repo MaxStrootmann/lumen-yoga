@@ -17,7 +17,6 @@ export default function Hamburger() {
         onCloseAutoFocus={(event: Event) => event.preventDefault()}
       >
         <DropdownMenuItem>Home</DropdownMenuItem>
-        <DropdownMenuItem>Recensies</DropdownMenuItem>
         <DropdownMenuItem>Kinderyoga</DropdownMenuItem>
         <DropdownMenuItem>Over Mij</DropdownMenuItem>
         <DropdownMenuItem>Info</DropdownMenuItem>

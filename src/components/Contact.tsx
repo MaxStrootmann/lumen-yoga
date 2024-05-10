@@ -5,8 +5,11 @@ import { ContactForm } from "./ContactForm";
 
 export default function Contact() {
   return (
-    <div className="px-4" id="contact">
-      <h2 className="pb-8 pt-12 text-4xl font-bold">
+    <div
+      className="grid-cols-2 gap-x-16 gap-y-8 px-4 lg:container lg:grid"
+      id="contact"
+    >
+      <h2 className="pb-8 pt-16 text-4xl font-bold">
         Vraag een vrijblijvend gesprek aan
       </h2>
       <p className="font-normal">Of neem contact op via email of telefoon.</p>

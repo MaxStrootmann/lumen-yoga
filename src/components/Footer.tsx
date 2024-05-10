@@ -5,7 +5,7 @@ import { FaFacebook } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="py-8">
+    <footer className="py-10">
       <Link href="/">
         <CldImage
           src="https://res.cloudinary.com/strootmann/image/upload/v1708871727/lumen-yoga/Lumen-Yoga_logo-vol_xg1uur.svg"

@@ -69,7 +69,7 @@ export const FloatingNav = ({
             alt="Lumen yoga logo"
             width={667}
             height={430}
-            className="h-11 w-auto md:h-16"
+            className="h-11 w-auto lg:h-16"
           ></CldImage>
 
           <menu className="hidden space-x-4 lg:flex">

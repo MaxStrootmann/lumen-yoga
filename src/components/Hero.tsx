@@ -16,7 +16,7 @@ export default function Hero() {
           className="object-cover lg:h-[35rem] lg:w-7/12 lg:rounded-l-xl"
         ></CldImage>
         <div className="flex-col justify-center px-4 pt-6 lg:flex">
-          <h1 className="max-w-[20ch] text-4xl font-bold md:text-5xl">
+          <h1 className="max-w-[20ch] text-4xl font-bold lg:text-5xl">
             Schoolverlichting en kinderyoga
           </h1>
           <p className="max-w-[50ch] pt-4 lg:pt-6">
@@ -31,13 +31,13 @@ export default function Hero() {
         </div>
       </header>
       <div className="flex justify-between pb-4 pt-24">
-        <div className="flex flex-col px-4 md:p-20">
-          <div className="flex-grow md:hidden"></div>
-          <p className="mt-auto max-w-[30ch] pb-2 pt-8 text-center text-xl font-bold md:text-5xl">
+        <div className="flex flex-col px-4 lg:p-20">
+          <div className="flex-grow lg:hidden"></div>
+          <p className="mt-auto max-w-[30ch] pb-2 pt-8 text-center text-xl font-bold lg:text-5xl">
             &quot;Eerst had ik stress en nu voel ik me helemaal rustig&quot;
           </p>
         </div>
-        <div className="relative w-[50vw] md:w-[33vw]">
+        <div className="relative w-[50vw] lg:w-[33vw]">
           <Image
             width={239}
             height={342}
