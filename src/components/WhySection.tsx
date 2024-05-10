@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Krijgers from "./Krijgers";
 import CldImage from "./CldImage";
 
 export default function WhySection() {
