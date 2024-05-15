@@ -28,7 +28,7 @@ export default function Lespakketten() {
           </div>
           <p>
             <strong>Losse les:</strong> <br />
-            op gewenste locatie aan maximaal 12 kinderen. Yogamatten worden
+            op gewenste locatie aan maximaal 10 kinderen. Yogamatten worden
             verzorgd. Thema van de les kan op maat gemaakt worden.
           </p>
         </div>
