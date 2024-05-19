@@ -1,6 +1,8 @@
 import CldImage from "./CldImage";
 import FixedImage from "./FixedImage";
+import MobileReviews from "./MobileReviews";
 import Quote from "./Quote";
+import Reviews, { reviews } from "./Reviews";
 
 export default function IntroImages() {
   return (
@@ -31,6 +33,12 @@ export default function IntroImages() {
           }}
         />
       </FixedImage>
+      <div className="hidden lg:block">
+        <Reviews />
+      </div>
+      <div>
+        <MobileReviews items={reviews} />
+      </div>
       <Quote text="Yoga! Het beste van de hele dag!" />
       <FixedImage>
         <CldImage

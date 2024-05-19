@@ -35,6 +35,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      embla-carousel-react:
+        specifier: ^8.1.1
+        version: 8.1.1(react@18.2.0)
       framer-motion:
         specifier: ^11.1.7
         version: 11.1.7(@emotion/is-prop-valid@0.8.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -1041,6 +1044,19 @@ packages:
     resolution: {integrity: sha512-L9Qe08KWTlqYMVvMcTIvMAdl1cDUubzRNYL+WfA4bLDMHe4nemKkpmYzkznE1FwLKu0EEmy6obgQKzMJrg4x9Q==}
     engines: {node: '>=14'}
     hasBin: true
+
+  embla-carousel-react@8.1.1:
+    resolution: {integrity: sha512-VuIrNyGneFKlDzAvkRGeXjEOw+FW2Ob76R/Y+kdSuKj68bnaAJCEf8PlHtJJWle1/rR/Sfv9NTIa00zlA8iXgw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.1 || ^18.0.0
+
+  embla-carousel-reactive-utils@8.1.1:
+    resolution: {integrity: sha512-zlsaorYN56qtoXoVNw8hA/IbUjxq0pdggZpl9b5V2Cxvrd47ZSL5Lat7GgC+kgyUEdEocP1iOmw5+vpCX9rZPA==}
+    peerDependencies:
+      embla-carousel: 8.1.1
+
+  embla-carousel@8.1.1:
+    resolution: {integrity: sha512-PfdhNbPoNl7V5YnwuKe2zmKd0+/HY+Q4O59xQcVvinsgv2LkpAVQ1NB/q5STqAde8nZ56U2uQOe6X+9u4IZlhA==}
 
   emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
@@ -3251,6 +3267,18 @@ snapshots:
       commander: 10.0.1
       minimatch: 9.0.1
       semver: 7.6.0
+
+  embla-carousel-react@8.1.1(react@18.2.0):
+    dependencies:
+      embla-carousel: 8.1.1
+      embla-carousel-reactive-utils: 8.1.1(embla-carousel@8.1.1)
+      react: 18.2.0
+
+  embla-carousel-reactive-utils@8.1.1(embla-carousel@8.1.1):
+    dependencies:
+      embla-carousel: 8.1.1
+
+  embla-carousel@8.1.1: {}
 
   emoji-regex@8.0.0: {}
 

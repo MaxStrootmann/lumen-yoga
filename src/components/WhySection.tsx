@@ -1,5 +1,6 @@
 import Image from "next/image";
 import CldImage from "./CldImage";
+import Quote from "./Quote";
 
 export default function WhySection() {
   return (
@@ -94,6 +95,9 @@ export default function WhySection() {
           sizes="100vw"
           className="h-full object-cover"
         />
+      </div>
+      <div className="lg:hidden">
+        <Quote text="Wat een fijne les, mijn hoofd is helemaal leeg!" />
       </div>
     </div>
   );

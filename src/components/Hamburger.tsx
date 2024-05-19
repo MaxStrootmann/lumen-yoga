@@ -20,6 +20,9 @@ export default function Hamburger() {
         <Link href={"/"}>
           <DropdownMenuItem>Home</DropdownMenuItem>
         </Link>
+        <Link href={"#recensies"}>
+          <DropdownMenuItem>Recensies</DropdownMenuItem>
+        </Link>
         <Link href={"#kinderyoga"}>
           <DropdownMenuItem>Kinderyoga</DropdownMenuItem>
         </Link>

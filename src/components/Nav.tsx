@@ -12,6 +12,7 @@ import CldImage from "./CldImage";
 import Hamburger from "./Hamburger";
 import ContactButton from "./ContactButton";
 
+// nav items are defined in the layout
 type NavItem = {
   name: string;
   link: string;
