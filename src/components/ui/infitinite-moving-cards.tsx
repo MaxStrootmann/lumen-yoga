@@ -98,7 +98,7 @@ export const InfiniteMovingCards = ({
                 className="user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
               ></div>
               <div className="rounded-lg bg-white px-4 pb-4">
-                <div className="element-with-scrollbar max-h-48 py-5 [mask-image:linear-gradient(to_top,transparent,white_20%,white_80%,transparent)]">
+                <div className="element-with-scrollbar max-h-48 py-4 [mask-image:linear-gradient(to_top,transparent,white_15%,white_95%,transparent)]">
                   <span className="">{item.quote}</span>
                 </div>
                 <div className="relative z-20 mt-6 flex flex-row items-center">
