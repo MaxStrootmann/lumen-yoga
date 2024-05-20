@@ -96,6 +96,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^7.8.0
         version: 7.8.0(eslint@8.57.0)(typescript@5.4.5)
+      embla-carousel:
+        specifier: ^8.1.2
+        version: 8.1.2
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
@@ -1057,6 +1060,9 @@ packages:
 
   embla-carousel@8.1.1:
     resolution: {integrity: sha512-PfdhNbPoNl7V5YnwuKe2zmKd0+/HY+Q4O59xQcVvinsgv2LkpAVQ1NB/q5STqAde8nZ56U2uQOe6X+9u4IZlhA==}
+
+  embla-carousel@8.1.2:
+    resolution: {integrity: sha512-UCjqg223H6xZ0xxosmyV5CDfzdbw31yIgkm3xGGLeRRD5yIbtR2AhWzkk2ntjHK09/v3dKcY8G09OawDV3gbew==}
 
   emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
@@ -3279,6 +3285,8 @@ snapshots:
       embla-carousel: 8.1.1
 
   embla-carousel@8.1.1: {}
+
+  embla-carousel@8.1.2: {}
 
   emoji-regex@8.0.0: {}
 

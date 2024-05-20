@@ -1,8 +1,8 @@
 import CldImage from "./CldImage";
+import EmblaCarousel from "./Embla";
 import FixedImage from "./FixedImage";
-import MobileReviews from "./MobileReviews";
 import Quote from "./Quote";
-import Reviews, { reviews } from "./Reviews";
+import Reviews from "./Reviews";
 
 export default function IntroImages() {
   return (
@@ -36,8 +36,8 @@ export default function IntroImages() {
       <div className="hidden lg:block">
         <Reviews />
       </div>
-      <div>
-        <MobileReviews items={reviews} />
+      <div className="lg:hidden">
+        <EmblaCarousel options={{ loop: true }} />
       </div>
       <Quote text="Yoga! Het beste van de hele dag!" />
       <FixedImage>

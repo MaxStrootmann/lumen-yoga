@@ -28,25 +28,26 @@ export const InfiniteMovingCards = ({
   const scrollerRef = React.useRef<HTMLUListElement>(null);
 
   useEffect(() => {
-    addAnimation();
-  }, []);
-  const [start, setStart] = useState(false);
-  function addAnimation() {
-    if (containerRef.current && scrollerRef.current) {
-      const scrollerContent = Array.from(scrollerRef.current.children);
+    function addAnimation() {
+      if (containerRef.current && scrollerRef.current) {
+        const scrollerContent = Array.from(scrollerRef.current.children);
 
-      scrollerContent.forEach((item) => {
-        const duplicatedItem = item.cloneNode(true);
-        if (scrollerRef.current) {
-          scrollerRef.current.appendChild(duplicatedItem);
-        }
-      });
+        scrollerContent.forEach((item) => {
+          const duplicatedItem = item.cloneNode(true);
+          if (scrollerRef.current) {
+            scrollerRef.current.appendChild(duplicatedItem);
+          }
+        });
 
-      getDirection();
-      getSpeed();
-      setStart(true);
+        getDirection();
+        getSpeed();
+        setStart(true);
+      }
     }
-  }
+    addAnimation();
+  });
+  const [start, setStart] = useState(false);
+
   const getDirection = () => {
     if (containerRef.current) {
       if (direction === "left") {
@@ -86,7 +87,7 @@ export const InfiniteMovingCards = ({
           pauseOnHover && "hover:[animation-play-state:paused]",
         )}
       >
-        {items.map((item, idx) => (
+        {items.map((item) => (
           <li
             className={`bg-${item.color} relative w-[350px] max-w-full flex-shrink-0 rounded-2xl px-4 py-8 md:w-[450px]`}
             key={item.name}
