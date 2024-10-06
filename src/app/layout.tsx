@@ -37,6 +37,10 @@ export default function RootLayout({
       link: "#over-mij",
     },
     {
+      name: "Ons aanbod",
+      link: "#aanbod",
+    },
+    {
       name: "Info",
       link: "#info",
     },

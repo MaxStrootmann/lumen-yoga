@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import type { EmblaOptionsType } from "embla-carousel";
 import { DotButton, useDotButton } from "./EmblaCarouselDotButton";
 import useEmblaCarousel from "embla-carousel-react";
@@ -17,9 +17,23 @@ type PropType = {
 const EmblaCarousel: React.FC<PropType> = (props) => {
   const { options } = props;
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const { scrollSnaps, onDotButtonClick } = useDotButton(emblaApi);
 
-  const { selectedIndex, scrollSnaps, onDotButtonClick } =
-    useDotButton(emblaApi);
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    const onSelect = () => {
+      setSelectedIndex(emblaApi.selectedScrollSnap());
+    };
+
+    emblaApi.on("select", onSelect);
+
+    // Clean up the listener when the component is unmounted or emblaApi changes
+    return () => {
+      emblaApi.off("select", onSelect);
+    };
+  }, [emblaApi]);
 
   return (
     <section className="embla overflow-hidden">
@@ -72,12 +86,12 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       </div>
 
       <div className="embla__dots mr-[calc((2rem - 1.4rem)) / 2 * -1) flex flex-wrap items-center justify-center">
-        {scrollSnaps.map((index: number) => (
+        {scrollSnaps.map((_, index) => (
           <DotButton
             key={index}
             onClick={() => onDotButtonClick(index)}
             className={"embla__dot".concat(
-              index === selectedIndex ? " embla__dot--selected" : "",
+              index === selectedIndex ? " embla__dot--selected" : ""
             )}
           />
         ))}

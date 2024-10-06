@@ -7,7 +7,7 @@ export default function Lespakketten() {
       id="info"
     >
       <h2 className="col-span-2 pt-16 text-4xl font-bold">
-        Praktische info over de lespakketten
+        Praktische info voor basisscholen
       </h2>
       <div>
         <div className="flex pt-8">

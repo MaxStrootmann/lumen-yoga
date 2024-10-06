@@ -25,7 +25,13 @@ export default function WhySection() {
           </div>
           <div className="pt-4">
             <h2 className="px-4 pt-4 text-4xl font-bold">
-              Waarom schoolverlichting en kinderyoga?
+              Yoga, meditatie en mindfulness
+            </h2>
+            <p className="px-4 pt-4">Draagt bij aan meer zelfvertrouwen, lichaamsbesef en helpt kinderen te verbinden met zichzelf en anderen! Yoga is een manier om meer rust te voelen in je lijf en in je hoofd. Je voert de oefeningen uit met aandacht, hierdoor leren kinderen zich beter te concentreren.</p>
+          </div>
+          <div className="pt-4">
+            <h2 className="px-4 pt-4 text-4xl font-bold">
+              Waarom kinderyoga op school?
             </h2>
             <p className="px-4 pt-4">
               Te vaak worden scholen niet alleen door kinderen maar ook door
@@ -35,12 +41,12 @@ export default function WhySection() {
               experimenteren meer dan tienduizend scholen inmiddels met
               verstilling, yoga en meditatie. De resultaten zijn fantastisch.
               Regelmatige meditatie leidt tot meer
-              <strong>geluk, focus en zelfvertrouwen.</strong>
+              <strong className="pl-1">geluk, focus en zelfvertrouwen.</strong>
             </p>
           </div>
           <div className="pt-4">
             <h2 className="px-4 pt-4 text-4xl font-bold">
-              De Nieuwe Yogaschool
+              Schoolverlichting
             </h2>
             <p className="px-4 pt-4">
               Schoolverlichting is een initiatief van de Nieuwe Yogaschool om
@@ -64,19 +70,7 @@ export default function WhySection() {
               </strong>
             </p>
           </div>
-          <div className="pt-4">
-            <h2 className="px-4 pt-4 text-4xl font-bold">
-              Een positieve invloed
-            </h2>
-            <p className="px-4 pt-4">
-              Dat alles heeft een positieve invloed op de prestaties van de
-              kinderen en is vooral ook van waarde voor het algehele welzijn van
-              het kind en draagt bij aan een fijne en veilige sfeer in de groep.
-              In slechts een half uur per week, gedurende 6 weken, leer ik de
-              kinderen én de leerkracht verschillende praktische tools die ze in
-              de klas kunnen gebruiken, ook na afloop van het programma.
-            </p>
-          </div>
+
         </div>
         <div className="flex flex-col">
           <div className="flex-1 bg-yellow px-4"></div>

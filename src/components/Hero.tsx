@@ -17,15 +17,11 @@ export default function Hero() {
         ></CldImage>
         <div className="flex-col justify-center px-4 pt-6 lg:flex">
           <h1 className="max-w-[20ch] text-4xl font-bold lg:text-5xl">
-            Schoolverlichting en kinderyoga
+            Kinderyoga
           </h1>
-          <p className="max-w-[50ch] pt-4 lg:pt-6">
-            Kinderen en leerkrachten kennis laten maken met yoga, meditatie en
-            mindfullness. Draag bij aan een veilige en fijne sfeer en help
-            kinderen leren rust te vinden in zichzelf!
-          </p>
+          <p className="max-w-[50ch] pt-4 lg:pt-6">Laat kinderen kennis maken met yoga, meditatie en mindfulness. Geef kinderen de tools waar ze de rest van hun leven profijt van hebben.</p>
           <div className="flex gap-4 pt-6 lg:pt-6">
-            <ContactButton size={"min"} />
+            <ContactButton text="Contact" size={"min"} />
             <InfoButton variant={"outline"} size={"min"} />
           </div>
         </div>

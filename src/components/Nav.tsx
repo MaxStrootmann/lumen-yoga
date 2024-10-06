@@ -89,7 +89,7 @@ export const FloatingNav = ({
                 </span>
               </Link>
             ))}
-            <ContactButton size={"sm"} />
+            <ContactButton text="Contact" size={"sm"} />
           </menu>
           <div className="flex items-center lg:hidden">
             <Hamburger></Hamburger>

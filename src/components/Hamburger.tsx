@@ -7,6 +7,7 @@ import {
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import ContactButton from "./ContactButton";
 import Link from "next/link";
+import { Button } from "./ui/button";
 
 export default function Hamburger() {
   return (
@@ -33,7 +34,11 @@ export default function Hamburger() {
           <DropdownMenuItem>Info</DropdownMenuItem>
         </Link>
         <div className="p-2"></div>
-        <ContactButton size={"sm"} />
+        <Link href={"#contact"}>
+          <DropdownMenuItem>
+            <Button bgColor={"yellow"} size={"sm"}>Contact</Button>
+          </DropdownMenuItem>
+        </Link>
       </DropdownMenuContent>
     </DropdownMenu>
   );

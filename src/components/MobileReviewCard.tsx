@@ -14,7 +14,7 @@ export default function MobileReviewCard({
           className="user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
         ></div>
         <div className="rounded-lg bg-white px-3 pb-4">
-          <div className="element-with-scrollbar max-h-56 py-4 [mask-image:linear-gradient(to_top,transparent,white_15%,white_95%,transparent)]">
+          <div className="element-with-scrollbar max-h-80 py-4 [mask-image:linear-gradient(to_top,transparent,white_15%,white_95%,transparent)]">
             <span className="">{item.quote}</span>
           </div>
           <div className="relative z-20 flex flex-row items-center pt-4">

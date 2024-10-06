@@ -21,50 +21,26 @@ export default function About() {
           className="col-span-1 col-start-2 flex items-stretch"
         >
           <div className="flex flex-col">
-            <div className="flex-1 bg-yellow px-4"></div>
-            <div className="flex-1 bg-magenta px-4"></div>
-            <div className="flex-1 bg-purple px-4"></div>
-            <div className="flex-1 bg-blue px-4"></div>
-            <div className="flex-1 bg-green px-4"></div>
+            <div className="flex-1 bg-yellow "></div>
+            <div className="flex-1 bg-magenta "></div>
+            <div className="flex-1 bg-purple "></div>
+            <div className="flex-1 bg-blue "></div>
+            <div className="flex-1 bg-green "></div>
           </div>
           <div id="logo-and-text" className="max-w-[70ch] pb-4">
             <div className="pt-4">
               <h2 className="px-4 pt-4 text-4xl font-bold lg:pt-16">
-                Over mij
+                Welkom bij Lumen Yoga!
               </h2>
               <p className="px-4 pt-4">
-                Sinds ik de kracht van yoga heb ontdekt was ik verkocht. De rust
-                die het mij bracht in mijn hoofd en lijf voelde zo goed, een
-                nieuw soort ontspanning. Naarmate ik vaker yoga oefende leerde
-                ik mezelf steeds beter kennen. Mijn innerlijke kracht maar ook
-                mijn strenge, negatieve kant. Verwachtingen die ik van mezelf
-                had bij een oefening: &quot;ik moet toch wel met mijn neus bij
-                mijn knieën komen&quot;. Of een negatieve stem die opdoemt dat
-                ik hoe dan ook in deze houding moest blijven, want &quot;ik ben
-                toch een jonge vrouw&quot;.
+                Ik ben Ellen Wissink, trotse eigenaar van Lumen Yoga en woon met mijn man en zoontje in het gezellige Schagen.
               </p>
+              <p className="px-4 pt-4">Yoga heeft mijn leven veranderd. Het heeft me geleerd om zachter voor mezelf te zijn en mijn innerlijke kracht te omarmen. Waar ik voorheen worstelde met strenge verwachtingen en een kritische stem, vind ik nu rust en balans. </p>
+              <p className="px-4 pt-4">Steeds vaker vroeg ik me af waarom ik deze belangrijke vaardigheden niet als kind had geleerd. Wat als we kinderen al vroeg deze waardevolle tools bijbrengen?</p>
               <p className="px-4 pt-4">
-                Door de yoga heb ik geleerd zachter voor mezelf te zijn en dit
-                ondersteund mij met de dagelijkse dingen. De ene dag ga je
-                minder diep in een yoga houding dan de andere dag. De ene dag
-                doe je meer dan de andere en dat is prima. Na een drukke dag
-                neem ik nu even rust in plaats van door te pushen met wat er
-                &quot;moet&quot; gebeuren die dag. Daardoor lig ik &apos;s
-                avonds niet overprikkeld in bed. Dat negatieve stemmetje duikt
-                een stuk minder vaak op. En met ademhalingsoefeningen lukt het
-                mij om stressvolle situaties meer de baas te zijn. Hierdoor kwam
-                bij mij steeds vaker de vraag: Hoe zou mijn leven eruit hebben
-                gezien als ik deze vaardigheden al eerder had geleerd? Wat als
-                we dit al leren aan onze kinderen?
+                Sinds 2016 werk ik op de Burgemeester de Wildeschool (cluster 2 onderwijs) en hiervoor heb ik vijf jaar in de buitenschoolse opvang gewerkt. In 2023 volgde ik de cursus schoolverlichting van de nieuwe yogaschool, wat mijn nieuwe avontuur startte. Mijn missie is om kinderen te leren zichzelf te waarderen en hun kwaliteiten te ontdekken.
               </p>
-              <p className="px-4 pt-4">
-                Momenteel werk ik sinds 2016 in het cluster 2 onderwijs en
-                daarvoor heb ik 5 jaar gewerkt bij de buitenschoolse opvang. In
-                2023 heb ik de cursus schoolverlichting van de nieuwe yogaschool
-                gevolgd. Dit was de kickstart van een nieuw avontuur voor mij!
-                Mijn missie is om kinderen te leren zichzelf te waarderen om wie
-                ze zijn en hun eigen kwaliteiten te ontdekken.
-              </p>
+              <p className="px-4 pt-4">Ik droom ervan dat kinderyoga een vast onderdeel wordt op basisscholen, zodat elk kind de kans krijgt om deze waardevolle vaardigheden te leren.</p>
             </div>
           </div>
         </div>
@@ -102,11 +78,11 @@ export default function About() {
         </FixedImage>
       </div>
       <div className="hidden h-8 items-stretch lg:flex">
-        <div className="flex-1 bg-yellow px-4"></div>
-        <div className="flex-1 bg-magenta px-4"></div>
-        <div className="flex-1 bg-purple px-4"></div>
-        <div className="flex-1 bg-blue px-4"></div>
-        <div className="flex-1 bg-green px-4"></div>
+        <div className="flex-1 bg-yellow "></div>
+        <div className="flex-1 bg-magenta "></div>
+        <div className="flex-1 bg-purple "></div>
+        <div className="flex-1 bg-blue "></div>
+        <div className="flex-1 bg-green "></div>
       </div>
     </div>
   );

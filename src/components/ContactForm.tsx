@@ -107,7 +107,7 @@ export function ContactForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Verstuur</Button>
+        <Button bgColor={"yellow"} type="submit">Verstuur</Button>
       </form>
     </Form>
   );
