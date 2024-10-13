@@ -1,7 +1,8 @@
-import ContactButton from "./ContactButton";
 import InfoButton from "./InfoButton";
 import CldImage from "./CldImage";
 import Image from "next/image";
+import { Button } from "./ui/button";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -21,7 +22,9 @@ export default function Hero() {
           </h1>
           <p className="max-w-[50ch] pt-4 lg:pt-6">Laat kinderen kennis maken met yoga, meditatie en mindfulness. Geef kinderen de tools waar ze de rest van hun leven profijt van hebben.</p>
           <div className="flex gap-4 pt-6 lg:pt-6">
-            <ContactButton text="Contact" size={"min"} />
+            <Link href="https://docs.google.com/forms/d/e/1FAIpQLSctAPfSQAKw3pdtxlDASPai16SxSO1XGNYz1UBzw5ysTdIIKQ/viewform">
+              <Button bgColor={"yellow"} size={"min"}>Aanmelden</Button>
+            </Link>
             <InfoButton variant={"outline"} size={"min"} />
           </div>
         </div>

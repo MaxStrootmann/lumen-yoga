@@ -22,7 +22,7 @@ interface CardProps {
   href: string;
 }
 
-export function ColoredCarousel() {
+export function OfferCarousel() {
   const cards: CardProps[] = [
     { color: "yellow", title: "Kinderyoga workshop", text: "Spelenderwijs ontspannen", buttonText: "Meer info", href: "https://docs.google.com/forms/d/e/1FAIpQLScFbOtfK54SVAj_Vtzo3TMh23UTZWkz7sbYqfzp4EcbqeRLpg/viewform" },
     { color: "magenta", title: "Kinderyoga<br>4 t/m 7 jaar", text: "Beweeg, adem en speel!", buttonText: "Meer info", href: "https://docs.google.com/forms/d/e/1FAIpQLSctAPfSQAKw3pdtxlDASPai16SxSO1XGNYz1UBzw5ysTdIIKQ/viewform" },

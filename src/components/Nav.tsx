@@ -10,7 +10,7 @@ import { cn } from "~/utils/cn";
 import Link from "next/link";
 import CldImage from "./CldImage";
 import Hamburger from "./Hamburger";
-import ContactButton from "./ContactButton";
+import { Button } from "./ui/button";
 
 // nav items are defined in the layout
 type NavItem = {
@@ -89,7 +89,9 @@ export const FloatingNav = ({
                 </span>
               </Link>
             ))}
-            <ContactButton text="Contact" size={"sm"} />
+            <Link href="https://docs.google.com/forms/d/e/1FAIpQLSctAPfSQAKw3pdtxlDASPai16SxSO1XGNYz1UBzw5ysTdIIKQ/viewform">
+              <Button bgColor={"yellow"} size={"min"}>Aanmelden</Button>
+            </Link>
           </menu>
           <div className="flex items-center lg:hidden">
             <Hamburger></Hamburger>
