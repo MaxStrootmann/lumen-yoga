@@ -11,9 +11,11 @@ import Link from "next/link";
 import CldImage from "./CldImage";
 import Hamburger from "./Hamburger";
 import { Button } from "./ui/button";
+import { sendGAEvent } from "@next/third-parties/google";
 
 // nav items are defined in the layout
-type NavItem = {
+export type NavItem = {
+  id: number;
   name: string;
   link: string;
   icon?: JSX.Element;
@@ -23,11 +25,7 @@ export const FloatingNav = ({
   navItems,
   className,
 }: {
-  navItems: {
-    name: string;
-    link: string;
-    icon?: JSX.Element;
-  }[];
+  navItems: NavItem[];
   className?: string;
 }) => {
   const { scrollYProgress } = useScroll();
@@ -76,9 +74,10 @@ export const FloatingNav = ({
           </Link>
 
           <menu className="hidden space-x-4 lg:flex">
-            {navItems.map((navItem: NavItem, idx: number) => (
+            {navItems.map((navItem: NavItem) => (
               <Link
-                key={`link=${idx}`}
+                onClick={() => sendGAEvent("event", `nav_${navItem.name}`)}
+                key={navItem.id}
                 href={navItem.link}
                 className={cn(
                   "dark:text-neutral-50 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 relative flex items-center space-x-1",
@@ -89,12 +88,17 @@ export const FloatingNav = ({
                 </span>
               </Link>
             ))}
-            <Link href="https://docs.google.com/forms/d/e/1FAIpQLSctAPfSQAKw3pdtxlDASPai16SxSO1XGNYz1UBzw5ysTdIIKQ/viewform">
-              <Button bgColor={"yellow"} size={"min"}>Aanmelden</Button>
+            <Link
+              onClick={() => sendGAEvent("event", "nav_buttonAanmelden")}
+              href="https://docs.google.com/forms/d/e/1FAIpQLSctAPfSQAKw3pdtxlDASPai16SxSO1XGNYz1UBzw5ysTdIIKQ/viewform"
+            >
+              <Button bgColor={"yellow"} size={"min"}>
+                Aanmelden
+              </Button>
             </Link>
           </menu>
           <div className="flex items-center lg:hidden">
-            <Hamburger></Hamburger>
+            <Hamburger navItems={navItems} />
           </div>
         </nav>
       </motion.div>

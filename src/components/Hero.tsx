@@ -1,8 +1,6 @@
-import InfoButton from "./InfoButton";
 import CldImage from "./CldImage";
 import Image from "next/image";
-import { Button } from "./ui/button";
-import Link from "next/link";
+import { HeroButtons } from "./HeroButtons";
 
 export default function Hero() {
   return (
@@ -20,13 +18,11 @@ export default function Hero() {
           <h1 className="max-w-[20ch] text-4xl font-bold lg:text-5xl">
             Kinderyoga
           </h1>
-          <p className="max-w-[50ch] pt-4 lg:pt-6">Laat kinderen kennis maken met yoga, meditatie en mindfulness. Geef kinderen de tools waar ze de rest van hun leven profijt van hebben.</p>
-          <div className="flex gap-4 pt-6 lg:pt-6">
-            <Link href="https://docs.google.com/forms/d/e/1FAIpQLSctAPfSQAKw3pdtxlDASPai16SxSO1XGNYz1UBzw5ysTdIIKQ/viewform">
-              <Button bgColor={"yellow"} size={"min"}>Aanmelden</Button>
-            </Link>
-            <InfoButton variant={"outline"} size={"min"} />
-          </div>
+          <p className="max-w-[50ch] pt-4 lg:pt-6">
+            Laat kinderen kennis maken met yoga, meditatie en mindfulness. Geef
+            kinderen de tools waar ze de rest van hun leven profijt van hebben.
+          </p>
+          <HeroButtons />
         </div>
       </header>
       <div className="flex justify-between pb-4 pt-24">

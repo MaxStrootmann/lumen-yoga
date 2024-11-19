@@ -5,11 +5,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
-import ContactButton from "./ContactButton";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import type { NavItem } from "./Nav";
+import { sendGAEvent } from "@next/third-parties/google";
 
-export default function Hamburger() {
+export default function Hamburger({ navItems }: { navItems: NavItem[] }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -18,27 +19,26 @@ export default function Hamburger() {
       <DropdownMenuContent
         onCloseAutoFocus={(event: Event) => event.preventDefault()}
       >
-        <Link href={"/"}>
-          <DropdownMenuItem>Home</DropdownMenuItem>
-        </Link>
-        <Link href={"#recensies"}>
-          <DropdownMenuItem>Recensies</DropdownMenuItem>
-        </Link>
-        <Link href={"#kinderyoga"}>
-          <DropdownMenuItem>Kinderyoga</DropdownMenuItem>
-        </Link>
-        <Link href={"#over-mij"}>
-          <DropdownMenuItem>Over Mij</DropdownMenuItem>
-        </Link>
-        <Link href={"#info"}>
-          <DropdownMenuItem>Info</DropdownMenuItem>
-        </Link>
+        {navItems.map((item: NavItem) => (
+          <Link
+            key={item.id}
+            href={item.link}
+            onClick={() => sendGAEvent("event", `hamburger_${item.name}`)}
+          >
+            <DropdownMenuItem>{item.name}</DropdownMenuItem>
+          </Link>
+        ))}
         <div className="p-2"></div>
-        <Link href={"#contact"}>
-          <DropdownMenuItem>
-            <Button bgColor={"yellow"} size={"sm"}>Contact</Button>
-          </DropdownMenuItem>
-        </Link>
+        <DropdownMenuItem>
+          <Link
+            onClick={() => sendGAEvent("event", "hamburger_buttonAanmelden")}
+            href="https://docs.google.com/forms/d/e/1FAIpQLSctAPfSQAKw3pdtxlDASPai16SxSO1XGNYz1UBzw5ysTdIIKQ/viewform"
+          >
+            <Button bgColor={"yellow"} size={"min"}>
+              Aanmelden
+            </Button>
+          </Link>
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

@@ -1,11 +1,12 @@
 import Footer from "~/components/Footer";
 import { FloatingNav } from "~/components/Nav";
 import "~/styles/globals.css";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata = {
-  title: "Lumen Yoga | yoga, meditatie & mindfulness in de klas",
+  title: "Lumen Yoga | yoga, meditatie & mindfulness voor kinderen",
   description:
-    "Kinderen en leerkrachten kennis laten maken met yoga, meditatie en mindfulness. Draag bij aan een veilige en fijne sfeer en help kinderen leren rust te vinden in zichzelf!",
+    "Laat kinderen kennis maken met yoga, meditatie en mindfulness. Geef kinderen de tools waar ze de rest van hun leven profijt van hebben.",
   icons: [
     {
       rel: "icon",
@@ -21,26 +22,32 @@ export default function RootLayout({
 }) {
   const navItems = [
     {
+      id: 1,
       name: "Home",
       link: "/",
     },
     {
+      id: 2,
       name: "Recensies",
       link: "#recensies",
     },
     {
+      id: 3,
       name: "Kinderyoga",
       link: "#kinderyoga",
     },
     {
+      id: 4,
       name: "Over mij",
       link: "#over-mij",
     },
     {
+      id: 5,
       name: "Ons aanbod",
       link: "#aanbod",
     },
     {
+      id: 6,
       name: "Info",
       link: "#info",
     },
@@ -50,8 +57,9 @@ export default function RootLayout({
       <body className="font-sans">
         <FloatingNav navItems={navItems}></FloatingNav>
         <main>{children}</main>
-        <Footer />
+        <Footer navItems={navItems} />
       </body>
+      <GoogleAnalytics gaId="G-P4F78NW226" />
     </html>
   );
 }

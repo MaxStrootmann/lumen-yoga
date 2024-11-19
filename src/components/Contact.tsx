@@ -28,9 +28,9 @@ export default function Contact() {
           <MdLocationPin size={24} />
           <Link
             className="underline underline-offset-4"
-            href="https://www.google.com/maps/place/Vlierstraat+6,+1741+VK+Schagen/@52.7991544,4.7945222,16z/data=!3m1!4b1!4m6!3m5!1s0x47cf4e47fc1c8309:0x50b2fe8763322bc0!8m2!3d52.7991544!4d4.7970971!16s%2Fg%2F11c12gczzz?entry=ttu"
+            href="https://www.google.com/maps/place/https://www.google.com/maps/dir//Zijperweg+9,+1742+NE+Schagen/@52.7899589,4.7032031,12z/data=!3m1!4b1!4m8!4m7!1m0!1m5!1m1!1s0x47cf4fb00e26744b:0xb6bf74e88712983f!2m2!1d4.7856595!2d52.7900205?entry=ttu&g_ep=EgoyMDI0MTExMy4xIKXMDSoASAFQAw%3D%3Dlierstraat+6,+1741+VK+Schagen/@52.7991544,4.7945222,16z/data=!3m1!4b1!4m6!3m5!1s0x47cf4e47fc1c8309:0x50b2fe8763322bc0!8m2!3d52.7991544!4d4.7970971!16s%2Fg%2F11c12gczzz?entry=ttu"
           >
-            Vlierstraat 6, 1741 VK, Schagen
+            YPHS Huis, Zijperweg 9, 1742 NE Schagen
           </Link>
         </div>
       </div>
