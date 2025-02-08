@@ -17,9 +17,8 @@ export default function Lespakketten() {
           <p>
             <strong>Lespakket schoolverlichting:</strong>
             <br /> 6 themalessen a half uur (geen gymlokaal nodig, tafels en
-            stoelen kunnen blijven staan), praktisch handboek voor leerkrachten,
-            link naar muziek en klankschaal voor de klas. Mogelijkheid tot
-            uitbreiding met thema lessen of herhaling
+            stoelen kunnen blijven staan), praktisch handboek voor leerkrachten.
+            Mogelijkheid tot uitbreiding met thema lessen of herhaling.
           </p>
         </div>
         <div className="flex pt-4">

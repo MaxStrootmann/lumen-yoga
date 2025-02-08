@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import * as React from "react";
 
@@ -27,8 +27,8 @@ export function OfferCarousel() {
   const cards: CardProps[] = [
     {
       color: "yellow",
-      title: "Kinderyoga workshop",
-      text: "Spelenderwijs ontspannen",
+      title: "Ouder-kind workshop",
+      text: "Samen groeien, ontspannen en ontdekken",
       buttonText: "Meer info",
       href: "https://docs.google.com/forms/d/e/1FAIpQLScFbOtfK54SVAj_Vtzo3TMh23UTZWkz7sbYqfzp4EcbqeRLpg/viewform",
     },
@@ -55,10 +55,10 @@ export function OfferCarousel() {
     },
     {
       color: "green",
-      title: "Ouder-kind workshop",
-      text: "Samen groeien, ontspannen en ontdekken",
+      title: "Kinderyoga workshop",
+      text: "Spelenderwijs ontspannen",
       buttonText: "Meer info",
-      href: "https://docs.google.com/forms/d/e/1FAIpQLScFbOtfK54SVAj_Vtzo3TMh23UTZWkz7sbYqfzp4EcbqeRLpg/viewform",
+      href: "https://docs.google.com/forms/d/e/1FAIpQLSe1UIald50arX6u9Qeov0bc-gCncpNA2QTjGnDK0y_XIL8kOw/viewform?usp=dialog",
     },
   ];
 
