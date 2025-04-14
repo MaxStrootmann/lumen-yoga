@@ -1,7 +1,7 @@
 import Footer from "~/components/Footer";
 import { FloatingNav } from "~/components/Nav";
 import "~/styles/globals.css";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 export const metadata = {
   title: "Lumen Yoga | yoga, meditatie & mindfulness voor kinderen",
@@ -54,12 +54,12 @@ export default function RootLayout({
   ];
   return (
     <html lang="en">
+      <GoogleTagManager gtmId="GTM-TG5CK2MX'" />
       <body className="font-sans">
         <FloatingNav navItems={navItems}></FloatingNav>
         <main>{children}</main>
         <Footer navItems={navItems} />
       </body>
-      <GoogleAnalytics gaId="G-P4F78NW226" />
     </html>
   );
 }

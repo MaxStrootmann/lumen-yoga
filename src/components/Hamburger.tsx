@@ -8,7 +8,7 @@ import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import type { NavItem } from "./Nav";
-import { sendGAEvent } from "@next/third-parties/google";
+import { sendGTMEvent } from "@next/third-parties/google";
 
 export default function Hamburger({ navItems }: { navItems: NavItem[] }) {
   return (
@@ -23,7 +23,7 @@ export default function Hamburger({ navItems }: { navItems: NavItem[] }) {
           <Link
             key={item.id}
             href={item.link}
-            onClick={() => sendGAEvent("event", `hamburger_${item.name}`)}
+            onClick={() => sendGTMEvent("event", `hamburger_${item.name}`)}
           >
             <DropdownMenuItem>{item.name}</DropdownMenuItem>
           </Link>
@@ -31,7 +31,7 @@ export default function Hamburger({ navItems }: { navItems: NavItem[] }) {
         <div className="p-2"></div>
         <DropdownMenuItem>
           <Link
-            onClick={() => sendGAEvent("event", "hamburger_buttonAanmelden")}
+            onClick={() => sendGTMEvent("event", "hamburger_buttonAanmelden")}
             href="https://docs.google.com/forms/d/e/1FAIpQLSctAPfSQAKw3pdtxlDASPai16SxSO1XGNYz1UBzw5ysTdIIKQ/viewform"
           >
             <Button bgColor={"yellow"} size={"min"}>

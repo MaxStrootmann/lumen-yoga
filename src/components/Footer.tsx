@@ -5,7 +5,7 @@ import CldImage from "./CldImage";
 import { FaInstagram } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import type { NavItem } from "./Nav";
-import { sendGAEvent } from "@next/third-parties/google";
+import { sendGTMEvent } from "@next/third-parties/google";
 
 export default function Footer({ navItems }: { navItems: NavItem[] }) {
   return (
@@ -23,7 +23,7 @@ export default function Footer({ navItems }: { navItems: NavItem[] }) {
       <ul className="flex flex-col justify-center gap-3 pt-5 text-center">
         {navItems.map((item: NavItem) => (
           <li key={item.id}>
-            <Link onClick={() => sendGAEvent("event", `footer_${item.name}`)} href={item.link} className="font-bold">
+            <Link onClick={() => sendGTMEvent("event", `footer_${item.name}`)} href={item.link} className="font-bold">
               {item.name}
             </Link>
           </li>

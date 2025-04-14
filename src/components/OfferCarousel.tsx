@@ -13,7 +13,7 @@ import {
 } from "~/components/ui/carousel";
 import { Button } from "./ui/button";
 import Link from "next/link";
-import { sendGAEvent } from "@next/third-parties/google";
+import { sendGTMEvent } from "@next/third-parties/google";
 
 interface CardProps {
   color: "yellow" | "magenta" | "purple" | "blue" | "green";
@@ -90,7 +90,7 @@ export function OfferCarousel() {
                       <p className="text-center font-semibold">{card.text}</p>
                       <Link
                         onClick={() =>
-                          sendGAEvent("event", `aanbod_${card.title}`)
+                          sendGTMEvent("event", `aanbod_${card.title}`)
                         }
                         href={card.href}
                       >

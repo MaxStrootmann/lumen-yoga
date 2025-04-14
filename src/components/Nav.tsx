@@ -11,7 +11,7 @@ import Link from "next/link";
 import CldImage from "./CldImage";
 import Hamburger from "./Hamburger";
 import { Button } from "./ui/button";
-import { sendGAEvent } from "@next/third-parties/google";
+import { sendGTMEvent } from "@next/third-parties/google";
 
 // nav items are defined in the layout
 export type NavItem = {
@@ -76,7 +76,7 @@ export const FloatingNav = ({
           <menu className="hidden space-x-4 lg:flex">
             {navItems.map((navItem: NavItem) => (
               <Link
-                onClick={() => sendGAEvent("event", `nav_${navItem.name}`)}
+                onClick={() => sendGTMEvent("event", `nav_${navItem.name}`)}
                 key={navItem.id}
                 href={navItem.link}
                 className={cn(
@@ -89,7 +89,7 @@ export const FloatingNav = ({
               </Link>
             ))}
             <Link
-              onClick={() => sendGAEvent("event", "nav_buttonAanmelden")}
+              onClick={() => sendGTMEvent("event", "nav_buttonAanmelden")}
               href="https://docs.google.com/forms/d/e/1FAIpQLSctAPfSQAKw3pdtxlDASPai16SxSO1XGNYz1UBzw5ysTdIIKQ/viewform"
             >
               <Button bgColor={"yellow"} size={"min"}>
