@@ -19,10 +19,10 @@ export default async function sendEmail(contactProps: contact): Promise<void> {
     }
 
     await resend.emails.send({
-      from: "Lumen Yoga Contact <email@nngrafischontwerp.nl>",
+      from: "Lumen Yoga Contact <email@manndigital.nl>",
       to:
         process.env.NODE_ENV === "production"
-          ? ["max@nngrafischontwerp.nl", "ellen@lumenyoga.nl"]
+          ? ["ellen@lumenyoga.nl"]
           : ["strootmann95@gmail.com"],
       subject: `Bericht van ${naam} - Lumen Yoga Contact`,
       html: `<p>Naam: ${naam}</p><p>Email: ${email}</p><p>Bericht: ${bericht}</p>`,
@@ -30,7 +30,7 @@ export default async function sendEmail(contactProps: contact): Promise<void> {
     console.log("Email sent");
   } catch (error) {
     await resend.emails.send({
-      from: "CONTACT FORMULIER LUMEN ERROR <email@nngrafischontwerp.nl>",
+      from: "CONTACT FORMULIER LUMEN ERROR <email@manndigital.nl>",
       to:
         process.env.NODE_ENV === "production"
           ? ["strootmann95@gmail.com", "ellen@lumenyoga.nl"]

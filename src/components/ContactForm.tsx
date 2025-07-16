@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -14,18 +15,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import sendEmail from "~/lib/sendEmail";
-
-export function MessageBox() {
-  return (
-    <div className="grid w-full gap-1.5">
-      <Label htmlFor="message">Bericht</Label>
-      <Textarea placeholder="Schrijf hier je bericht" id="message" />
-    </div>
-  );
-}
 
 const formSchema = z.object({
   naam: z.string().min(2, {
@@ -40,7 +31,10 @@ const formSchema = z.object({
 });
 
 export function ContactForm() {
-  // 1. Define your form.
+  const [isSent, setIsSent] = useState(false);
+  const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -49,13 +43,31 @@ export function ContactForm() {
       bericht: "",
     },
   });
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    void sendEmail(values);
-    console.log(values);
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsSubmitting(true);
+    setError("");
+    try {
+      await sendEmail(values);
+      setIsSent(true);
+      form.reset();
+    } catch (err) {
+      setError("Er is iets misgegaan bij het verzenden. Probeer het opnieuw.");
+      setIsSent(false);
+    } finally {
+      setIsSubmitting(false);
+    }
   }
+
+  useEffect(() => {
+    if (isSent || error) {
+      const timer = setTimeout(() => {
+        setIsSent(false);
+        setError("");
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [isSent, error]);
 
   return (
     <Form {...form}>
@@ -107,7 +119,17 @@ export function ContactForm() {
             </FormItem>
           )}
         />
-        <Button bgColor={"yellow"} type="submit">Verstuur</Button>
+
+        <Button bgColor={"yellow"} type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Versturen..." : "Verstuur"}
+        </Button>
+
+        {isSent && (
+          <p className="text-green-600 mx-auto w-full text-sm pt-2">Bericht is verzonden ✅</p>
+        )}
+        {error && (
+          <p className="text-red-600 text-sm pt-2">{error}</p>
+        )}
       </form>
     </Form>
   );
