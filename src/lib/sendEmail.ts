@@ -1,5 +1,4 @@
 "use server";
-
 import { Resend } from "resend";
 import { env } from "~/env";
 
@@ -12,23 +11,15 @@ type contact = {
 };
 
 export default async function sendEmail(contactProps: contact): Promise<void> {
-  const { naam, email, bericht } = contactProps;
-
-  console.log("🚀 Email send triggered");
-  console.log("Naam:", naam);
-  console.log("Email:", email);
-  console.log("Bericht:", bericht);
-  console.log("ENV:", process.env.NODE_ENV);
-  console.log("API KEY present:", !!env.RESEND_API_KEY);
-
-  if (!naam || !email || !bericht) {
-    console.error("❌ Missing fields");
-    return;
-  }
-
   try {
-    const result = await resend.emails.send({
-      from: "Lumen Yoga Contact <email@manndigital.nl>", // tijdelijk werkende from
+    const { naam, email, bericht } = contactProps;
+
+    if (!naam || !email || !bericht) {
+      throw new Error("Missing required data for email");
+    }
+
+    await resend.emails.send({
+      from: "Lumen Yoga Contact <email@manndigital.nl>",
       to:
         process.env.NODE_ENV === "production"
           ? ["ellen@lumenyoga.nl"]
@@ -36,9 +27,16 @@ export default async function sendEmail(contactProps: contact): Promise<void> {
       subject: `Bericht van ${naam} - Lumen Yoga Contact`,
       html: `<p>Naam: ${naam}</p><p>Email: ${email}</p><p>Bericht: ${bericht}</p>`,
     });
-
-    console.log("✅ Email sent result:", result);
+    console.log("Email sent");
   } catch (error) {
-    console.error("❌ Email send failed:", error);
+    await resend.emails.send({
+      from: "CONTACT FORMULIER LUMEN ERROR <email@manndigital.nl>",
+      to:
+        process.env.NODE_ENV === "production"
+          ? ["strootmann95@gmail.com", "ellen@lumenyoga.nl"]
+          : ["strootmann95@gmail.com"],
+      subject: `Kan email niet versturen - Lumen Yoga Contact`,
+      text: `Er is een fout opgetreden bij het versturen van de email voor bericht van ${contactProps.email}. De benodigde data is niet gevonden.`,
+    });
   }
 }
