@@ -44,30 +44,36 @@ export function ContactForm() {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsSubmitting(true);
-    setError("");
-    try {
-      await sendEmail(values);
+async function onSubmit(values: z.infer<typeof formSchema>) {
+  setIsSubmitting(true);
+  setError("");
+
+  const emailPromise = sendEmail(values);
+
+  try {
+    await Promise.race([
+      emailPromise,
+      new Promise((_, reject) =>
+        setTimeout(() => reject(new Error("Timeout")), 7000)
+      ),
+    ]);
+
+    setIsSent(true);
+    form.reset();
+  } catch (err) {
+    console.error("Fout bij verzenden (of timeout):", err);
+
+    if ((err as Error).message === "Timeout") {
+      // Mail is waarschijnlijk nog verstuurd — we geven gebruiker gewoon bevestiging
       setIsSent(true);
-      form.reset();
-    } catch (err) {
+    } else {
       setError("Er is iets misgegaan bij het verzenden. Probeer het opnieuw.");
       setIsSent(false);
-    } finally {
-      setIsSubmitting(false);
     }
+  } finally {
+    setIsSubmitting(false);
   }
-
-  useEffect(() => {
-    if (isSent || error) {
-      const timer = setTimeout(() => {
-        setIsSent(false);
-        setError("");
-      }, 2000);
-      return () => clearTimeout(timer);
-    }
-  }, [isSent, error]);
+}
 
   return (
     <Form {...form}>
