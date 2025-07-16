@@ -20,10 +20,7 @@ export default async function sendEmail(contactProps: contact): Promise<void> {
 
     await resend.emails.send({
       from: "Lumen Yoga Contact <email@manndigital.nl>",
-      to:
-        process.env.NODE_ENV === "production"
-          ? ["ellen@lumenyoga.nl"]
-          : ["strootmann95@gmail.com"],
+      to: "ellen@lumenyoga.nl",
       subject: `Bericht van ${naam} - Lumen Yoga Contact`,
       html: `<p>Naam: ${naam}</p><p>Email: ${email}</p><p>Bericht: ${bericht}</p>`,
     });
