@@ -1,10 +1,15 @@
+"use client";
+
 import CldImage from "./CldImage";
+import { ReactGoogleReviews } from "react-google-reviews";
+import "react-google-reviews/dist/index.css";
 import Image from "next/image";
 import { HeroButtons } from "./HeroButtons";
 import Link from "next/link";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 
 export default function Hero() {
+  const featurableWidgetId = "4a7ab06d-759a-49dd-bf79-f9eac6fc982d"; // You can use "example" for testing
   return (
     <div>
       <header className="flex-row-reverse pt-20 lg:flex lg:pt-24">
@@ -26,6 +31,7 @@ export default function Hero() {
           </p>
 
           <HeroButtons />
+
           <div className="flex gap-2 pt-6">
             <Link href="https://www.instagram.com/lumen.yoga/">
               <span
@@ -40,6 +46,17 @@ export default function Hero() {
             >
               <FaFacebook size={32} className="text-[#1877F2]" />
             </Link>
+          </div>
+
+          <div className="mr-auto flex pt-6">
+            <ReactGoogleReviews
+              layout="badge"
+              badgeLabel="Reviews op Google"
+              badgeSubheadingFormatter={(totalReviewCount) =>
+                `Lees onze ${totalReviewCount} reviews`
+              }
+              featurableId={featurableWidgetId}
+            />
           </div>
         </div>
       </header>

@@ -1,8 +1,7 @@
 import CldImage from "./CldImage";
-import EmblaCarousel from "./Embla";
 import FixedImage from "./FixedImage";
+import { OfferCarousel } from "./OfferCarousel";
 import Quote from "./Quote";
-import Reviews from "./Reviews";
 
 export default function IntroImages() {
   return (
@@ -33,11 +32,8 @@ export default function IntroImages() {
           }}
         />
       </FixedImage>
-      <div className="hidden lg:block">
-        <Reviews />
-      </div>
-      <div className="lg:hidden">
-        <EmblaCarousel options={{ loop: true }} />
+      <div className="px-2 pt-4">
+        <OfferCarousel />
       </div>
       <Quote text="Yoga! Het beste van de hele dag!" />
       <FixedImage>

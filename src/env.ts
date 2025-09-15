@@ -18,6 +18,7 @@ export const env = createEnv({
    */
   client: {
     NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: z.string(),
+    NEXT_PUBLIC_GOOGLE_FEATURABLE_WIDGET: z.string(),
     // NEXT_PUBLIC_CLIENTVAR: z.string(),
   },
 
@@ -30,6 +31,7 @@ export const env = createEnv({
     NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME:
       process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
+    NEXT_PUBLIC_GOOGLE_FEATURABLE_WIDGET: process.env.NEXT_PUBLIC_GOOGLE_FEATURABLE_WIDGET,
     // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
   },
   /**

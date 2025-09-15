@@ -6,7 +6,7 @@ import About from "~/components/About";
 import Lespakketten from "~/components/Lespakketten";
 import Contact from "~/components/Contact";
 import Ellen from "~/components/Ellen";
-import { OfferCarousel } from "~/components/OfferCarousel";
+import Reviews from "~/components/Reviews";
 
 export default function HomePage() {
   return (
@@ -28,7 +28,7 @@ export default function HomePage() {
         <div className="flex-1 bg-blue "></div>
         <div className="flex-1 bg-green "></div>
       </div>
-      <OfferCarousel />
+      <Reviews />
       <Lespakketten />
       <Contact />
     </div>
