@@ -1,6 +1,8 @@
 import CldImage from "./CldImage";
 import Image from "next/image";
 import { HeroButtons } from "./HeroButtons";
+import Link from "next/link";
+import { FaFacebook, FaInstagram } from "react-icons/fa";
 
 export default function Hero() {
   return (
@@ -16,13 +18,29 @@ export default function Hero() {
         ></CldImage>
         <div className="flex-col justify-center px-4 pt-6 lg:flex">
           <h1 className="max-w-[20ch] text-4xl font-bold lg:text-5xl">
-            Kinderyoga
+            Kinderyoga in Schagen
           </h1>
           <p className="max-w-[50ch] pt-4 lg:pt-6">
             Laat kinderen kennis maken met yoga, meditatie en mindfulness. Geef
             kinderen de tools waar ze de rest van hun leven profijt van hebben.
           </p>
+
           <HeroButtons />
+          <div className="flex gap-2 pt-6">
+            <Link href="https://www.instagram.com/lumen.yoga/">
+              <span
+                className="inline-flex h-8 w-8 items-center justify-center rounded-xl
+                   bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888]"
+              >
+                <FaInstagram className="text-white" size={24} />
+              </span>
+            </Link>
+            <Link
+              href={"https://www.facebook.com/profile.php?id=100091839270911"}
+            >
+              <FaFacebook size={32} className="text-[#1877F2]" />
+            </Link>
+          </div>
         </div>
       </header>
       <div className="flex justify-between pb-4 pt-24">

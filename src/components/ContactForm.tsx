@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -44,36 +44,38 @@ export function ContactForm() {
     },
   });
 
-async function onSubmit(values: z.infer<typeof formSchema>) {
-  setIsSubmitting(true);
-  setError("");
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsSubmitting(true);
+    setError("");
 
-  const emailPromise = sendEmail(values);
+    const emailPromise = sendEmail(values);
 
-  try {
-    await Promise.race([
-      emailPromise,
-      new Promise((_, reject) =>
-        setTimeout(() => reject(new Error("Timeout")), 7000)
-      ),
-    ]);
+    try {
+      await Promise.race([
+        emailPromise,
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error("Timeout")), 7000),
+        ),
+      ]);
 
-    setIsSent(true);
-    form.reset();
-  } catch (err) {
-    console.error("Fout bij verzenden (of timeout):", err);
-
-    if ((err as Error).message === "Timeout") {
-      // Mail is waarschijnlijk nog verstuurd — we geven gebruiker gewoon bevestiging
       setIsSent(true);
-    } else {
-      setError("Er is iets misgegaan bij het verzenden. Probeer het opnieuw.");
-      setIsSent(false);
+      form.reset();
+    } catch (err) {
+      console.error("Fout bij verzenden (of timeout):", err);
+
+      if ((err as Error).message === "Timeout") {
+        // Mail is waarschijnlijk nog verstuurd — we geven gebruiker gewoon bevestiging
+        setIsSent(true);
+      } else {
+        setError(
+          "Er is iets misgegaan bij het verzenden. Probeer het opnieuw.",
+        );
+        setIsSent(false);
+      }
+    } finally {
+      setIsSubmitting(false);
     }
-  } finally {
-    setIsSubmitting(false);
   }
-}
 
   return (
     <Form {...form}>
@@ -131,11 +133,11 @@ async function onSubmit(values: z.infer<typeof formSchema>) {
         </Button>
 
         {isSent && (
-          <p className="text-green-600 mx-auto w-full text-sm pt-2">Bericht is verzonden ✅</p>
+          <p className="text-green-600 mx-auto w-full pt-2 text-sm">
+            Bericht is verzonden ✅
+          </p>
         )}
-        {error && (
-          <p className="text-red-600 text-sm pt-2">{error}</p>
-        )}
+        {error && <p className="text-red-600 pt-2 text-sm">{error}</p>}
       </form>
     </Form>
   );
