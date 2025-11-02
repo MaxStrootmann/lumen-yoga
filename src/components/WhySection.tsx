@@ -31,43 +31,24 @@ export default function WhySection() {
           </div>
           <div className="pt-4">
             <h2 className="px-4 pt-4 text-4xl font-bold">
-              Waarom kinderyoga op school?
+              Waarom kiezen voor kinderyoga?
             </h2>
             <p className="px-4 pt-4">
-              Te vaak worden scholen niet alleen door kinderen maar ook door
-              leerkrachten als bron van stress ervaren. De klassen zijn vaak te
-              groot en het lesprogramma is te gestandaardiseerd. Het gevolg is
-              dat kinderen en leerkrachten gefrustreerd raken. Wereldwijd
-              experimenteren meer dan tienduizend scholen inmiddels met
-              verstilling, yoga en meditatie. De resultaten zijn fantastisch.
-              Regelmatige meditatie leidt tot meer
-              <strong className="pl-1">geluk, focus en zelfvertrouwen.</strong>
+              Kinderyoga geeft kinderen een fijne balans tussen bewegen en ontspannen. In de lessen oefenen we spelenderwijs met yogahoudingen, ademhaling, korte meditaties en een massage op de rug om respectvol te leren omgaan met grenzen en wensen.
+            </p>
+            <p className="px-4 pt-4">
+              De lessen dragen bij aan meer zelfvertrouwen, concentratie en emotionele balans. We besteden aandacht aan thema&apos;s zoals omgaan met spanning, samenwerken, complimenten geven, emoties herkennen en jezelf waarderen.
+            </p>
+            <p className="px-4 pt-4">
+              Kinderyoga helpt kinderen vaardigheden te ontdekken die ze niet alleen nu, maar ook later in hun leven kunnen gebruiken.
             </p>
           </div>
           <div className="pt-4">
             <h2 className="px-4 pt-4 text-4xl font-bold">
-              Schoolverlichting
+              Ouder-kind yoga: lol en verbinding
             </h2>
             <p className="px-4 pt-4">
-              Schoolverlichting is een initiatief van de Nieuwe Yogaschool om
-              kinderen en leerkrachten kennis te laten maken met yoga, meditatie
-              en mindfulness. De lessen bestaan uit oefeningen waarmee kinderen
-              op een speelse manier leren om bewust te focussen en taken met
-              aandacht uit te voeren. Daarnaast ontdekken ze dat er in jezelf
-              altijd een stille plek is waar je naartoe kunt gaan. Wanneer je
-              druk bent in je hoofd, als je je niet fijn voelt of als je iets
-              spannend vindt.
-            </p>
-            <p className="px-4 pt-4">
-              Leerkrachten leren korte yoga interventies inzetten in de klas met
-              een praktisch digitaal handboek als naslagwerk. We sluiten met de
-              yoga zoveel mogelijk aan bij de thema&apos;s en leerlijnen van de
-              school. Het voorkomt dat het als &apos;iets los&apos; en als
-              belastend wordt ervaren.
-              <strong>
-                De lessen vinden plaats in het klaslokaal zelf, tafels en
-                stoelen kunnen blijven staan. Er is geen gymlokaal nodig.
-              </strong>
+              Tijdens ouder-kind yoga neem je samen de tijd om te bewegen, ontspannen en plezier te maken. Het draait niet om prestatie, maar om verbinding. Met speelse oefeningen, ademhaling en ontspanning leer je je kind én jezelf beter kennen. Een waardevol moment om te lachen, knuffelen en samen te zijn in de drukte van alledag.
             </p>
           </div>
 
