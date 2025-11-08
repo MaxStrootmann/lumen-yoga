@@ -6,7 +6,7 @@ import "react-google-reviews/dist/index.css";
 import Image from "next/image";
 import { HeroButtons } from "./HeroButtons";
 import Link from "next/link";
-import { FaFacebook, FaInstagram } from "react-icons/fa";
+import { IoLocation } from "react-icons/io5";
 
 export default function Hero() {
   const featurableWidgetId = "4a7ab06d-759a-49dd-bf79-f9eac6fc982d"; // You can use "example" for testing
@@ -22,31 +22,19 @@ export default function Hero() {
           className="object-cover lg:h-[35rem] lg:w-7/12 lg:rounded-l-xl"
         ></CldImage>
         <div className="flex-col justify-center px-4 pt-6 lg:flex">
-          <h1 className="max-w-[20ch] text-4xl font-bold lg:text-5xl">
+          <h1 className="max-w-[20ch] text-4xl pb-2 font-bold lg:text-5xl">
             Kinderyoga in Schagen
           </h1>
+          <Link href="https://maps.google.com/?q=YPHS+Huis,+Zijperweg+9,+1742+NE+Schagen" target="_blank" className="flex items-center gap-2 pt-3 text-neutral-600 hover:text-neutral-500">
+            <IoLocation className="text-lg" />
+            <span className="underline text-sm font-semibold">YPHS Huis, Zijperweg 9, 1742 NE Schagen</span>
+          </Link>
           <p className="max-w-[50ch] pt-4 lg:pt-6">
             Laat kinderen kennis maken met yoga, meditatie en mindfulness. Geef
             kinderen de tools waar ze de rest van hun leven profijt van hebben.
           </p>
 
           <HeroButtons />
-
-          <div className="flex gap-2 pt-6">
-            <Link href="https://www.instagram.com/lumen.yoga/">
-              <span
-                className="inline-flex h-8 w-8 items-center justify-center rounded-xl
-                   bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888]"
-              >
-                <FaInstagram className="text-white" size={24} />
-              </span>
-            </Link>
-            <Link
-              href={"https://www.facebook.com/profile.php?id=100091839270911"}
-            >
-              <FaFacebook size={32} className="text-[#1877F2]" />
-            </Link>
-          </div>
 
           <div className="mr-auto flex pt-6">
             <ReactGoogleReviews

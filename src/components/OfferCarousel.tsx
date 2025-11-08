@@ -88,7 +88,7 @@ export function OfferCarousel() {
             >
               <div className="pb-4">
                 <Card className={`relative overflow-visible rounded-3xl border-4 border-black`}>
-                  <CardContent className="flex min-h-[400px] flex-col items-center justify-start px-6 py-8">
+                  <CardContent className="flex min-h-[400px] flex-col items-center justify-start px-4 py-6">
                     <div className="flex flex-1 flex-col items-center justify-start">
                       <h3
                         className="mb-6 text-center text-2xl font-bold leading-tight"

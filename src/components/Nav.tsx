@@ -12,6 +12,7 @@ import CldImage from "./CldImage";
 import Hamburger from "./Hamburger";
 import { Button } from "./ui/button";
 import { sendGTMEvent } from "@next/third-parties/google";
+import { FaFacebook, FaInstagram } from "react-icons/fa";
 
 // nav items are defined in the layout
 export type NavItem = {
@@ -73,7 +74,7 @@ export const FloatingNav = ({
             ></CldImage>
           </Link>
 
-          <menu className="hidden space-x-4 lg:flex">
+          <menu className="hidden space-x-4 lg:flex items-center">
             {navItems.map((navItem: NavItem) => (
               <Link
                 onClick={() => sendGTMEvent("event", `nav_${navItem.name}`)}
@@ -88,6 +89,12 @@ export const FloatingNav = ({
                 </span>
               </Link>
             ))}
+            <Link href="https://www.instagram.com/lumen.yoga/">
+              <FaInstagram className="text-neutral-600 hover:text-neutral-500 text-lg" />
+            </Link>
+            <Link href="https://www.facebook.com/profile.php?id=100091839270911">
+              <FaFacebook className="text-neutral-600 hover:text-neutral-500 text-lg" />
+            </Link>
             <Link
               onClick={() => sendGTMEvent("event", "nav_buttonAanmelden")}
               href="https://docs.google.com/forms/d/e/1FAIpQLSctAPfSQAKw3pdtxlDASPai16SxSO1XGNYz1UBzw5ysTdIIKQ/viewform"

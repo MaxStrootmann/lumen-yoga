@@ -23,7 +23,11 @@ export default function Footer({ navItems }: { navItems: NavItem[] }) {
       <ul className="flex flex-col justify-center gap-3 pt-5 text-center">
         {navItems.map((item: NavItem) => (
           <li key={item.id}>
-            <Link onClick={() => sendGTMEvent("event", `footer_${item.name}`)} href={item.link} className="font-bold">
+            <Link
+              onClick={() => sendGTMEvent("event", `footer_${item.name}`)}
+              href={item.link}
+              className="font-bold"
+            >
               {item.name}
             </Link>
           </li>
@@ -60,7 +64,7 @@ export default function Footer({ navItems }: { navItems: NavItem[] }) {
           href="https://www.linkedin.com/in/max-strootmann/"
           className="font-bold"
         >
-          Max Strootmann
+          Mann Digital
         </Link>
       </div>
     </footer>

@@ -6,7 +6,7 @@ import { env } from "~/env";
 export default function Reviews() {
   const featurableWidgetId = env.NEXT_PUBLIC_GOOGLE_FEATURABLE_WIDGET;
   return (
-    <div id="recensies" className="pt-16">
+    <div id="recensies" className="px-4 py-16 lg:py-24">
       <h2 className="col-span-2 pb-8 text-center text-4xl font-bold">
         Klanten aan het woord
       </h2>

@@ -13,14 +13,15 @@ export default function HomePage() {
     <div>
       <Hero />
       <IntroImages />
-      <WhySection />
-      <div className="lg:hidden">
-        <Krijgers />
-      </div>
       <About />
       <div className="lg:hidden">
         <Ellen />
       </div>
+      <WhySection />
+      <div className="lg:hidden">
+        <Krijgers />
+      </div>
+
       <div className="flex h-8 items-stretch lg:hidden">
         <div className="flex-1 bg-yellow "></div>
         <div className="flex-1 bg-magenta "></div>
@@ -29,7 +30,7 @@ export default function HomePage() {
         <div className="flex-1 bg-green "></div>
       </div>
       <Reviews />
-      <Lespakketten />
+      {/* <Lespakketten /> */}
       <Contact />
     </div>
   );

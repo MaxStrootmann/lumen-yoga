@@ -9,6 +9,7 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import type { NavItem } from "./Nav";
 import { sendGTMEvent } from "@next/third-parties/google";
+import { FaFacebook, FaInstagram } from "react-icons/fa";
 
 export default function Hamburger({ navItems }: { navItems: NavItem[] }) {
   return (
@@ -28,6 +29,15 @@ export default function Hamburger({ navItems }: { navItems: NavItem[] }) {
             <DropdownMenuItem>{item.name}</DropdownMenuItem>
           </Link>
         ))}
+        <div className="p-2"></div>
+        <div className="flex justify-center gap-4 py-2">
+          <Link href="https://www.instagram.com/lumen.yoga/">
+            <FaInstagram className="text-lg" />
+          </Link>
+          <Link href="https://www.facebook.com/profile.php?id=100091839270911">
+            <FaFacebook className="text-lg" />
+          </Link>
+        </div>
         <div className="p-2"></div>
         <DropdownMenuItem>
           <Link
