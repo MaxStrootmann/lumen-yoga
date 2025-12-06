@@ -3,7 +3,6 @@ import IntroImages from "~/components/IntroImages";
 import WhySection from "~/components/WhySection";
 import Krijgers from "~/components/Krijgers";
 import About from "~/components/About";
-import Lespakketten from "~/components/Lespakketten";
 import Contact from "~/components/Contact";
 import Ellen from "~/components/Ellen";
 import Reviews from "~/components/Reviews";

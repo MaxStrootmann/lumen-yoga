@@ -1,7 +1,5 @@
 "use client";
 import CldImage from "./CldImage";
-import FixedImage from "./FixedImage";
-import Quote from "./Quote";
 import { useEffect } from "react";
 
 export default function About() {
