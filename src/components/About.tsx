@@ -1,45 +1,58 @@
 "use client";
+
 import CldImage from "./CldImage";
-import { useEffect } from "react";
+import Script from "next/script";
 
 export default function About() {
-  // ---- Instagram feed loader ----
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.type = "module";
-    script.innerHTML = `
-      import App from "https://cdn.fouita.com/public/instagram-feed.js?11";
-      new App({
-        target: document.getElementById("ft-insta-app"),
-        props: {
-          settings: {
-            layout: "carousel",
-            source: "insta",
-            selected: "uname",
-            header: true,
-            autoplay: true,
-            zigzag: false,
-            cols: 2,
-            cardHeight: 300,
-            gap: 0,
-            direction: "down",
-            height: 700,
-            bgColor: "",
-            txtColor: "",
-            ukey: "03248bb9-c68b-48ad-9e11-04ee4df527f2"
-          }
-        }
-      });
-    `;
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-  // -------------------------------
   return (
     <div>
+      {/* Load Fouita script after the page is interactive */}
+      <Script
+        id="fouita-instagram"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            (function () {
+              // wait a tick to ensure the div is in the DOM
+              const init = () => {
+                const target = document.getElementById("ft-insta-app");
+                if (!target) {
+                  requestAnimationFrame(init);
+                  return;
+                }
+                import("https://cdn.fouita.com/public/instagram-feed.js?11")
+                  .then((mod) => {
+                    const App = mod.default || mod;
+                    new App({
+                      target,
+                      props: {
+                        settings: {
+                          layout: "carousel",
+                          source: "insta",
+                          selected: "uname",
+                          header: true,
+                          autoplay: true,
+                          zigzag: false,
+                          cols: 2,
+                          cardHeight: 300,
+                          gap: 0,
+                          direction: "down",
+                          height: 700,
+                          bgColor: "",
+                          txtColor: "",
+                          ukey: "03248bb9-c68b-48ad-9e11-04ee4df527f2"
+                        }
+                      }
+                    });
+                  })
+                  .catch(console.error);
+              };
+              init();
+            })();
+          `,
+        }}
+      />
+
       <div id="over-mij" className="custom-grid-about lg:py-20">
         <div id="ellen-image" className="hidden lg:block">
           <CldImage
@@ -51,6 +64,7 @@ export default function About() {
             className="h-full object-cover"
           />
         </div>
+
         <div
           id="balk+text"
           className="col-span-1 col-start-2 flex flex-col items-stretch"
@@ -62,6 +76,7 @@ export default function About() {
             <div className="flex-1 bg-blue "></div>
             <div className="flex-1 bg-green "></div>
           </div>
+
           <div id="logo-and-text" className="max-w-[70ch] pb-8 lg:pl-12">
             <div className="px-4 pt-4 lg:px-0 lg:pr-4">
               <h2 className="pt-4 text-4xl font-bold">
@@ -75,7 +90,7 @@ export default function About() {
                 Yoga heeft mijn leven veranderd. Het heeft me geleerd om zachter
                 voor mezelf te zijn en mijn innerlijke kracht te omarmen. Waar
                 ik voorheen worstelde met strenge verwachtingen en een kritische
-                stem, vind ik nu rust en balans.{" "}
+                stem, vind ik nu rust en balans.
               </p>
               <p className="pt-4">
                 Steeds vaker vroeg ik me af waarom ik deze belangrijke
@@ -101,13 +116,14 @@ export default function About() {
           {/* ---- Instagram Feed Embed ---- */}
           <div className="pb-4 lg:pl-12">
             <p className="pl-4 pt-6 italic opacity-60">Volg ons op Instagram</p>
-            <div id="ft-insta-app" className=""></div>
-            <div id="ft-insta-brd" className=""></div>
+
+            {/* Give it explicit min-height so it can't collapse to 0 */}
+            <div id="ft-insta-app" className="mt-4 min-h-[350px] w-full"></div>
+            <div id="ft-insta-brd" className="hidden"></div>
           </div>
           {/* -------------------------------- */}
         </div>
       </div>
-      {/* end of grid */}
     </div>
   );
 }
