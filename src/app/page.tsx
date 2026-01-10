@@ -8,6 +8,7 @@ import Ellen from "~/components/Ellen";
 import Reviews from "~/components/Reviews";
 
 export default function HomePage() {
+  console.log("runtime", process.versions.bun);
   return (
     <div>
       <Hero />

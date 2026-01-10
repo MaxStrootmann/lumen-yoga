@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, type JSX } from "react";
+import { useState, type JSX } from "react";
 import {
   motion,
   AnimatePresence,
@@ -59,11 +59,11 @@ export const FloatingNav = ({
           duration: 0.2,
         }}
         className={cn(
-          "fixed  inset-x-0 z-[5000] flex items-center justify-between bg-white py-3",
+          "fixed  inset-x-0 z-5000 flex items-center justify-between bg-white py-3",
           className,
         )}
       >
-        <nav className="container flex items-center justify-between">
+        <nav className="flex w-full max-w-2xl mx-auto p-4 items-center justify-between">
           <Link href="/">
             <CldImage
               src="https://res.cloudinary.com/strootmann/image/upload/v1708871727/lumen-yoga/Lumen-Yoga_logo-vol_xg1uur.svg"
