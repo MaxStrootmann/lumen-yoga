@@ -63,7 +63,7 @@ export const FloatingNav = ({
           className,
         )}
       >
-        <nav className="flex w-full max-w-2xl mx-auto p-4 items-center justify-between">
+        <nav className="flex w-full max-w-360 mx-auto px-8 items-center justify-between">
           <Link href="/">
             <CldImage
               src="https://res.cloudinary.com/strootmann/image/upload/v1708871727/lumen-yoga/Lumen-Yoga_logo-vol_xg1uur.svg"
@@ -81,7 +81,7 @@ export const FloatingNav = ({
                 key={navItem.id}
                 href={navItem.link}
                 className={cn(
-                  "dark:text-neutral-50 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 relative flex items-center space-x-1",
+                  "text-neutral-800 hover:text-neutral-500 relative flex items-center space-x-1",
                 )}
               >
                 <span className="hidden whitespace-nowrap text-sm font-bold lg:block">
