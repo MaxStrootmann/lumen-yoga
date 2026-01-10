@@ -36,7 +36,7 @@ export default async function sendEmail(contactProps: contact): Promise<void> {
           ? ["strootmann95@gmail.com", "ellen@lumenyoga.nl"]
           : ["strootmann95@gmail.com"],
       subject: `Kan email niet versturen - Lumen Yoga Contact`,
-      text: `Er is een fout opgetreden bij het versturen van de email voor bericht van ${contactProps.email}. De benodigde data is niet gevonden.`,
+      text: `Er is een fout opgetreden bij het versturen van de email voor bericht van ${contactProps.email}. De benodigde data is niet gevonden. Error: ${error}`,
     });
   }
 }
