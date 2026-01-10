@@ -40,11 +40,21 @@
   }
 }
 
-  @media (min-width: 1920px) {
-    html {
-      @apply container;
-    }
+/* @layer { */
+/*   @media (min-width: 1920px) { */
+/*     html { */
+/*       @apply container; */
+/*     } */
+/*   } */
+/* } */
+@media (width >= 120rem) { /* 1920px */
+  html {
+    margin-inline: auto;
+    max-width: 90rem;
+    padding-inline: 2rem;
   }
+}
+
 
 .element-with-scrollbar {
   overflow-y: auto;
