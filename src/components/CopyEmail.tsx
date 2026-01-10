@@ -6,12 +6,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import {
-  TooltipTrigger,
-  TooltipContent,
-  Tooltip,
-  TooltipProvider,
-} from "@/components/ui/tooltip";
 import { useState } from "react";
 
 export default function Component() {
@@ -22,27 +16,18 @@ export default function Component() {
     setCopied(true);
   };
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button onClick={copyToClipboard} size="link" variant="link">
-            {copied ? (
-              "email gekopieerd! 🎉"
-            ) : (
-              <div className="flex items-center gap-1">
-                <span className="underline underline-offset-4">
-                  ellen@lumenyoga.nl
-                </span>
-                <ClipboardIcon />
-              </div>
-            )}
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>Klik om te kopiëren</p>
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <Button onClick={copyToClipboard} size="link" variant="link">
+      {copied ? (
+        "email gekopieerd! 🎉"
+      ) : (
+        <div className="cursor-pointer flex items-center gap-1">
+          <span className="underline underline-offset-4">
+            ellen@lumenyoga.nl
+          </span>
+          <ClipboardIcon />
+        </div>
+      )}
+    </Button>
   );
 }
 
