@@ -70,11 +70,11 @@ export default function About() {
           className="col-span-1 col-start-2 flex flex-col items-stretch"
         >
           <div className="flex flex-col">
-            <div className="flex-1 bg-yellow "></div>
-            <div className="flex-1 bg-magenta "></div>
-            <div className="flex-1 bg-purple "></div>
-            <div className="flex-1 bg-blue "></div>
-            <div className="flex-1 bg-green "></div>
+            <div className="flex-1 bg-yellow"></div>
+            <div className="flex-1 bg-magenta"></div>
+            <div className="flex-1 bg-purple"></div>
+            <div className="flex-1 bg-blue"></div>
+            <div className="flex-1 bg-green"></div>
           </div>
 
           <div id="logo-and-text" className="max-w-[70ch] pb-8 lg:pl-12">
@@ -88,7 +88,7 @@ export default function About() {
               </p>
               <p className="pt-4">
                 Yoga heeft mijn leven veranderd. Het heeft me geleerd om zachter
-                voor mezelf te zijn en mijn innerlijke kracht te omarmen. Waar
+                voor jezelf te zijn en mijn innerlijke kracht te omarmen. Waar
                 ik voorheen worstelde met strenge verwachtingen en een kritische
                 stem, vind ik nu rust en balans.
               </p>
@@ -116,10 +116,8 @@ export default function About() {
           {/* ---- Instagram Feed Embed ---- */}
           <div className="pb-4 lg:pl-12">
             <p className="pl-4 pt-6 italic opacity-60">Volg ons op Instagram</p>
-
-            {/* Give it explicit min-height so it can't collapse to 0 */}
-            <div id="ft-insta-app" className="mt-4 min-h-[350px] w-full"></div>
-            <div id="ft-insta-brd" className="hidden"></div>
+            <div id="ft-insta-app" className="mt-4 min-h-[350px] w-full" />
+            <div id="ft-insta-brd" className="hidden" />
           </div>
           {/* -------------------------------- */}
         </div>

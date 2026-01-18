@@ -1,6 +1,28 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@config "../../tailwind.config.ts";
+
+@theme {
+  /* Colors */
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-yellow: #efad5b;
+  --color-magenta: #b361a4;
+  --color-purple: #7663a8;
+  --color-blue: #80a5d7;
+  --color-green: #aed9b3;
+
+  /* Font family */
+  --font-sans: "Inter", "Roboto", "Helvetica Neue", "Arial Nova", "Arial",
+    sans-serif;
+
+  /* Font weights */
+  --font-weight-semibold: 500;
+
+  /* Container */
+  --container-padding: 2rem;
+  --container-2xl: 1400px;
+}
+
 
 .clip-path {
   clip-path: inset(0 0 0 0);
@@ -18,11 +40,21 @@
   }
 }
 
-@media (min-width: 1920px) {
+/* @layer { */
+/*   @media (min-width: 1920px) { */
+/*     html { */
+/*       @apply container; */
+/*     } */
+/*   } */
+/* } */
+@media (width >= 120rem) { /* 1920px */
   html {
-    @apply container;
+    margin-inline: auto;
+    max-width: 90rem;
+    padding-inline: 2rem;
   }
 }
+
 
 .element-with-scrollbar {
   overflow-y: auto;
