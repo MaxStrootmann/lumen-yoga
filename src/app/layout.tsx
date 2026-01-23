@@ -2,8 +2,9 @@ import Footer from "~/components/Footer";
 import { FloatingNav } from "~/components/Nav";
 import "~/styles/globals.css";
 import { GoogleTagManager } from "@next/third-parties/google";
+import { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Lumen Yoga | yoga, meditatie & mindfulness voor kinderen",
   description:
     "Laat kinderen kennis maken met yoga, meditatie en mindfulness. Geef kinderen de tools waar ze de rest van hun leven profijt van hebben.",
