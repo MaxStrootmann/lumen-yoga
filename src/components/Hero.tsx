@@ -7,9 +7,10 @@ import Image from "next/image";
 import { HeroButtons } from "./HeroButtons";
 import Link from "next/link";
 import { IoLocation } from "react-icons/io5";
+import { env } from "~/env";
 
 export default function Hero() {
-  const featurableWidgetId = "4a7ab06d-759a-49dd-bf79-f9eac6fc982d"; // You can use "example" for testing
+  const featurableWidgetId = env.NEXT_PUBLIC_GOOGLE_FEATURABLE_WIDGET;
   return (
     <div>
       <header className="flex-row-reverse pt-20 lg:flex lg:pt-24">

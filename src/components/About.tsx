@@ -1,58 +1,10 @@
 "use client";
 
 import CldImage from "./CldImage";
-import Script from "next/script";
 
 export default function About() {
   return (
     <div>
-      {/* Load Fouita script after the page is interactive */}
-      <Script
-        id="fouita-instagram"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            (function () {
-              // wait a tick to ensure the div is in the DOM
-              const init = () => {
-                const target = document.getElementById("ft-insta-app");
-                if (!target) {
-                  requestAnimationFrame(init);
-                  return;
-                }
-                import("https://cdn.fouita.com/public/instagram-feed.js?11")
-                  .then((mod) => {
-                    const App = mod.default || mod;
-                    new App({
-                      target,
-                      props: {
-                        settings: {
-                          layout: "carousel",
-                          source: "insta",
-                          selected: "uname",
-                          header: true,
-                          autoplay: true,
-                          zigzag: false,
-                          cols: 2,
-                          cardHeight: 300,
-                          gap: 0,
-                          direction: "down",
-                          height: 700,
-                          bgColor: "",
-                          txtColor: "",
-                          ukey: "03248bb9-c68b-48ad-9e11-04ee4df527f2"
-                        }
-                      }
-                    });
-                  })
-                  .catch(console.error);
-              };
-              init();
-            })();
-          `,
-        }}
-      />
-
       <div id="over-mij" className="custom-grid-about lg:py-20">
         <div id="ellen-image" className="hidden lg:block">
           <CldImage
@@ -113,15 +65,16 @@ export default function About() {
             </div>
           </div>
 
-          {/* ---- Instagram Feed Embed ---- */}
-          <div className="pb-4 lg:pl-12">
-            <p className="pl-4 pt-6 italic opacity-60">Volg ons op Instagram</p>
-
-            {/* Give it explicit min-height so it can't collapse to 0 */}
-            <div id="ft-insta-app" className="mt-4 min-h-[350px] w-full"></div>
-            <div id="ft-insta-brd" className="hidden"></div>
+          <div className="pb-8 pl-4 pt-6 lg:pl-12">
+            <a
+              href="https://www.instagram.com/lumen.yoga/"
+              target="_blank"
+              rel="noreferrer"
+              className="italic underline opacity-60"
+            >
+              Volg ons op Instagram
+            </a>
           </div>
-          {/* -------------------------------- */}
         </div>
       </div>
     </div>

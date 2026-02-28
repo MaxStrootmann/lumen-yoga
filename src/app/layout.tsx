@@ -53,7 +53,7 @@ export default function RootLayout({
     },
   ];
   return (
-    <html lang="en">
+    <html lang="nl">
       <GoogleTagManager gtmId="GTM-TG5CK2MX" />
       <body className="font-sans">
         <FloatingNav navItems={navItems}></FloatingNav>

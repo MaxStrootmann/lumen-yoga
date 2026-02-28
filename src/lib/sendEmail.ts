@@ -11,13 +11,13 @@ type contact = {
 };
 
 export default async function sendEmail(contactProps: contact): Promise<void> {
+  const { naam, email, bericht } = contactProps;
+
+  if (!naam || !email || !bericht) {
+    throw new Error("Missing required data for email");
+  }
+
   try {
-    const { naam, email, bericht } = contactProps;
-
-    if (!naam || !email || !bericht) {
-      throw new Error("Missing required data for email");
-    }
-
     await resend.emails.send({
       from: "Lumen Yoga Contact <email@manndigital.nl>",
       to:
@@ -29,14 +29,20 @@ export default async function sendEmail(contactProps: contact): Promise<void> {
     });
     console.log("Email sent");
   } catch (error) {
-    await resend.emails.send({
-      from: "CONTACT FORMULIER LUMEN ERROR <email@manndigital.nl>",
-      to:
-        process.env.NODE_ENV === "production"
-          ? ["strootmann95@gmail.com", "ellen@lumenyoga.nl"]
-          : ["strootmann95@gmail.com"],
-      subject: `Kan email niet versturen - Lumen Yoga Contact`,
-      text: `Er is een fout opgetreden bij het versturen van de email voor bericht van ${contactProps.email}. De benodigde data is niet gevonden.`,
-    });
+    try {
+      await resend.emails.send({
+        from: "CONTACT FORMULIER LUMEN ERROR <email@manndigital.nl>",
+        to:
+          process.env.NODE_ENV === "production"
+            ? ["strootmann95@gmail.com", "ellen@lumenyoga.nl"]
+            : ["strootmann95@gmail.com"],
+        subject: `Kan email niet versturen - Lumen Yoga Contact`,
+        text: `Er is een fout opgetreden bij het versturen van de email voor bericht van ${contactProps.email}.`,
+      });
+    } catch {
+      // Keep the original error as the source of truth for callers.
+    }
+
+    throw error;
   }
 }

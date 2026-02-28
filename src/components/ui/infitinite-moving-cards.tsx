@@ -30,6 +30,13 @@ export const InfiniteMovingCards = ({
   useEffect(() => {
     function addAnimation() {
       if (containerRef.current && scrollerRef.current) {
+        if (scrollerRef.current.dataset.duplicated === "true") {
+          getDirection();
+          getSpeed();
+          setStart(true);
+          return;
+        }
+
         const scrollerContent = Array.from(scrollerRef.current.children);
 
         scrollerContent.forEach((item) => {
@@ -39,13 +46,14 @@ export const InfiniteMovingCards = ({
           }
         });
 
+        scrollerRef.current.dataset.duplicated = "true";
         getDirection();
         getSpeed();
         setStart(true);
       }
     }
     addAnimation();
-  });
+  }, [direction, speed]);
   const [start, setStart] = useState(false);
 
   const getDirection = () => {
