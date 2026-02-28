@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { X } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -61,7 +62,7 @@ export default function MaternityLeaveModal() {
           closeButtonRef.current?.focus();
         }}
       >
-        <div className="flex items-start justify-between gap-4">
+        <div className="flex items-start justify-between gap-1 lg:gap-2">
           <DialogTitle>
             Lumen Yoga viert momenteel zwangerschapsverlof
           </DialogTitle>
@@ -70,9 +71,9 @@ export default function MaternityLeaveModal() {
             type="button"
             onClick={handleClose}
             aria-label="Sluit melding"
-            className="hover:bg-neutral-100 rounded-md border border-black px-3 py-1 text-sm font-bold"
+            className="hover:bg-neutral-100 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-black"
           >
-            Sluiten
+            <X className="h-4 w-4" />
           </button>
         </div>
 
