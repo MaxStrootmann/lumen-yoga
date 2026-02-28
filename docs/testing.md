@@ -11,6 +11,7 @@
 
 - `npm run test` runs all tests once
 - `npm run test:watch` runs tests in watch mode
+- `npm run lint` runs TypeScript checks via `tsconfig.lint.json` (excludes `.next` generated files)
 
 ## Coverage currently in repo
 
@@ -30,3 +31,4 @@
 - Contact form UI success/error states
 - Nav/anchor behavior in an E2E suite
 - Offer carousel interactions on mobile breakpoints
+- Maternity modal behavior (open-on-load, close on overlay click, reopen via `Verlof` trigger)

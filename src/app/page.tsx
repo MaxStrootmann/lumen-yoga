@@ -6,10 +6,12 @@ import About from "~/components/About";
 import Contact from "~/components/Contact";
 import Ellen from "~/components/Ellen";
 import Reviews from "~/components/Reviews";
+import MaternityLeaveModal from "~/components/MaternityLeaveModal";
 
 export default function HomePage() {
   return (
     <div>
+      <MaternityLeaveModal />
       <Hero />
       <IntroImages />
       <About />

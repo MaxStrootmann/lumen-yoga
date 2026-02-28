@@ -13,6 +13,7 @@ import Hamburger from "./Hamburger";
 import { Button } from "./ui/button";
 import { sendGTMEvent } from "@next/third-parties/google";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
+import { openMaternityModal } from "~/lib/maternity-modal";
 
 // nav items are defined in the layout
 export type NavItem = {
@@ -76,18 +77,32 @@ export const FloatingNav = ({
 
           <menu className="hidden space-x-4 lg:flex items-center">
             {navItems.map((navItem: NavItem) => (
-              <Link
-                onClick={() => sendGTMEvent("event", `nav_${navItem.name}`)}
-                key={navItem.id}
-                href={navItem.link}
-                className={cn(
-                  "dark:text-neutral-50 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 relative flex items-center space-x-1",
-                )}
-              >
-                <span className="hidden whitespace-nowrap text-sm font-bold lg:block">
+              navItem.link === "#verlof" ? (
+                <button
+                  key={navItem.id}
+                  type="button"
+                  onClick={() => {
+                    sendGTMEvent("event", `nav_${navItem.name}`);
+                    openMaternityModal();
+                  }}
+                  className="rounded-full border-2 border-magenta px-4 py-1.5 text-base font-bold text-black transition hover:bg-magenta/10"
+                >
                   {navItem.name}
-                </span>
-              </Link>
+                </button>
+              ) : (
+                <Link
+                  onClick={() => sendGTMEvent("event", `nav_${navItem.name}`)}
+                  key={navItem.id}
+                  href={navItem.link}
+                  className={cn(
+                    "dark:text-neutral-50 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 relative flex items-center space-x-1",
+                  )}
+                >
+                  <span className="hidden whitespace-nowrap text-sm font-bold lg:block">
+                    {navItem.name}
+                  </span>
+                </Link>
+              )
             ))}
             <Link href="https://www.instagram.com/lumen.yoga/">
               <FaInstagram className="text-neutral-600 hover:text-neutral-500 text-lg" />
@@ -99,7 +114,7 @@ export const FloatingNav = ({
               onClick={() => sendGTMEvent("event", "nav_buttonAanmelden")}
               href="https://docs.google.com/forms/d/e/1FAIpQLSctAPfSQAKw3pdtxlDASPai16SxSO1XGNYz1UBzw5ysTdIIKQ/viewform"
             >
-              <Button bgColor={"yellow"} size={"min"}>
+              <Button bgColor={"yellow"} size={"min"} className="h-9 px-3 text-base">
                 Aanmelden
               </Button>
             </Link>

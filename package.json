@@ -6,7 +6,7 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev --turbo",
-    "lint": "tsc --noEmit",
+    "lint": "tsc -p tsconfig.lint.json --noEmit",
     "start": "next start",
     "test": "vitest run",
     "test:watch": "vitest"
@@ -36,7 +36,8 @@
     "resend": "^3.5.0",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
-    "zod": "^3.25.76"
+    "zod": "^3.25.76",
+    "@radix-ui/react-dialog": "^1.1.15"
   },
   "devDependencies": {
     "@types/eslint": "^8.56.12",

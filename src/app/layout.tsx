@@ -51,6 +51,11 @@ export default function RootLayout({
       name: "Info",
       link: "#info",
     },
+    {
+      id: 7,
+      name: "Verlof",
+      link: "#verlof",
+    },
   ];
   return (
     <html lang="nl">
