@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import sendEmail from "~/lib/sendEmail";
+import posthog from "posthog-js";
 
 const formSchema = z.object({
   naam: z.string().min(2, {
@@ -58,6 +59,7 @@ export function ContactForm() {
         ),
       ]);
 
+      posthog.capture("contact_form_submitted");
       setIsSent(true);
       form.reset();
     } catch (err) {
@@ -65,8 +67,12 @@ export function ContactForm() {
 
       if ((err as Error).message === "Timeout") {
         // Mail is waarschijnlijk nog verstuurd — we geven gebruiker gewoon bevestiging
+        posthog.capture("contact_form_submitted");
         setIsSent(true);
       } else {
+        posthog.capture("contact_form_error", {
+          error_message: (err as Error).message,
+        });
         setError(
           "Er is iets misgegaan bij het verzenden. Probeer het opnieuw.",
         );

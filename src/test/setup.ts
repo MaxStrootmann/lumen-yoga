@@ -6,3 +6,5 @@ env.NODE_ENV ??= "test";
 env.RESEND_API_KEY ??= "test_resend_key";
 env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME ??= "test_cloud_name";
 env.NEXT_PUBLIC_GOOGLE_FEATURABLE_WIDGET ??= "test_widget";
+env.NEXT_PUBLIC_POSTHOG_KEY ??= "ph_test_key";
+env.NEXT_PUBLIC_POSTHOG_HOST ??= "https://us.i.posthog.com";

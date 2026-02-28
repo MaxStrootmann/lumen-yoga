@@ -8,6 +8,7 @@ import {
   DialogTitle,
 } from "~/components/ui/dialog";
 import { MATERNITY_MODAL_EVENT } from "~/lib/maternity-modal";
+import posthog from "posthog-js";
 
 export default function MaternityLeaveModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,6 +24,7 @@ export default function MaternityLeaveModal() {
       setIsOpen(true);
     };
 
+    posthog.capture("maternity_modal_viewed");
     setIsOpen(true);
 
     openFromHash();
@@ -38,6 +40,7 @@ export default function MaternityLeaveModal() {
     if (window.location.hash === "#verlof") {
       window.history.replaceState(null, "", window.location.pathname);
     }
+    posthog.capture("maternity_modal_dismissed");
     setIsOpen(false);
   };
 
@@ -67,7 +70,7 @@ export default function MaternityLeaveModal() {
             type="button"
             onClick={handleClose}
             aria-label="Sluit melding"
-            className="rounded-md border border-black px-3 py-1 text-sm font-bold hover:bg-neutral-100"
+            className="hover:bg-neutral-100 rounded-md border border-black px-3 py-1 text-sm font-bold"
           >
             Sluiten
           </button>
@@ -88,8 +91,8 @@ export default function MaternityLeaveModal() {
             <p className="font-bold">Aanmelden:</p>
             <p>
               Je kunt je voor alle lessen en workshops alvast opgeven via de
-              website. Eind juni neem ik contact met je op om de inschrijving
-              te bevestigen.
+              website. Eind juni neem ik contact met je op om de inschrijving te
+              bevestigen.
             </p>
           </div>
           <p>Ik wens je een mooie tijd en tot snel!</p>

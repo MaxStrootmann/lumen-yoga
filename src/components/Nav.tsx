@@ -14,6 +14,7 @@ import { Button } from "./ui/button";
 import { sendGTMEvent } from "@next/third-parties/google";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import { openMaternityModal } from "~/lib/maternity-modal";
+import posthog from "posthog-js";
 
 // nav items are defined in the layout
 export type NavItem = {
@@ -75,8 +76,8 @@ export const FloatingNav = ({
             ></CldImage>
           </Link>
 
-          <menu className="hidden space-x-4 lg:flex items-center">
-            {navItems.map((navItem: NavItem) => (
+          <menu className="hidden items-center space-x-4 lg:flex">
+            {navItems.map((navItem: NavItem) =>
               navItem.link === "#verlof" ? (
                 <button
                   key={navItem.id}
@@ -102,8 +103,8 @@ export const FloatingNav = ({
                     {navItem.name}
                   </span>
                 </Link>
-              )
-            ))}
+              ),
+            )}
             <Link href="https://www.instagram.com/lumen.yoga/">
               <FaInstagram className="text-neutral-600 hover:text-neutral-500 text-lg" />
             </Link>
@@ -111,10 +112,17 @@ export const FloatingNav = ({
               <FaFacebook className="text-neutral-600 hover:text-neutral-500 text-lg" />
             </Link>
             <Link
-              onClick={() => sendGTMEvent("event", "nav_buttonAanmelden")}
+              onClick={() => {
+                sendGTMEvent("event", "nav_buttonAanmelden");
+                posthog.capture("nav_registration_clicked", { source: "nav" });
+              }}
               href="https://docs.google.com/forms/d/e/1FAIpQLSctAPfSQAKw3pdtxlDASPai16SxSO1XGNYz1UBzw5ysTdIIKQ/viewform"
             >
-              <Button bgColor={"yellow"} size={"min"} className="h-9 px-3 text-base">
+              <Button
+                bgColor={"yellow"}
+                size={"min"}
+                className="h-9 px-3 text-base"
+              >
                 Aanmelden
               </Button>
             </Link>

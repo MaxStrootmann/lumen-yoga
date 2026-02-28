@@ -15,6 +15,7 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 import { sendGTMEvent } from "@next/third-parties/google";
 import { IoTime } from "react-icons/io5";
+import posthog from "posthog-js";
 
 interface CardProps {
   color: "yellow" | "magenta" | "purple" | "blue" | "green";
@@ -87,7 +88,9 @@ export function OfferCarousel() {
               className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
             >
               <div className="pb-4">
-                <Card className={`relative overflow-visible rounded-3xl border-4 border-black`}>
+                <Card
+                  className={`relative overflow-visible rounded-3xl border-4 border-black`}
+                >
                   <CardContent className="flex min-h-[400px] flex-col items-center justify-start px-4 py-6">
                     <div className="flex flex-1 flex-col items-center justify-start">
                       <h3
@@ -95,8 +98,13 @@ export function OfferCarousel() {
                         dangerouslySetInnerHTML={{ __html: card.title }}
                       />
                       <div className="mb-4 flex items-center gap-2">
-                        <IoTime className="text-2xl" style={{ color: '#F5A623' }} />
-                        <span className="text-sm font-semibold">{card.time}</span>
+                        <IoTime
+                          className="text-2xl"
+                          style={{ color: "#F5A623" }}
+                        />
+                        <span className="text-sm font-semibold">
+                          {card.time}
+                        </span>
                       </div>
                       <div
                         className="text-sm leading-relaxed"
@@ -105,13 +113,20 @@ export function OfferCarousel() {
                     </div>
                     <div className=" w-full">
                       <Link
-                        onClick={() =>
-                          sendGTMEvent("event", `aanbod_${card.title}`)
-                        }
+                        onClick={() => {
+                          sendGTMEvent("event", `aanbod_${card.title}`);
+                          posthog.capture("offer_registration_clicked", {
+                            offer_title: card.title,
+                            button_text: card.buttonText,
+                          });
+                        }}
                         href={card.href}
                         className="block"
                       >
-                        <Button bgColor={card.color} className="w-full text-lg font-bold">
+                        <Button
+                          bgColor={card.color}
+                          className="w-full text-lg font-bold"
+                        >
                           {card.buttonText}
                         </Button>
                       </Link>

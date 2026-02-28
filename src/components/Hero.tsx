@@ -8,6 +8,7 @@ import { HeroButtons } from "./HeroButtons";
 import Link from "next/link";
 import { IoLocation } from "react-icons/io5";
 import { env } from "~/env";
+import posthog from "posthog-js";
 
 export default function Hero() {
   const featurableWidgetId = env.NEXT_PUBLIC_GOOGLE_FEATURABLE_WIDGET;
@@ -23,12 +24,19 @@ export default function Hero() {
           className="object-cover lg:h-[35rem] lg:w-7/12 lg:rounded-l-xl"
         ></CldImage>
         <div className="flex-col justify-center px-4 pt-6 lg:flex">
-          <h1 className="max-w-[20ch] text-4xl pb-2 font-bold lg:text-5xl">
+          <h1 className="max-w-[20ch] pb-2 text-4xl font-bold lg:text-5xl">
             Kinderyoga in Schagen
           </h1>
-          <Link href="https://maps.google.com/?q=YPHS+Huis,+Zijperweg+9,+1742+NE+Schagen" target="_blank" className="flex items-center gap-2 pt-3 text-neutral-600 hover:text-neutral-500">
+          <Link
+            href="https://maps.google.com/?q=YPHS+Huis,+Zijperweg+9,+1742+NE+Schagen"
+            target="_blank"
+            onClick={() => posthog.capture("location_link_clicked")}
+            className="text-neutral-600 hover:text-neutral-500 flex items-center gap-2 pt-3"
+          >
             <IoLocation className="text-lg" />
-            <span className="underline text-sm font-semibold">YPHS Huis, Zijperweg 9, 1742 NE Schagen</span>
+            <span className="text-sm font-semibold underline">
+              YPHS Huis, Zijperweg 9, 1742 NE Schagen
+            </span>
           </Link>
           <p className="max-w-[50ch] pt-4 lg:pt-6">
             Laat kinderen kennis maken met yoga, meditatie en mindfulness. Geef

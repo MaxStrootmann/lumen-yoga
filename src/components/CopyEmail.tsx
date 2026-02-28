@@ -13,6 +13,7 @@ import {
   TooltipProvider,
 } from "@/components/ui/tooltip";
 import { useState } from "react";
+import posthog from "posthog-js";
 
 export default function Component() {
   const [copied, setCopied] = useState(false);
@@ -20,6 +21,7 @@ export default function Component() {
   const copyToClipboard = () => {
     void navigator.clipboard.writeText("ellen@lumenyoga.nl");
     setCopied(true);
+    posthog.capture("email_copied");
   };
   return (
     <TooltipProvider>

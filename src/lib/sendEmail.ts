@@ -1,6 +1,7 @@
 "use server";
 import { Resend } from "resend";
 import { env } from "~/env";
+import { getPostHogClient } from "~/lib/posthog-server";
 
 const resend = new Resend(env.RESEND_API_KEY);
 
@@ -28,6 +29,13 @@ export default async function sendEmail(contactProps: contact): Promise<void> {
       html: `<p>Naam: ${naam}</p><p>Email: ${email}</p><p>Bericht: ${bericht}</p>`,
     });
     console.log("Email sent");
+    const posthog = getPostHogClient();
+    posthog.capture({
+      distinctId: email,
+      event: "send_email_server_action_called",
+      properties: { naam },
+    });
+    await posthog.shutdown();
   } catch (error) {
     try {
       await resend.emails.send({
@@ -42,6 +50,16 @@ export default async function sendEmail(contactProps: contact): Promise<void> {
     } catch {
       // Keep the original error as the source of truth for callers.
     }
+    const posthog = getPostHogClient();
+    posthog.capture({
+      distinctId: email,
+      event: "send_email_server_action_failed",
+      properties: {
+        error_message: (error as Error).message,
+        naam,
+      },
+    });
+    await posthog.shutdown();
 
     throw error;
   }
