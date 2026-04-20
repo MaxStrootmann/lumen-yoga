@@ -18,6 +18,18 @@ const dirname = path.dirname(filename)
 
 const isProduction = process.env.NODE_ENV === 'production'
 
+function getPublicS3FileURL(filename: string, prefix?: string) {
+  const bucket = process.env.S3_BUCKET
+  const region = process.env.S3_REGION || 'eu-west-1'
+
+  if (!bucket) {
+    return `/api/media/file/${encodeURIComponent(filename)}`
+  }
+
+  const key = [prefix, filename].filter(Boolean).join('/')
+  return `https://${bucket}.s3.${region}.amazonaws.com/${key}`
+}
+
 export default buildConfig({
   admin: {
     importMap: {
@@ -39,7 +51,10 @@ export default buildConfig({
     s3Storage({
       bucket: process.env.S3_BUCKET || '',
       collections: {
-        media: true,
+        media: {
+          disablePayloadAccessControl: true,
+          generateFileURL: ({ filename, prefix }) => getPublicS3FileURL(filename, prefix),
+        },
       },
       config: {
         credentials: {
