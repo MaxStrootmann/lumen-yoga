@@ -239,10 +239,10 @@ To avoid interfering with the existing host setup:
 - Docker Compose runs:
   - `app`
   - `db` (Postgres)
-- bind app only to localhost on a high port, e.g. `127.0.0.1:3020`
+- bind app only to localhost on a high port, e.g. `127.0.0.1:3030`
 - keep system Caddy as the only public web server
 - add a new Caddy site block:
-  - `lumen.manndigital.nl -> 127.0.0.1:3020`
+  - `lumen.manndigital.nl -> 127.0.0.1:3030`
 
 This matches the existing `mann-dev` pattern already used for other apps.
 

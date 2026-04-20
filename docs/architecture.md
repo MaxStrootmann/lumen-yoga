@@ -74,7 +74,7 @@ Shared shell content comes from:
 Current deployment target:
 
 - app + db via Docker Compose
-- app bound to `127.0.0.1:3020`
+- app bound to `127.0.0.1:3030`
 - db bound to `127.0.0.1:5438`
 - system Caddy terminates HTTPS and proxies `lumen.manndigital.nl` to the app
 
