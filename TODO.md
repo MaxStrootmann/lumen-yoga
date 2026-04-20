@@ -15,4 +15,5 @@
 - [x] Add Docker production setup for app + Postgres
 - [x] Add deployment notes for `mann-dev` and `lumen.manndigital.nl`
 - [ ] Smoke test locally and via shared-browser workflow
-- [ ] Deploy preview to `mann-dev`
+- [x] Deploy preview to `mann-dev`
+- [x] Add server-side deploy script for the canonical `~/projects/lumen-yoga` workflow

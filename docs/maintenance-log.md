@@ -37,3 +37,5 @@
 - Added `src/seed/lumen.ts` to import current hardcoded content and media into Payload.
 - Added Dockerfile, Docker Compose setup, production env example, and Caddy host snippet for `mann-dev` deployment.
 - Updated README and project docs to reflect the new architecture and deployment workflow.
+- Added `scripts/deploy.sh` for the canonical server workflow in `~/projects/lumen-yoga`.
+- Standardized the server setup so `~/projects/lumen-yoga` is the canonical git working copy and deployment directory.

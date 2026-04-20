@@ -113,6 +113,30 @@ Caddy site snippet:
 
 - `deploy/Caddyfile.lumen.manndigital.nl`
 
+## Server workflow on `mann-dev`
+
+Canonical server repo:
+
+- `~/projects/lumen-yoga`
+
+Deploy from the server with:
+
+```bash
+./scripts/deploy.sh
+```
+
+Options:
+
+- `./scripts/deploy.sh --seed`
+- `./scripts/deploy.sh --no-pull`
+
+The deploy script:
+
+- pulls latest `master` with fast-forward only
+- runs `docker compose up -d --build`
+- prints container status
+- prints recent app logs
+
 ## Useful commands
 
 ```bash
@@ -124,4 +148,5 @@ bun run payload:generate-importmap
 bun run payload:generate-types
 bun run payload:migrate
 bun run seed:lumen
+./scripts/deploy.sh
 ```
