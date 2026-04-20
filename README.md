@@ -74,7 +74,7 @@ docker compose up -d --build
 This exposes:
 
 - app on `127.0.0.1:3030`
-- postgres on `127.0.0.1:5438`
+- postgres on `127.0.0.1:5440`
 
 ## Required environment variables
 
