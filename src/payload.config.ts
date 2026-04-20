@@ -45,6 +45,7 @@ export default buildConfig({
         credentials: {
           accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
           secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || '',
+          sessionToken: process.env.S3_SESSION_TOKEN,
         },
         region: process.env.S3_REGION || 'eu-west-1',
       },

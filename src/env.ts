@@ -15,6 +15,7 @@ export const env = createEnv({
     S3_REGION: z.string(),
     S3_ACCESS_KEY_ID: z.string(),
     S3_SECRET_ACCESS_KEY: z.string(),
+    S3_SESSION_TOKEN: z.string().optional(),
   },
 
   /**
@@ -45,6 +46,7 @@ export const env = createEnv({
     S3_REGION: process.env.S3_REGION,
     S3_ACCESS_KEY_ID: process.env.S3_ACCESS_KEY_ID,
     S3_SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY,
+    S3_SESSION_TOKEN: process.env.S3_SESSION_TOKEN,
     NEXT_PUBLIC_GOOGLE_FEATURABLE_WIDGET:
       process.env.NEXT_PUBLIC_GOOGLE_FEATURABLE_WIDGET,
     NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
