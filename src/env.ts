@@ -9,6 +9,12 @@ export const env = createEnv({
   server: {
     NODE_ENV: z.enum(["development", "test", "production"]),
     RESEND_API_KEY: z.string(),
+    DATABASE_URL: z.string(),
+    PAYLOAD_SECRET: z.string(),
+    S3_BUCKET: z.string(),
+    S3_REGION: z.string(),
+    S3_ACCESS_KEY_ID: z.string(),
+    S3_SECRET_ACCESS_KEY: z.string(),
   },
 
   /**
@@ -33,6 +39,12 @@ export const env = createEnv({
     NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME:
       process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
+    DATABASE_URL: process.env.DATABASE_URL,
+    PAYLOAD_SECRET: process.env.PAYLOAD_SECRET,
+    S3_BUCKET: process.env.S3_BUCKET,
+    S3_REGION: process.env.S3_REGION,
+    S3_ACCESS_KEY_ID: process.env.S3_ACCESS_KEY_ID,
+    S3_SECRET_ACCESS_KEY: process.env.S3_SECRET_ACCESS_KEY,
     NEXT_PUBLIC_GOOGLE_FEATURABLE_WIDGET:
       process.env.NEXT_PUBLIC_GOOGLE_FEATURABLE_WIDGET,
     NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,

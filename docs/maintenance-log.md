@@ -22,3 +22,18 @@
 ### Tooling
 
 - Lint command currently uses `tsc -p tsconfig.lint.json --noEmit` for stable CI checks in this repo.
+
+## 2026-04-20
+
+### Payload migration scaffold
+
+- Added Payload CMS into the existing Next.js app instead of replacing the frontend.
+- Added Payload collections for `users` and `media`.
+- Added Payload globals for `site-settings`, `header`, `footer`, and `home`.
+- Added integrated Payload admin and REST routes under `src/app/(payload)`.
+- Added S3 storage adapter wiring for the dedicated Lumen bucket.
+- Added fallback-driven frontend data loading so the site still renders before the database is seeded.
+- Refactored homepage and shell components to consume CMS-driven content.
+- Added `src/seed/lumen.ts` to import current hardcoded content and media into Payload.
+- Added Dockerfile, Docker Compose setup, production env example, and Caddy host snippet for `mann-dev` deployment.
+- Updated README and project docs to reflect the new architecture and deployment workflow.

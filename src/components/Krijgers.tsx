@@ -1,12 +1,14 @@
+import type { MediaLike } from "~/lib/media";
+
 import CldImage from "./CldImage";
 import FixedImage from "./FixedImage";
 
-export default function Krijgers() {
+export default function Krijgers({ image }: { image?: MediaLike }) {
   return (
     <div>
       <FixedImage>
         <CldImage
-          src="https://res.cloudinary.com/strootmann/image/upload/v1715243821/lumen-yoga/Krijgers-cropped_pgidcb.jpg"
+          src={image}
           alt="Krijgers"
           width={1500}
           height={3000}
@@ -16,7 +18,7 @@ export default function Krijgers() {
           gravity="center"
         />
         <CldImage
-          src="https://res.cloudinary.com/strootmann/image/upload/v1715243821/lumen-yoga/Krijgers-cropped_pgidcb.jpg"
+          src={image}
           alt="Krijgers"
           width={2000}
           height={1000}

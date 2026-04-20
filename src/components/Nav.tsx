@@ -1,38 +1,49 @@
 "use client";
-import React, { useState, type JSX } from "react";
-import {
-  motion,
-  AnimatePresence,
-  useScroll,
-  useMotionValueEvent,
-} from "framer-motion";
-import { cn } from "~/utils/cn";
+
 import Link from "next/link";
+import { sendGTMEvent } from "@next/third-parties/google";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValueEvent,
+  useScroll,
+} from "framer-motion";
+import posthog from "posthog-js";
+import { FaFacebook, FaInstagram } from "react-icons/fa";
+import React, { useState, type JSX } from "react";
+
+import { openMaternityModal } from "~/lib/maternity-modal";
+import { cn } from "~/utils/cn";
+
 import CldImage from "./CldImage";
 import Hamburger from "./Hamburger";
 import { Button } from "./ui/button";
-import { sendGTMEvent } from "@next/third-parties/google";
-import { FaFacebook, FaInstagram } from "react-icons/fa";
-import { openMaternityModal } from "~/lib/maternity-modal";
-import posthog from "posthog-js";
+import type { MediaLike } from "~/lib/media";
 
-// nav items are defined in the layout
 export type NavItem = {
   id: number;
   name: string;
   link: string;
   icon?: JSX.Element;
+  highlightAsButton?: boolean;
 };
 
 export const FloatingNav = ({
-  navItems,
   className,
+  facebookUrl,
+  instagramUrl,
+  logo,
+  navItems,
+  primaryCTA,
 }: {
-  navItems: NavItem[];
   className?: string;
+  facebookUrl?: string;
+  instagramUrl?: string;
+  logo?: MediaLike;
+  navItems: NavItem[];
+  primaryCTA?: { label: string; url: string };
 }) => {
   const { scrollYProgress } = useScroll();
-
   const [visible, setVisible] = useState(true);
 
   useMotionValueEvent(scrollYProgress, "change", (current) => {
@@ -61,24 +72,24 @@ export const FloatingNav = ({
           duration: 0.2,
         }}
         className={cn(
-          "fixed  inset-x-0 z-[5000] flex items-center justify-between bg-white py-3",
+          "fixed inset-x-0 z-[5000] flex items-center justify-between bg-white py-3",
           className,
         )}
       >
         <nav className="container flex items-center justify-between">
           <Link href="/">
             <CldImage
-              src="https://res.cloudinary.com/strootmann/image/upload/v1708871727/lumen-yoga/Lumen-Yoga_logo-vol_xg1uur.svg"
+              src={logo}
               alt="Lumen yoga logo"
               width={667}
               height={430}
               className="h-11 w-auto lg:h-16"
-            ></CldImage>
+            />
           </Link>
 
           <menu className="hidden items-center space-x-4 lg:flex">
             {navItems.map((navItem: NavItem) =>
-              navItem.link === "#verlof" ? (
+              navItem.highlightAsButton || navItem.link === "#verlof" ? (
                 <button
                   key={navItem.id}
                   type="button"
@@ -105,30 +116,43 @@ export const FloatingNav = ({
                 </Link>
               ),
             )}
-            <Link href="https://www.instagram.com/lumen.yoga/">
-              <FaInstagram className="text-neutral-600 hover:text-neutral-500 text-lg" />
-            </Link>
-            <Link href="https://www.facebook.com/profile.php?id=100091839270911">
-              <FaFacebook className="text-neutral-600 hover:text-neutral-500 text-lg" />
-            </Link>
-            <Link
-              onClick={() => {
-                sendGTMEvent("event", "nav_buttonAanmelden");
-                posthog.capture("nav_registration_clicked", { source: "nav" });
-              }}
-              href="https://docs.google.com/forms/d/e/1FAIpQLSctAPfSQAKw3pdtxlDASPai16SxSO1XGNYz1UBzw5ysTdIIKQ/viewform"
-            >
-              <Button
-                bgColor={"yellow"}
-                size={"min"}
-                className="h-9 px-3 text-base"
+            {instagramUrl ? (
+              <Link href={instagramUrl}>
+                <FaInstagram className="text-neutral-600 hover:text-neutral-500 text-lg" />
+              </Link>
+            ) : null}
+            {facebookUrl ? (
+              <Link href={facebookUrl}>
+                <FaFacebook className="text-neutral-600 hover:text-neutral-500 text-lg" />
+              </Link>
+            ) : null}
+            {primaryCTA ? (
+              <Link
+                onClick={() => {
+                  sendGTMEvent("event", "nav_buttonAanmelden");
+                  posthog.capture("nav_registration_clicked", {
+                    source: "nav",
+                  });
+                }}
+                href={primaryCTA.url}
               >
-                Aanmelden
-              </Button>
-            </Link>
+                <Button
+                  bgColor={"yellow"}
+                  size={"min"}
+                  className="h-9 px-3 text-base"
+                >
+                  {primaryCTA.label}
+                </Button>
+              </Link>
+            ) : null}
           </menu>
           <div className="flex items-center lg:hidden">
-            <Hamburger navItems={navItems} />
+            <Hamburger
+              facebookUrl={facebookUrl}
+              instagramUrl={instagramUrl}
+              navItems={navItems}
+              primaryCTA={primaryCTA}
+            />
           </div>
         </nav>
       </motion.div>

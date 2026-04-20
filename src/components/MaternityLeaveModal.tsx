@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
+import posthog from "posthog-js";
+
 import {
   Dialog,
   DialogContent,
@@ -9,13 +11,34 @@ import {
   DialogTitle,
 } from "~/components/ui/dialog";
 import { MATERNITY_MODAL_EVENT } from "~/lib/maternity-modal";
-import posthog from "posthog-js";
 
-export default function MaternityLeaveModal() {
+export default function MaternityLeaveModal({
+  closingText,
+  enabled,
+  intro,
+  scheduleItems,
+  scheduleTitle,
+  signature,
+  signupText,
+  signupTitle,
+  title,
+}: {
+  closingText: string;
+  enabled: boolean;
+  intro: string;
+  scheduleItems: ReadonlyArray<{ text: string }>;
+  scheduleTitle: string;
+  signature: string;
+  signupText: string;
+  signupTitle: string;
+  title: string;
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
+    if (!enabled) return;
+
     const openFromHash = () => {
       if (window.location.hash === "#verlof") {
         setIsOpen(true);
@@ -35,7 +58,9 @@ export default function MaternityLeaveModal() {
       window.removeEventListener("hashchange", openFromHash);
       window.removeEventListener(MATERNITY_MODAL_EVENT, openFromEvent);
     };
-  }, []);
+  }, [enabled]);
+
+  if (!enabled) return null;
 
   const handleClose = () => {
     if (window.location.hash === "#verlof") {
@@ -63,9 +88,7 @@ export default function MaternityLeaveModal() {
         }}
       >
         <div className="flex items-start justify-between gap-1 lg:gap-2">
-          <DialogTitle>
-            Lumen Yoga viert momenteel zwangerschapsverlof
-          </DialogTitle>
+          <DialogTitle>{title}</DialogTitle>
           <button
             ref={closeButtonRef}
             type="button"
@@ -78,26 +101,22 @@ export default function MaternityLeaveModal() {
         </div>
 
         <DialogDescription className="pt-4 text-base text-black">
-          Ik ben er even tussenuit, maar kijk er nu al naar uit om jullie in de
-          zomer weer te zien op de mat in Schagen!
+          {intro}
         </DialogDescription>
 
         <div className="space-y-4 pt-4 text-base text-black">
           <div>
-            <p className="font-bold">De agenda voor 2026:</p>
-            <p>Zaterdag 4 juli: Eerste ouder-kindyoga workshop</p>
-            <p>Woensdag 19 augustus: Start van de wekelijkse lessen</p>
+            <p className="font-bold">{scheduleTitle}</p>
+            {scheduleItems.map((item, index) => (
+              <p key={`${item.text}-${index}`}>{item.text}</p>
+            ))}
           </div>
           <div>
-            <p className="font-bold">Aanmelden:</p>
-            <p>
-              Je kunt je voor alle lessen en workshops alvast opgeven via de
-              website. Eind juni neem ik contact met je op om de inschrijving te
-              bevestigen.
-            </p>
+            <p className="font-bold">{signupTitle}</p>
+            <p>{signupText}</p>
           </div>
-          <p>Ik wens je een mooie tijd en tot snel!</p>
-          <p className="font-semibold">Ellen Wissink - Lumen Yoga</p>
+          <p>{closingText}</p>
+          <p className="font-semibold">{signature}</p>
         </div>
       </DialogContent>
     </Dialog>

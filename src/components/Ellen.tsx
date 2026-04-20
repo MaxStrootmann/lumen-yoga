@@ -1,12 +1,14 @@
+import type { MediaLike } from "~/lib/media";
+
 import CldImage from "./CldImage";
 import FixedImage from "./FixedImage";
 
-export default function Ellen() {
+export default function Ellen({ image }: { image?: MediaLike }) {
   return (
     <div>
       <FixedImage>
         <CldImage
-          src="https://res.cloudinary.com/strootmann/image/upload/v1708871503/lumen-yoga/Ellen_binnen_5_4k_ze0iyt.jpg"
+          src={image}
           alt="Ellen Wissink"
           width={1500}
           height={3000}

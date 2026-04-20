@@ -2,24 +2,31 @@
 
 import { sendGTMEvent } from "@next/third-parties/google";
 import Link from "next/link";
-import { Button } from "./ui/button";
-import InfoButton from "./InfoButton";
 import posthog from "posthog-js";
 
-export function HeroButtons() {
+import InfoButton from "./InfoButton";
+import { Button } from "./ui/button";
+
+export function HeroButtons({
+  primaryCTA,
+  secondaryCTA,
+}: {
+  primaryCTA: { label: string; url: string };
+  secondaryCTA: { label: string; url: string };
+}) {
   return (
     <div
       onClick={() => sendGTMEvent("event", "heroButtonAanmelden")}
       className="flex gap-4 pt-6 lg:pt-6"
     >
       <Link
-        href="https://docs.google.com/forms/d/e/1FAIpQLSctAPfSQAKw3pdtxlDASPai16SxSO1XGNYz1UBzw5ysTdIIKQ/viewform"
+        href={primaryCTA.url}
         onClick={() =>
           posthog.capture("registration_clicked", { source: "hero" })
         }
       >
         <Button bgColor={"yellow"} size={"min"}>
-          Aanmelden
+          {primaryCTA.label}
         </Button>
       </Link>
       <div
@@ -28,7 +35,7 @@ export function HeroButtons() {
           posthog.capture("more_info_clicked", { source: "hero" });
         }}
       >
-        <InfoButton variant={"outline"} size={"min"} />
+        <InfoButton href={secondaryCTA.url} label={secondaryCTA.label} variant={"outline"} size={"min"} />
       </div>
     </div>
   );

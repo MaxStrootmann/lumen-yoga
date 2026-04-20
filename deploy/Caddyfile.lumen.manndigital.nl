@@ -1,0 +1,3 @@
+lumen.manndigital.nl {
+  reverse_proxy 127.0.0.1:3020
+}

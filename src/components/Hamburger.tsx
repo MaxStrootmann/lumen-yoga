@@ -5,14 +5,26 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
-import Link from "next/link";
-import { Button } from "./ui/button";
-import type { NavItem } from "./Nav";
 import { sendGTMEvent } from "@next/third-parties/google";
+import Link from "next/link";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
+
 import { openMaternityModal } from "~/lib/maternity-modal";
 
-export default function Hamburger({ navItems }: { navItems: NavItem[] }) {
+import type { NavItem } from "./Nav";
+import { Button } from "./ui/button";
+
+export default function Hamburger({
+  facebookUrl,
+  instagramUrl,
+  navItems,
+  primaryCTA,
+}: {
+  facebookUrl?: string;
+  instagramUrl?: string;
+  navItems: NavItem[];
+  primaryCTA?: { label: string; url: string };
+}) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -21,8 +33,8 @@ export default function Hamburger({ navItems }: { navItems: NavItem[] }) {
       <DropdownMenuContent
         onCloseAutoFocus={(event: Event) => event.preventDefault()}
       >
-        {navItems.map((item: NavItem) => (
-          item.link === "#verlof" ? (
+        {navItems.map((item: NavItem) =>
+          item.highlightAsButton || item.link === "#verlof" ? (
             <DropdownMenuItem
               key={item.id}
               onClick={() => {
@@ -41,28 +53,36 @@ export default function Hamburger({ navItems }: { navItems: NavItem[] }) {
             >
               <DropdownMenuItem>{item.name}</DropdownMenuItem>
             </Link>
-          )
-        ))}
+          ),
+        )}
         <div className="p-2"></div>
         <div className="flex justify-center gap-4 py-2">
-          <Link href="https://www.instagram.com/lumen.yoga/">
-            <FaInstagram className="text-lg" />
-          </Link>
-          <Link href="https://www.facebook.com/profile.php?id=100091839270911">
-            <FaFacebook className="text-lg" />
-          </Link>
+          {instagramUrl ? (
+            <Link href={instagramUrl}>
+              <FaInstagram className="text-lg" />
+            </Link>
+          ) : null}
+          {facebookUrl ? (
+            <Link href={facebookUrl}>
+              <FaFacebook className="text-lg" />
+            </Link>
+          ) : null}
         </div>
         <div className="p-2"></div>
-        <DropdownMenuItem>
-          <Link
-            onClick={() => sendGTMEvent("event", "hamburger_buttonAanmelden")}
-            href="https://docs.google.com/forms/d/e/1FAIpQLSctAPfSQAKw3pdtxlDASPai16SxSO1XGNYz1UBzw5ysTdIIKQ/viewform"
-          >
-            <Button bgColor={"yellow"} size={"min"}>
-              Aanmelden
-            </Button>
-          </Link>
-        </DropdownMenuItem>
+        {primaryCTA ? (
+          <DropdownMenuItem>
+            <Link
+              onClick={() =>
+                sendGTMEvent("event", "hamburger_buttonAanmelden")
+              }
+              href={primaryCTA.url}
+            >
+              <Button bgColor={"yellow"} size={"min"}>
+                {primaryCTA.label}
+              </Button>
+            </Link>
+          </DropdownMenuItem>
+        ) : null}
       </DropdownMenuContent>
     </DropdownMenu>
   );

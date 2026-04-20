@@ -1,29 +1,123 @@
-# Create T3 App
+# Lumen Yoga
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Lumen Yoga is a Next.js 16 website that is being migrated from hardcoded marketing content to Payload CMS.
 
-## What's next? How do I make an app with this?
+## Current stack
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+- Next.js App Router
+- React 19
+- Payload CMS 3
+- PostgreSQL
+- S3 media storage
+- Tailwind CSS
+- Resend contact form
+- PostHog + GTM
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## Architecture
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+```mermaid
+flowchart TD
+  A[Browser] --> B[Next.js app]
+  B --> C[Payload admin + REST API]
+  B --> D[Payload globals for site content]
+  C --> E[(Postgres)]
+  C --> F[(S3 media bucket)]
+  B --> G[Resend contact email]
+```
 
-## Learn More
+## Content model
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+Payload currently manages:
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+- `site-settings` global
+- `header` global
+- `footer` global
+- `home` global
+- `media` collection
+- `users` collection
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+## Local development
 
-## How do I deploy this?
+1. copy envs
+2. start Postgres
+3. run the app
+4. seed the current content into Payload
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+```bash
+cp .env.example .env.local
+cp .env.production.example .env.production # optional reference for deployment
+
+docker compose up -d db
+bun install
+bun run payload:generate-importmap
+bun run payload:generate-types
+bun run dev
+```
+
+In another shell, seed the current website content:
+
+```bash
+bun run seed:lumen
+```
+
+Then open:
+
+- site: `http://localhost:3000`
+- admin: `http://localhost:3000/admin`
+
+## Production-style local run
+
+```bash
+docker compose up -d --build
+```
+
+This exposes:
+
+- app on `127.0.0.1:3020`
+- postgres on `127.0.0.1:5438`
+
+## Required environment variables
+
+Core:
+
+- `DATABASE_URL`
+- `PAYLOAD_SECRET`
+- `RESEND_API_KEY`
+
+Public frontend:
+
+- `NEXT_PUBLIC_GOOGLE_FEATURABLE_WIDGET`
+- `NEXT_PUBLIC_POSTHOG_KEY`
+- `NEXT_PUBLIC_POSTHOG_HOST`
+
+S3 media:
+
+- `S3_BUCKET`
+- `S3_REGION`
+- `S3_ACCESS_KEY_ID`
+- `S3_SECRET_ACCESS_KEY`
+
+## Deployment target
+
+Preview deploy target is `mann-dev` with:
+
+- Docker Compose for app + Postgres
+- system Caddy reverse proxy for HTTPS
+- preview hostname `lumen.manndigital.nl`
+
+Caddy site snippet:
+
+- `deploy/Caddyfile.lumen.manndigital.nl`
+
+## Useful commands
+
+```bash
+bun run dev
+bun run build
+bun run start
+bun run lint
+bun run payload:generate-importmap
+bun run payload:generate-types
+bun run payload:migrate
+bun run seed:lumen
+```

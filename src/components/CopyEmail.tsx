@@ -1,9 +1,7 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/FF95m9DDDH8
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
 "use client";
+
+import { useState } from "react";
+import posthog from "posthog-js";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -12,17 +10,16 @@ import {
   Tooltip,
   TooltipProvider,
 } from "@/components/ui/tooltip";
-import { useState } from "react";
-import posthog from "posthog-js";
 
-export default function Component() {
+export default function CopyEmail({ email }: { email: string }) {
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = () => {
-    void navigator.clipboard.writeText("ellen@lumenyoga.nl");
+    void navigator.clipboard.writeText(email);
     setCopied(true);
     posthog.capture("email_copied");
   };
+
   return (
     <TooltipProvider>
       <Tooltip>
@@ -32,9 +29,7 @@ export default function Component() {
               "email gekopieerd! 🎉"
             ) : (
               <div className="flex items-center gap-1">
-                <span className="underline underline-offset-4">
-                  ellen@lumenyoga.nl
-                </span>
+                <span className="underline underline-offset-4">{email}</span>
                 <ClipboardIcon />
               </div>
             )}

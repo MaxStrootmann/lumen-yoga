@@ -3,6 +3,7 @@
  * for Docker builds.
  */
 import { fileURLToPath } from "node:url";
+import { withPayload } from "@payloadcms/next/withPayload";
 import createJiti from "jiti";
 const jiti = createJiti(fileURLToPath(import.meta.url));
 
@@ -11,6 +12,22 @@ jiti("./src/env.ts");
 
 /** @type {import("next").NextConfig} */
 const config = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+      {
+        protocol: "https",
+        hostname: "lumen-yoga-media-061051249936.s3.eu-west-1.amazonaws.com",
+      },
+      {
+        protocol: "https",
+        hostname: "**.amazonaws.com",
+      },
+    ],
+  },
   async rewrites() {
     return [
       {
@@ -27,4 +44,4 @@ const config = {
   skipTrailingSlashRedirect: true,
 };
 
-export default config;
+export default withPayload(config, { devBundleServerPackages: false });

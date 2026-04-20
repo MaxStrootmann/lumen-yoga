@@ -5,37 +5,82 @@
 - Next.js App Router (`src/app`)
 - React 19 + TypeScript
 - Tailwind CSS + custom UI primitives in `src/components/ui`
-- Cloudinary images via `next-cloudinary`
+- Payload CMS 3 integrated into the same Next.js app
+- PostgreSQL via `@payloadcms/db-postgres`
+- S3 media storage via `@payloadcms/storage-s3`
 - Server-side email sending via Resend (`src/lib/sendEmail.ts`)
+
+## App surfaces
+
+### Frontend
+
+- homepage route: `src/app/page.tsx`
+- root layout: `src/app/layout.tsx`
+
+### Payload
+
+- config: `src/payload.config.ts`
+- admin: `src/app/(payload)/admin/[[...segments]]/page.tsx`
+- REST API: `src/app/(payload)/api/[...slug]/route.ts`
+
+## Content model
+
+### Collections
+
+- `users`
+- `media`
+
+### Globals
+
+- `site-settings`
+- `header`
+- `footer`
+- `home`
 
 ## Page composition
 
-The homepage is composed in `src/app/page.tsx` using section components:
+The homepage is now rendered from the `home` global with fallback defaults from `src/lib/default-content.ts`.
 
-- `Hero`
-- `IntroImages` (contains `OfferCarousel`)
-- `About`
-- `WhySection`
-- `Reviews`
-- `Contact`
-- `MaternityLeaveModal`
+Sections:
 
-Shared layout elements are in `src/app/layout.tsx`:
+- `announcementModal`
+- `hero`
+- `intro`
+- `offers`
+- `about`
+- `kinderyoga`
+- `reviews`
+- `contact`
 
-- Floating nav
-- Footer
-- GTM integration
+Shared shell content comes from:
 
-## Key interaction paths
+- `header` global
+- `footer` global
+- `site-settings` global
 
-- Navigation anchor links between sections (`#recensies`, `#aanbod`, etc.)
-- Contact form (`ContactForm`) validates with zod + react-hook-form and calls server action `sendEmail`
-- Review widgets use `NEXT_PUBLIC_GOOGLE_FEATURABLE_WIDGET`
-- Maternity leave announcement opens on page load and can be re-opened via the `Verlof` nav action.
-- Modal open behavior is triggered through a shared client event utility (`src/lib/maternity-modal.ts`).
+## Media flow
+
+- Payload uploads use the `media` collection
+- S3 storage is enabled when S3 env vars are present
+- current project bucket: `lumen-yoga-media-061051249936`
+- frontend image rendering accepts both Payload media docs and legacy URL fallbacks
+
+## Seed flow
+
+`src/seed/lumen.ts` downloads the currently hardcoded media assets, uploads them into Payload media, and writes the current site copy into Payload globals.
+
+## Deployment shape
+
+Current deployment target:
+
+- app + db via Docker Compose
+- app bound to `127.0.0.1:3020`
+- db bound to `127.0.0.1:5438`
+- system Caddy terminates HTTPS and proxies `lumen.manndigital.nl` to the app
 
 ## Notes
 
 - Site language metadata is Dutch (`<html lang="nl">`).
-- Instagram carousel embed was removed in favor of a direct Instagram link in `About`.
-- Maternity modal uses a Radix/shadcn-style dialog primitive (`src/components/ui/dialog.tsx`) for accessibility and focus handling.
+- Review widgets still use `NEXT_PUBLIC_GOOGLE_FEATURABLE_WIDGET`.
+- Contact form still uses the existing Resend server action flow.
+- Global fetches fall back to default content so the site can still build before the database is reachable.

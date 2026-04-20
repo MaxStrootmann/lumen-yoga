@@ -7,6 +7,7 @@ This folder contains lightweight maintenance docs for the codebase.
 - `architecture.md`: Current app structure and key data/interaction flows.
 - `testing.md`: How tests are set up and what is currently covered.
 - `maintenance-log.md`: Recent engineering changes and why they were made.
+- `payload-migration-plan.md`: Current Payload migration audit, target architecture, and `mann-dev` deployment notes.
 
 ## Update policy
 
