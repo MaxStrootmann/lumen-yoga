@@ -56,18 +56,20 @@ if (( NO_PULL == 0 )); then
   git pull --ff-only origin "$CURRENT_BRANCH"
 fi
 
+COMPOSE=(docker compose --env-file .env.production)
+
 echo ">>> Building and starting containers"
-docker compose up -d --build
+"${COMPOSE[@]}" up -d --build
 
 if (( SEED == 1 )); then
   echo ">>> Seeding Payload content"
-  docker compose exec -T app bun run seed:lumen
+  "${COMPOSE[@]}" exec -T app bun run seed:lumen
 fi
 
 echo ">>> Container status"
-docker compose ps
+"${COMPOSE[@]}" ps
 
 echo
 
 echo ">>> Recent app logs"
-docker compose logs --tail=60 app
+"${COMPOSE[@]}" logs --tail=60 app

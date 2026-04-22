@@ -125,6 +125,9 @@ Deploy from the server with:
 ./scripts/deploy.sh
 ```
 
+The deploy script loads `.env.production` for both Docker runtime envs and Docker build-time `NEXT_PUBLIC_*` vars.
+Keep `.env.production` server-local and untracked; use `.env.production.example` as the committed template.
+
 Options:
 
 - `./scripts/deploy.sh --seed`
