@@ -1,4 +1,5 @@
 import config from '@payload-config'
+import { draftMode } from 'next/headers'
 import { getPayload } from 'payload'
 import { cache } from 'react'
 
@@ -11,9 +12,12 @@ export async function getGlobalOrFallback<T>(
 ): Promise<T> {
   try {
     const payload = await getPayloadClient()
+    const { isEnabled } = await draftMode()
+
     return (await payload.findGlobal({
       slug,
       depth,
+      draft: isEnabled,
       overrideAccess: true,
     })) as T
   } catch {

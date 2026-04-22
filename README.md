@@ -36,6 +36,8 @@ Payload currently manages:
 - `media` collection
 - `users` collection
 
+Globals support drafts, autosave, and Payload live preview for the homepage/frontend shell.
+
 ## Local development
 
 1. copy envs
@@ -82,6 +84,7 @@ Core:
 
 - `DATABASE_URL`
 - `PAYLOAD_SECRET`
+- `PREVIEW_SECRET`
 - `RESEND_API_KEY`
 - `POSTGRES_DB`
 - `POSTGRES_USER`

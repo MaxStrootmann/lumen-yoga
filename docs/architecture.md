@@ -14,8 +14,9 @@
 
 ### Frontend
 
-- homepage route: `src/app/page.tsx`
-- root layout: `src/app/layout.tsx`
+- site route group: `src/app/(site)`
+- homepage route: `src/app/(site)/page.tsx`
+- app root layout: `src/app/layout.tsx`
 
 ### Payload
 
@@ -40,6 +41,7 @@
 ## Page composition
 
 The homepage is now rendered from the `home` global with fallback defaults from `src/lib/default-content.ts`.
+When Next draft mode is enabled via the preview route, frontend global queries request Payload draft content instead of published content.
 
 Sections:
 
@@ -84,3 +86,4 @@ Current deployment target:
 - Review widgets still use `NEXT_PUBLIC_GOOGLE_FEATURABLE_WIDGET`.
 - Contact form still uses the existing Resend server action flow.
 - Global fetches fall back to default content so the site can still build before the database is reachable.
+- Payload live preview is enabled for `home`, `header`, `footer`, and `site-settings` via `src/app/(site)/next/preview/route.ts` and Next draft mode.

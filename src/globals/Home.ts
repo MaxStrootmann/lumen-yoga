@@ -1,9 +1,22 @@
 import type { GlobalConfig } from 'payload'
 
+import { getPreviewURL } from '@/lib/live-preview'
+
 const paragraphFields = [{ name: 'text', type: 'textarea', required: true }] as const
 
 export const Home: GlobalConfig = {
   slug: 'home',
+  admin: {
+    livePreview: {
+      url: ({ req }) => getPreviewURL(req),
+    },
+    preview: (_, { req }) => getPreviewURL(req),
+  },
+  versions: {
+    drafts: {
+      autosave: true,
+    },
+  },
   fields: [
     {
       name: 'announcementModal',
