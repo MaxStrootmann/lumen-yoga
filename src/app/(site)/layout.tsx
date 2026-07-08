@@ -21,12 +21,14 @@ function mapNavItems(
     highlightAsButton?: boolean;
   }>,
 ): NavItem[] {
-  return navItems.map((item, index) => ({
-    id: index + 1,
-    name: item.label,
-    link: item.link,
-    highlightAsButton: item.highlightAsButton,
-  }));
+  return navItems
+    .filter((item) => item.link !== "#verlof")
+    .map((item, index) => ({
+      id: index + 1,
+      name: item.label,
+      link: item.link,
+      highlightAsButton: item.highlightAsButton,
+    }));
 }
 
 export async function generateMetadata(): Promise<Metadata> {
