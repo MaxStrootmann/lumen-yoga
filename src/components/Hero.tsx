@@ -7,8 +7,9 @@ import { IoLocation } from "react-icons/io5";
 
 import CldImage from "./CldImage";
 import { HeroButtons } from "./HeroButtons";
+import { env } from "~/env";
 import type { MediaLike } from "~/lib/media";
-
+import { GoogleReviewsBadge } from "./GoogleReviewsWidget";
 export default function Hero({
   accentImage,
   description,
@@ -30,6 +31,7 @@ export default function Hero({
   secondaryCTA: { label: string; url: string };
   title: string;
 }) {
+  const featurableWidgetId = env.NEXT_PUBLIC_GOOGLE_FEATURABLE_WIDGET;
 
   return (
     <div>
@@ -62,12 +64,7 @@ export default function Hero({
           <HeroButtons primaryCTA={primaryCTA} secondaryCTA={secondaryCTA} />
 
           <div className="mr-auto flex pt-6">
-            <Link
-              href="#recensies"
-              className="rounded-full border-2 border-green px-4 py-2 text-sm font-bold text-black transition hover:bg-green/10"
-            >
-              Reviews op Google
-            </Link>
+            <GoogleReviewsBadge widgetId={featurableWidgetId} />
           </div>
         </div>
       </header>
@@ -84,7 +81,12 @@ export default function Hero({
             height={342}
             alt="halve zon"
             className="absolute -top-20 right-0 w-full object-fill"
-            src={typeof accentImage === "string" ? accentImage : accentImage?.url || "https://res.cloudinary.com/strootmann/image/upload/v1708871728/lumen-yoga/halve_zon_mfcoaz.svg"}
+            src={
+              typeof accentImage === "string"
+                ? accentImage
+                : accentImage?.url ||
+                  "https://res.cloudinary.com/strootmann/image/upload/v1708871728/lumen-yoga/halve_zon_mfcoaz.svg"
+            }
           />
         </div>
       </div>
