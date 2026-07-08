@@ -12,7 +12,6 @@ import posthog from "posthog-js";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 import React, { useState, type JSX } from "react";
 
-import { openMaternityModal } from "~/lib/maternity-modal";
 import { cn } from "~/utils/cn";
 
 import CldImage from "./CldImage";
@@ -88,34 +87,24 @@ export const FloatingNav = ({
           </Link>
 
           <menu className="hidden items-center space-x-4 lg:flex">
-            {navItems.map((navItem: NavItem) =>
-              navItem.highlightAsButton || navItem.link === "#verlof" ? (
-                <button
-                  key={navItem.id}
-                  type="button"
-                  onClick={() => {
-                    sendGTMEvent("event", `nav_${navItem.name}`);
-                    openMaternityModal();
-                  }}
-                  className="rounded-full border-2 border-magenta px-4 py-1.5 text-base font-bold text-black transition hover:bg-magenta/10"
-                >
+            {navItems.map((navItem: NavItem) => (
+              <Link
+                onClick={() => sendGTMEvent("event", `nav_${navItem.name}`)}
+                key={navItem.id}
+                href={navItem.link}
+                className={
+                  navItem.highlightAsButton
+                    ? "rounded-full border-2 border-magenta px-4 py-1.5 text-base font-bold text-black transition hover:bg-magenta/10"
+                    : cn(
+                        "dark:text-neutral-50 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 relative flex items-center space-x-1",
+                      )
+                }
+              >
+                <span className="hidden whitespace-nowrap text-sm font-bold lg:block">
                   {navItem.name}
-                </button>
-              ) : (
-                <Link
-                  onClick={() => sendGTMEvent("event", `nav_${navItem.name}`)}
-                  key={navItem.id}
-                  href={navItem.link}
-                  className={cn(
-                    "dark:text-neutral-50 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 relative flex items-center space-x-1",
-                  )}
-                >
-                  <span className="hidden whitespace-nowrap text-sm font-bold lg:block">
-                    {navItem.name}
-                  </span>
-                </Link>
-              ),
-            )}
+                </span>
+              </Link>
+            ))}
             {instagramUrl ? (
               <Link href={instagramUrl}>
                 <FaInstagram className="text-neutral-600 hover:text-neutral-500 text-lg" />

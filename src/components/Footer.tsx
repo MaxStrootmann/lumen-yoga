@@ -4,7 +4,6 @@ import Link from "next/link";
 import { sendGTMEvent } from "@next/third-parties/google";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 
-import { openMaternityModal } from "~/lib/maternity-modal";
 
 import type { MediaLike } from "~/lib/media";
 import CldImage from "./CldImage";
@@ -42,26 +41,17 @@ export default function Footer({
       <ul className="flex flex-col justify-center gap-3 pt-5 text-center">
         {navItems.map((item: NavItem) => (
           <li key={item.id}>
-            {item.highlightAsButton || item.link === "#verlof" ? (
-              <button
-                type="button"
-                onClick={() => {
-                  sendGTMEvent("event", `footer_${item.name}`);
-                  openMaternityModal();
-                }}
-                className="rounded-full border-2 border-magenta px-3 py-1 font-bold text-black transition hover:bg-magenta/10"
-              >
-                {item.name}
-              </button>
-            ) : (
-              <Link
-                onClick={() => sendGTMEvent("event", `footer_${item.name}`)}
-                href={item.link}
-                className="font-bold"
-              >
-                {item.name}
-              </Link>
-            )}
+            <Link
+              onClick={() => sendGTMEvent("event", `footer_${item.name}`)}
+              href={item.link}
+              className={
+                item.highlightAsButton
+                  ? "rounded-full border-2 border-magenta px-3 py-1 font-bold text-black transition hover:bg-magenta/10"
+                  : "font-bold"
+              }
+            >
+              {item.name}
+            </Link>
           </li>
         ))}
       </ul>

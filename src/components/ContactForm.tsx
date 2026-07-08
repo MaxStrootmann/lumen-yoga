@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import posthog from "posthog-js";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -16,8 +17,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import sendEmail from "~/lib/sendEmail";
-import posthog from "posthog-js";
 
 const formSchema = z.object({
   naam: z.string().min(2, {
@@ -26,15 +25,15 @@ const formSchema = z.object({
   email: z.string().email({
     message: "Geen geldig emailadres.",
   }),
-  bericht: z.string().max(300, {
+  bericht: z.string().min(1, {
+    message: "Bericht is verplicht.",
+  }).max(300, {
     message: "Bericht mag maximaal 300 tekens bevatten.",
   }),
 });
 
 export function ContactForm() {
   const [isSent, setIsSent] = useState(false);
-  const [error, setError] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -45,42 +44,16 @@ export function ContactForm() {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    setIsSubmitting(true);
-    setError("");
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    const subject = encodeURIComponent(`Bericht van ${values.naam} - Lumen Yoga Contact`);
+    const body = encodeURIComponent(
+      `Naam: ${values.naam}\nEmail: ${values.email}\n\n${values.bericht}`,
+    );
 
-    const emailPromise = sendEmail(values);
-
-    try {
-      await Promise.race([
-        emailPromise,
-        new Promise((_, reject) =>
-          setTimeout(() => reject(new Error("Timeout")), 7000),
-        ),
-      ]);
-
-      posthog.capture("contact_form_submitted");
-      setIsSent(true);
-      form.reset();
-    } catch (err) {
-      console.error("Fout bij verzenden (of timeout):", err);
-
-      if ((err as Error).message === "Timeout") {
-        // Mail is waarschijnlijk nog verstuurd — we geven gebruiker gewoon bevestiging
-        posthog.capture("contact_form_submitted");
-        setIsSent(true);
-      } else {
-        posthog.capture("contact_form_error", {
-          error_message: (err as Error).message,
-        });
-        setError(
-          "Er is iets misgegaan bij het verzenden. Probeer het opnieuw.",
-        );
-        setIsSent(false);
-      }
-    } finally {
-      setIsSubmitting(false);
-    }
+    posthog.capture("contact_form_mailto_started");
+    window.location.href = `mailto:ellen@lumenyoga.nl?subject=${subject}&body=${body}`;
+    setIsSent(true);
+    form.reset();
   }
 
   return (
@@ -134,16 +107,15 @@ export function ContactForm() {
           )}
         />
 
-        <Button bgColor={"yellow"} type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Versturen..." : "Verstuur"}
+        <Button bgColor="yellow" type="submit">
+          Open e-mail
         </Button>
 
         {isSent && (
           <p className="text-green-600 mx-auto w-full pt-2 text-sm">
-            Bericht is verzonden ✅
+            Je e-mailprogramma is geopend met het bericht.
           </p>
         )}
-        {error && <p className="text-red-600 pt-2 text-sm">{error}</p>}
       </form>
     </Form>
   );

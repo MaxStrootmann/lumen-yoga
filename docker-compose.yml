@@ -4,35 +4,16 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: ${NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}
-        NEXT_PUBLIC_GOOGLE_FEATURABLE_WIDGET: ${NEXT_PUBLIC_GOOGLE_FEATURABLE_WIDGET}
-        NEXT_PUBLIC_POSTHOG_KEY: ${NEXT_PUBLIC_POSTHOG_KEY}
-        NEXT_PUBLIC_POSTHOG_HOST: ${NEXT_PUBLIC_POSTHOG_HOST}
+        NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: ${NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME:-strootmann}
+        NEXT_PUBLIC_GOOGLE_FEATURABLE_WIDGET: ${NEXT_PUBLIC_GOOGLE_FEATURABLE_WIDGET:-}
+        NEXT_PUBLIC_POSTHOG_KEY: ${NEXT_PUBLIC_POSTHOG_KEY:-}
+        NEXT_PUBLIC_POSTHOG_HOST: ${NEXT_PUBLIC_POSTHOG_HOST:-https://eu.i.posthog.com}
     restart: unless-stopped
-    depends_on:
-      db:
-        condition: service_healthy
-    env_file:
-      - .env.production
-    environment:
-      NODE_ENV: production
     ports:
-      - "127.0.0.1:3030:3000"
+      - "127.0.0.1:3030:80"
+    networks:
+      - mann-ingress
 
-  db:
-    image: postgres:16-alpine
-    restart: unless-stopped
-    env_file:
-      - .env.production
-    ports:
-      - "127.0.0.1:5440:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d lumen_yoga"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
-volumes:
-  postgres_data:
+networks:
+  mann-ingress:
+    external: true

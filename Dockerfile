@@ -1,30 +1,26 @@
-FROM node:20-alpine
+FROM oven/bun:1.3.9-alpine AS build
 
 WORKDIR /app
-
-RUN npm install -g bun@1.3.9
 
 ARG NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
 ARG NEXT_PUBLIC_GOOGLE_FEATURABLE_WIDGET
 ARG NEXT_PUBLIC_POSTHOG_KEY
 ARG NEXT_PUBLIC_POSTHOG_HOST
 
-COPY package.json bun.lock ./
-RUN bun install --frozen-lockfile
-
-COPY . .
-
-ENV NODE_ENV=production
-ENV SKIP_ENV_VALIDATION=1
 ENV NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=$NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
 ENV NEXT_PUBLIC_GOOGLE_FEATURABLE_WIDGET=$NEXT_PUBLIC_GOOGLE_FEATURABLE_WIDGET
 ENV NEXT_PUBLIC_POSTHOG_KEY=$NEXT_PUBLIC_POSTHOG_KEY
 ENV NEXT_PUBLIC_POSTHOG_HOST=$NEXT_PUBLIC_POSTHOG_HOST
 
-RUN ./node_modules/.bin/payload generate:importmap \
-  && ./node_modules/.bin/payload generate:types \
-  && bun run build
+COPY package.json bun.lock ./
+RUN bun install --frozen-lockfile
 
-EXPOSE 3000
+COPY . .
+RUN bun run build
 
-CMD ["sh", "-c", "./node_modules/.bin/payload migrate && bun run start"]
+FROM caddy:2.10-alpine
+
+COPY --from=build /app/dist /srv
+COPY deploy/Caddyfile.vite /etc/caddy/Caddyfile
+
+EXPOSE 80

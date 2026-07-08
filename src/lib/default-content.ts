@@ -36,7 +36,6 @@ export const DEFAULT_HEADER = {
     { label: 'Over mij', link: '#over-mij' },
     { label: 'Ons aanbod', link: '#aanbod' },
     { label: 'Info', link: '#info' },
-    { label: 'Verlof', link: '#verlof', highlightAsButton: true },
   ],
 } as const
 
@@ -52,22 +51,6 @@ export const DEFAULT_FOOTER = {
 } as const
 
 export const DEFAULT_HOME = {
-  announcementModal: {
-    enabled: true,
-    title: 'Lumen Yoga viert momenteel zwangerschapsverlof',
-    intro:
-      'Ik ben er even tussenuit, maar kijk er nu al naar uit om jullie in de zomer weer te zien op de mat in Schagen!',
-    scheduleTitle: 'De agenda voor 2026:',
-    scheduleItems: [
-      { text: 'Zaterdag 4 juli: Eerste ouder-kindyoga workshop' },
-      { text: 'Woensdag 19 augustus: Start van de wekelijkse lessen' },
-    ],
-    signupTitle: 'Aanmelden:',
-    signupText:
-      'Je kunt je voor alle lessen en workshops alvast opgeven via de website. Eind juni neem ik contact met je op om de inschrijving te bevestigen.',
-    closingText: 'Ik wens je een mooie tijd en tot snel!',
-    signature: 'Ellen Wissink - Lumen Yoga',
-  },
   hero: {
     image: {
       url: 'https://res.cloudinary.com/strootmann/image/upload/v1708871503/lumen-yoga/Handen_omhoog_4k_k12f9g.jpg',

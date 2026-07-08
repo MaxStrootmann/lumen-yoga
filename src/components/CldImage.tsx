@@ -1,8 +1,4 @@
-"use client";
-
-import Image from "next/image";
-import { CldImage as CloudinaryImage } from "next-cloudinary";
-import type { CldImageProps } from "next-cloudinary";
+import type { ImgHTMLAttributes } from "react";
 
 import {
   getMediaAlt,
@@ -11,62 +7,68 @@ import {
   type MediaLike,
 } from "~/lib/media";
 
-type ContentImageProps = Omit<CldImageProps, "src"> & {
-  src: CldImageProps["src"] | MediaLike;
+type ContentImageProps = Omit<
+  ImgHTMLAttributes<HTMLImageElement>,
+  "src" | "width" | "height"
+> & {
+  src?: string | MediaLike;
+  width?: number | `${number}`;
+  height?: number | `${number}`;
+  fill?: boolean;
+  priority?: boolean;
+  sizes?: string;
+  crop?: unknown;
+  gravity?: string;
+  preserveTransformations?: boolean;
 };
 
-const CldImage = ({
+function cloudinaryAutoFormat(url: string): string {
+  if (!url.includes("res.cloudinary.com") || url.includes("/f_auto/")) {
+    return url;
+  }
+
+  return url.replace("/upload/", "/upload/f_auto/q_auto/");
+}
+
+export default function CldImage({
   alt,
   className,
+  crop: _crop,
   fill,
+  gravity: _gravity,
   height,
-  priority,
+  preserveTransformations: _preserveTransformations,
+  priority: _priority,
   sizes,
   src,
   style,
   width,
   ...props
-}: ContentImageProps) => {
-  if (typeof src === "string") {
-    return (
-      <CloudinaryImage
-        alt={alt}
-        height={height}
-        src={src}
-        width={width}
-        className={className}
-        fill={fill}
-        priority={priority}
-        sizes={sizes}
-        style={style}
-        {...props}
-      />
-    );
-  }
+}: ContentImageProps) {
+  const resolvedSrc = typeof src === "string" ? src : getMediaUrl(src);
 
-  const resolvedSrc = getMediaUrl(src);
-
-  if (!resolvedSrc) {
-    return null;
-  }
+  if (!resolvedSrc) return null;
 
   const fallbackWidth = Number(width ?? 1000);
   const fallbackHeight = Number(height ?? 1000);
   const dimensions = getMediaDimensions(src, fallbackWidth, fallbackHeight);
+  const safeAlt = alt ?? "";
 
   return (
-    <Image
-      alt={getMediaAlt(src, alt)}
+    <img
+      alt={typeof src === "string" ? safeAlt : getMediaAlt(src, safeAlt)}
       className={className}
-      fill={fill}
       height={fill ? undefined : dimensions.height}
-      priority={priority}
+      loading={_priority ? "eager" : "lazy"}
       sizes={sizes}
-      src={resolvedSrc}
-      style={style}
+      src={cloudinaryAutoFormat(resolvedSrc)}
+      style={
+        fill
+          ? { ...style, height: "100%", inset: 0, objectFit: "cover", width: "100%" }
+          : style
+      }
       width={fill ? undefined : dimensions.width}
+      {...props}
     />
   );
-};
-
-export default CldImage;
+}
