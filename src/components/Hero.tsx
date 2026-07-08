@@ -4,12 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import posthog from "posthog-js";
 import { IoLocation } from "react-icons/io5";
+import { ReactGoogleReviews } from "react-google-reviews";
+import "react-google-reviews/dist/index.css";
 
 import CldImage from "./CldImage";
 import { HeroButtons } from "./HeroButtons";
 import { env } from "~/env";
 import type { MediaLike } from "~/lib/media";
-import { GoogleReviewsBadge } from "./GoogleReviewsWidget";
 export default function Hero({
   accentImage,
   description,
@@ -64,7 +65,14 @@ export default function Hero({
           <HeroButtons primaryCTA={primaryCTA} secondaryCTA={secondaryCTA} />
 
           <div className="mr-auto flex pt-6">
-            <GoogleReviewsBadge widgetId={featurableWidgetId} />
+            <ReactGoogleReviews
+              layout="badge"
+              badgeLabel="Reviews op Google"
+              badgeSubheadingFormatter={(totalReviewCount) =>
+                `Lees onze ${totalReviewCount} reviews`
+              }
+              featurableId={featurableWidgetId}
+            />
           </div>
         </div>
       </header>
