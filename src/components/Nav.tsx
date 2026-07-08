@@ -2,15 +2,9 @@
 
 import Link from "next/link";
 import { sendGTMEvent } from "@next/third-parties/google";
-import {
-  AnimatePresence,
-  motion,
-  useMotionValueEvent,
-  useScroll,
-} from "framer-motion";
 import posthog from "posthog-js";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
-import React, { useState, type JSX } from "react";
+import type { JSX } from "react";
 
 import { cn } from "~/utils/cn";
 
@@ -42,40 +36,14 @@ export const FloatingNav = ({
   navItems: NavItem[];
   primaryCTA?: { label: string; url: string };
 }) => {
-  const { scrollYProgress } = useScroll();
-  const [visible, setVisible] = useState(true);
-
-  useMotionValueEvent(scrollYProgress, "change", (current) => {
-    if (typeof current === "number") {
-      const direction = current - scrollYProgress.getPrevious()!;
-
-      if (direction < 0 || (current === 1 && direction === 1)) {
-        setVisible(true);
-      } else {
-        setVisible(false);
-      }
-    }
-  });
-
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        initial={{
-          opacity: 1,
-        }}
-        animate={{
-          y: visible ? 0 : -100,
-          opacity: visible ? 1 : 0,
-        }}
-        transition={{
-          duration: 0.2,
-        }}
-        className={cn(
+    <div
+      className={cn(
           "fixed inset-x-0 z-[5000] flex items-center justify-between bg-white py-3",
           className,
         )}
-      >
-        <nav className="container flex items-center justify-between">
+    >
+      <nav className="container flex items-center justify-between">
           <Link href="/">
             <CldImage
               src={logo}
@@ -144,7 +112,6 @@ export const FloatingNav = ({
             />
           </div>
         </nav>
-      </motion.div>
-    </AnimatePresence>
+    </div>
   );
 };

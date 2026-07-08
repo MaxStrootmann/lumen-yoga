@@ -4,10 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import posthog from "posthog-js";
 import { IoLocation } from "react-icons/io5";
-import { ReactGoogleReviews } from "react-google-reviews";
-import "react-google-reviews/dist/index.css";
-
-import { env } from "~/env";
 
 import CldImage from "./CldImage";
 import { HeroButtons } from "./HeroButtons";
@@ -34,7 +30,6 @@ export default function Hero({
   secondaryCTA: { label: string; url: string };
   title: string;
 }) {
-  const featurableWidgetId = env.NEXT_PUBLIC_GOOGLE_FEATURABLE_WIDGET;
 
   return (
     <div>
@@ -67,14 +62,12 @@ export default function Hero({
           <HeroButtons primaryCTA={primaryCTA} secondaryCTA={secondaryCTA} />
 
           <div className="mr-auto flex pt-6">
-            <ReactGoogleReviews
-              layout="badge"
-              badgeLabel="Reviews op Google"
-              badgeSubheadingFormatter={(totalReviewCount) =>
-                `Lees onze ${totalReviewCount} reviews`
-              }
-              featurableId={featurableWidgetId}
-            />
+            <Link
+              href="#recensies"
+              className="rounded-full border-2 border-green px-4 py-2 text-sm font-bold text-black transition hover:bg-green/10"
+            >
+              Reviews op Google
+            </Link>
           </div>
         </div>
       </header>
