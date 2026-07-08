@@ -4,7 +4,7 @@ import Link from "next/link";
 import { sendGTMEvent } from "@next/third-parties/google";
 import posthog from "posthog-js";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
-import type { JSX } from "react";
+import { useEffect, useRef, useState, type JSX } from "react";
 
 import { cn } from "~/utils/cn";
 
@@ -36,10 +36,32 @@ export const FloatingNav = ({
   navItems: NavItem[];
   primaryCTA?: { label: string; url: string };
 }) => {
+  const lastScrollY = useRef(0);
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const direction = currentScrollY - lastScrollY.current;
+      const isAtBottom =
+        window.innerHeight + currentScrollY >=
+        document.documentElement.scrollHeight - 1;
+
+      setVisible(direction <= 0 || currentScrollY < 16 || isAtBottom);
+      lastScrollY.current = currentScrollY;
+    };
+
+    lastScrollY.current = window.scrollY;
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div
       className={cn(
-          "fixed inset-x-0 z-[5000] flex items-center justify-between bg-white py-3",
+          visible ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0",
+          "fixed inset-x-0 z-[5000] flex items-center justify-between bg-white py-3 transition-all duration-200",
           className,
         )}
     >
