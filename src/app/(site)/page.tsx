@@ -7,7 +7,6 @@ import Ellen from "~/components/Ellen";
 import Hero from "~/components/Hero";
 import IntroImages from "~/components/IntroImages";
 import Krijgers from "~/components/Krijgers";
-import MaternityLeaveModal from "~/components/MaternityLeaveModal";
 import Reviews from "~/components/Reviews";
 import WhySection from "~/components/WhySection";
 import { DEFAULT_HOME } from "~/lib/default-content";
@@ -18,7 +17,6 @@ export default async function HomePage() {
 
   return (
     <div>
-      <MaternityLeaveModal {...home.announcementModal} />
       <Hero {...home.hero} />
       <IntroImages
         image={home.intro.image}

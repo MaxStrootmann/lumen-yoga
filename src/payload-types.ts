@@ -13,53 +13,53 @@
  * via the `definition` "supportedTimezones".
  */
 export type SupportedTimezones =
-  | 'Pacific/Midway'
-  | 'Pacific/Niue'
-  | 'Pacific/Honolulu'
-  | 'Pacific/Rarotonga'
-  | 'America/Anchorage'
-  | 'Pacific/Gambier'
-  | 'America/Los_Angeles'
-  | 'America/Tijuana'
-  | 'America/Denver'
-  | 'America/Phoenix'
-  | 'America/Chicago'
-  | 'America/Guatemala'
-  | 'America/New_York'
-  | 'America/Bogota'
-  | 'America/Caracas'
-  | 'America/Santiago'
-  | 'America/Buenos_Aires'
-  | 'America/Sao_Paulo'
-  | 'Atlantic/South_Georgia'
-  | 'Atlantic/Azores'
-  | 'Atlantic/Cape_Verde'
-  | 'Europe/London'
-  | 'Europe/Berlin'
-  | 'Africa/Lagos'
-  | 'Europe/Athens'
-  | 'Africa/Cairo'
-  | 'Europe/Moscow'
-  | 'Asia/Riyadh'
-  | 'Asia/Dubai'
-  | 'Asia/Baku'
-  | 'Asia/Karachi'
-  | 'Asia/Tashkent'
-  | 'Asia/Calcutta'
-  | 'Asia/Dhaka'
-  | 'Asia/Almaty'
-  | 'Asia/Jakarta'
-  | 'Asia/Bangkok'
-  | 'Asia/Shanghai'
-  | 'Asia/Singapore'
-  | 'Asia/Tokyo'
-  | 'Asia/Seoul'
-  | 'Australia/Brisbane'
-  | 'Australia/Sydney'
-  | 'Pacific/Guam'
-  | 'Pacific/Noumea'
-  | 'Pacific/Auckland'
-  | 'Pacific/Fiji';
+  | "Pacific/Midway"
+  | "Pacific/Niue"
+  | "Pacific/Honolulu"
+  | "Pacific/Rarotonga"
+  | "America/Anchorage"
+  | "Pacific/Gambier"
+  | "America/Los_Angeles"
+  | "America/Tijuana"
+  | "America/Denver"
+  | "America/Phoenix"
+  | "America/Chicago"
+  | "America/Guatemala"
+  | "America/New_York"
+  | "America/Bogota"
+  | "America/Caracas"
+  | "America/Santiago"
+  | "America/Buenos_Aires"
+  | "America/Sao_Paulo"
+  | "Atlantic/South_Georgia"
+  | "Atlantic/Azores"
+  | "Atlantic/Cape_Verde"
+  | "Europe/London"
+  | "Europe/Berlin"
+  | "Africa/Lagos"
+  | "Europe/Athens"
+  | "Africa/Cairo"
+  | "Europe/Moscow"
+  | "Asia/Riyadh"
+  | "Asia/Dubai"
+  | "Asia/Baku"
+  | "Asia/Karachi"
+  | "Asia/Tashkent"
+  | "Asia/Calcutta"
+  | "Asia/Dhaka"
+  | "Asia/Almaty"
+  | "Asia/Jakarta"
+  | "Asia/Bangkok"
+  | "Asia/Shanghai"
+  | "Asia/Singapore"
+  | "Asia/Tokyo"
+  | "Asia/Seoul"
+  | "Australia/Brisbane"
+  | "Australia/Sydney"
+  | "Pacific/Guam"
+  | "Pacific/Noumea"
+  | "Pacific/Auckland"
+  | "Pacific/Fiji";
 
 export interface Config {
   auth: {
@@ -69,19 +69,25 @@ export interface Config {
   collections: {
     users: User;
     media: Media;
-    'payload-kv': PayloadKv;
-    'payload-locked-documents': PayloadLockedDocument;
-    'payload-preferences': PayloadPreference;
-    'payload-migrations': PayloadMigration;
+    "payload-kv": PayloadKv;
+    "payload-locked-documents": PayloadLockedDocument;
+    "payload-preferences": PayloadPreference;
+    "payload-migrations": PayloadMigration;
   };
   collectionsJoins: {};
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
-    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
-    'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
-    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
-    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
+    "payload-kv": PayloadKvSelect<false> | PayloadKvSelect<true>;
+    "payload-locked-documents":
+      | PayloadLockedDocumentsSelect<false>
+      | PayloadLockedDocumentsSelect<true>;
+    "payload-preferences":
+      | PayloadPreferencesSelect<false>
+      | PayloadPreferencesSelect<true>;
+    "payload-migrations":
+      | PayloadMigrationsSelect<false>
+      | PayloadMigrationsSelect<true>;
   };
   db: {
     defaultIDType: number;
@@ -90,13 +96,13 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
-    'site-settings': SiteSetting;
+    "site-settings": SiteSetting;
     home: Home;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
-    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+    "site-settings": SiteSettingsSelect<false> | SiteSettingsSelect<true>;
     home: HomeSelect<false> | HomeSelect<true>;
   };
   locale: null;
@@ -150,7 +156,7 @@ export interface User {
       }[]
     | null;
   password?: string | null;
-  collection: 'users';
+  collection: "users";
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -196,16 +202,16 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
-        relationTo: 'users';
+        relationTo: "users";
         value: number | User;
       } | null)
     | ({
-        relationTo: 'media';
+        relationTo: "media";
         value: number | Media;
       } | null);
   globalSlug?: string | null;
   user: {
-    relationTo: 'users';
+    relationTo: "users";
     value: number | User;
   };
   updatedAt: string;
@@ -218,7 +224,7 @@ export interface PayloadLockedDocument {
 export interface PayloadPreference {
   id: number;
   user: {
-    relationTo: 'users';
+    relationTo: "users";
     value: number | User;
   };
   key?: string | null;
@@ -346,6 +352,7 @@ export interface Header {
         id?: string | null;
       }[]
     | null;
+  _status?: ("draft" | "published") | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -369,6 +376,7 @@ export interface Footer {
   termsUrl?: string | null;
   creditLabel?: string | null;
   creditUrl?: string | null;
+  _status?: ("draft" | "published") | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -382,6 +390,7 @@ export interface SiteSetting {
   metaDescription: string;
   favicon?: (number | null) | Media;
   socialImage?: (number | null) | Media;
+  _status?: ("draft" | "published") | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -391,22 +400,6 @@ export interface SiteSetting {
  */
 export interface Home {
   id: number;
-  announcementModal?: {
-    enabled?: boolean | null;
-    title?: string | null;
-    intro?: string | null;
-    scheduleTitle?: string | null;
-    scheduleItems?:
-      | {
-          text: string;
-          id?: string | null;
-        }[]
-      | null;
-    signupTitle?: string | null;
-    signupText?: string | null;
-    closingText?: string | null;
-    signature?: string | null;
-  };
   hero: {
     image?: (number | null) | Media;
     title?: string | null;
@@ -432,7 +425,7 @@ export interface Home {
     sectionTitle?: string | null;
     items?:
       | {
-          color: 'yellow' | 'magenta' | 'purple' | 'blue' | 'green';
+          color: "yellow" | "magenta" | "purple" | "blue" | "green";
           title: string;
           time: string;
           body: string;
@@ -482,6 +475,7 @@ export interface Home {
     locationLabel?: string | null;
     locationUrl?: string | null;
   };
+  _status?: ("draft" | "published") | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -507,6 +501,7 @@ export interface HeaderSelect<T extends boolean = true> {
         highlightAsButton?: T;
         id?: T;
       };
+  _status?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -530,6 +525,7 @@ export interface FooterSelect<T extends boolean = true> {
   termsUrl?: T;
   creditLabel?: T;
   creditUrl?: T;
+  _status?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -543,6 +539,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   metaDescription?: T;
   favicon?: T;
   socialImage?: T;
+  _status?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -552,24 +549,6 @@ export interface SiteSettingsSelect<T extends boolean = true> {
  * via the `definition` "home_select".
  */
 export interface HomeSelect<T extends boolean = true> {
-  announcementModal?:
-    | T
-    | {
-        enabled?: T;
-        title?: T;
-        intro?: T;
-        scheduleTitle?: T;
-        scheduleItems?:
-          | T
-          | {
-              text?: T;
-              id?: T;
-            };
-        signupTitle?: T;
-        signupText?: T;
-        closingText?: T;
-        signature?: T;
-      };
   hero?:
     | T
     | {
@@ -663,6 +642,7 @@ export interface HomeSelect<T extends boolean = true> {
         locationLabel?: T;
         locationUrl?: T;
       };
+  _status?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
@@ -675,7 +655,7 @@ export interface CollectionsWidget {
   data?: {
     [k: string]: unknown;
   };
-  width: 'full';
+  width: "full";
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -685,7 +665,6 @@ export interface Auth {
   [k: string]: unknown;
 }
 
-
-declare module 'payload' {
+declare module "payload" {
   export interface GeneratedTypes extends Config {}
 }
