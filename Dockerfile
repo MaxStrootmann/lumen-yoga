@@ -18,9 +18,19 @@ RUN bun install --frozen-lockfile
 COPY . .
 RUN bun run build
 
-FROM caddy:2.10-alpine
+FROM oven/bun:1.3.9-alpine AS runtime
 
-COPY --from=build /app/dist /srv
-COPY deploy/Caddyfile.vite /etc/caddy/Caddyfile
+WORKDIR /app
+
+ENV NODE_ENV=production
+ENV PORT=80
+
+COPY package.json bun.lock ./
+RUN bun install --frozen-lockfile --production
+
+COPY --from=build /app/dist ./dist
+COPY server ./server
 
 EXPOSE 80
+
+CMD ["bun", "run", "server/index.ts"]

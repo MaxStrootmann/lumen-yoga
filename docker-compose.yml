@@ -8,6 +8,8 @@ services:
         NEXT_PUBLIC_GOOGLE_FEATURABLE_WIDGET: ${NEXT_PUBLIC_GOOGLE_FEATURABLE_WIDGET:-}
         NEXT_PUBLIC_POSTHOG_KEY: ${NEXT_PUBLIC_POSTHOG_KEY:-}
         NEXT_PUBLIC_POSTHOG_HOST: ${NEXT_PUBLIC_POSTHOG_HOST:-https://eu.i.posthog.com}
+    env_file:
+      - .env.production
     restart: unless-stopped
     ports:
       - "127.0.0.1:3030:80"

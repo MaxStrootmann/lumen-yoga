@@ -25,15 +25,20 @@ const formSchema = z.object({
   email: z.string().email({
     message: "Geen geldig emailadres.",
   }),
-  bericht: z.string().min(1, {
-    message: "Bericht is verplicht.",
-  }).max(300, {
-    message: "Bericht mag maximaal 300 tekens bevatten.",
-  }),
+  bericht: z
+    .string()
+    .min(1, {
+      message: "Bericht is verplicht.",
+    })
+    .max(300, {
+      message: "Bericht mag maximaal 300 tekens bevatten.",
+    }),
 });
 
 export function ContactForm() {
   const [isSent, setIsSent] = useState(false);
+  const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -44,16 +49,40 @@ export function ContactForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    const subject = encodeURIComponent(`Bericht van ${values.naam} - Lumen Yoga Contact`);
-    const body = encodeURIComponent(
-      `Naam: ${values.naam}\nEmail: ${values.email}\n\n${values.bericht}`,
-    );
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsSubmitting(true);
+    setError("");
 
-    posthog.capture("contact_form_mailto_started");
-    window.location.href = `mailto:ellen@lumenyoga.nl?subject=${subject}&body=${body}`;
-    setIsSent(true);
-    form.reset();
+    try {
+      const response = await Promise.race([
+        fetch("/api/contact", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        }),
+        new Promise<Response>((_, reject) =>
+          setTimeout(() => reject(new Error("Timeout")), 7000),
+        ),
+      ]);
+
+      if (!response.ok) {
+        throw new Error(`Contact endpoint returned ${response.status}`);
+      }
+
+      posthog.capture("contact_form_submitted");
+      setIsSent(true);
+      form.reset();
+    } catch (err) {
+      posthog.capture("contact_form_error", {
+        error_message: (err as Error).message,
+      });
+      setError("Er is iets misgegaan bij het verzenden. Probeer het opnieuw.");
+      setIsSent(false);
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -107,15 +136,18 @@ export function ContactForm() {
           )}
         />
 
-        <Button bgColor="yellow" type="submit">
-          Open e-mail
+        <Button bgColor="yellow" type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Versturen..." : "Verstuur"}
         </Button>
 
         {isSent && (
           <p className="text-green-600 mx-auto w-full pt-2 text-sm">
-            Je e-mailprogramma is geopend met het bericht.
+            Bedankt voor je bericht, ik neem zo snel mogelijk contact met je op.
           </p>
         )}
+        {error ? (
+          <p className="text-red-600 mx-auto w-full pt-2 text-sm">{error}</p>
+        ) : null}
       </form>
     </Form>
   );
