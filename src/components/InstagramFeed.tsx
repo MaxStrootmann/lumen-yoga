@@ -68,7 +68,7 @@ export default function InstagramFeed() {
           rel="noreferrer"
           onClick={() => trackEvent("instagram_volgen_klik")}
         >
-          <Button bgColor="magenta" size="min" className="gap-2">
+          <Button bgColor="yellow" size="min" className="gap-2">
             <FaInstagram size={22} /> Volg @lumen.yoga
           </Button>
         </a>
