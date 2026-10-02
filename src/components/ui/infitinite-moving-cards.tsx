@@ -130,7 +130,7 @@ export const InfiniteMovingCards = ({
             <div className="absolute bottom-8 left-4 right-4 top-8 flex flex-col items-center justify-center gap-4 rounded-lg bg-white p-4">
               <Link href="https://search.google.com/local/writereview?placeid=ChIJ1-V0QNVroS8RynGOdhmv1FU">
                 <CldImage
-                  src="https://res.cloudinary.com/strootmann/image/upload/v1708871727/lumen-yoga/Lumen-Yoga_logo-vol_xg1uur.svg"
+                  src="/images/logo-vol.svg"
                   alt="Lumen yoga logo"
                   width={667}
                   height={430}

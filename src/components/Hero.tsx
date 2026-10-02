@@ -40,9 +40,8 @@ export default function Hero({
         <CldImage
           alt="Handen omhoog"
           src={image}
-          width={3840}
-          height={2355}
-          sizes="100vw"
+          priority
+          sizes="(min-width: 1024px) 58vw, 100vw"
           className="object-cover lg:h-[35rem] lg:w-7/12 lg:rounded-l-xl"
         />
         <div className="flex-col justify-center px-4 pt-6 lg:flex">

@@ -25,9 +25,7 @@ export default function About({
           <CldImage
             src={image}
             alt="Ellen Wissink"
-            width={1920}
-            height={2664}
-            sizes="100vw"
+            sizes="50vw"
             className="h-full object-cover"
           />
         </div>

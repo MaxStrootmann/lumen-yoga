@@ -6,6 +6,7 @@ import {
   getMediaUrl,
   type MediaLike,
 } from "~/lib/media";
+import { RESPONSIVE_IMAGES } from "~/lib/responsive-images";
 
 type ContentImageProps = Omit<
   ImgHTMLAttributes<HTMLImageElement>,
@@ -17,28 +18,23 @@ type ContentImageProps = Omit<
   fill?: boolean;
   priority?: boolean;
   sizes?: string;
-  crop?: unknown;
-  gravity?: string;
-  preserveTransformations?: boolean;
 };
 
-function cloudinaryAutoFormat(url: string): string {
-  if (!url.includes("res.cloudinary.com") || url.includes("/f_auto/")) {
-    return url;
-  }
-
-  return url.replace("/upload/", "/upload/f_auto/q_auto/");
+function srcSet(base: string, widths: number[], extension: string): string {
+  return widths.map((w) => `${base}-${w}.${extension} ${w}w`).join(", ");
 }
 
+/**
+ * Foto's staan als AVIF- en WebP-varianten op de site zelf (zie
+ * scripts/optimize-images.mjs); de browser kiest de kleinste die past.
+ * Overige bronnen, zoals de SVG-logo's, gaan als gewone <img> door.
+ */
 export default function CldImage({
   alt,
   className,
-  crop: _crop,
   fill,
-  gravity: _gravity,
   height,
-  preserveTransformations: _preserveTransformations,
-  priority: _priority,
+  priority,
   sizes,
   src,
   style,
@@ -49,19 +45,26 @@ export default function CldImage({
 
   if (!resolvedSrc) return null;
 
-  const fallbackWidth = Number(width ?? 1000);
-  const fallbackHeight = Number(height ?? 1000);
-  const dimensions = getMediaDimensions(src, fallbackWidth, fallbackHeight);
+  const responsive = RESPONSIVE_IMAGES[resolvedSrc];
+  const fallbackWidth = Number(width ?? responsive?.width ?? 1000);
+  const fallbackHeight = Number(height ?? responsive?.height ?? 1000);
+  const dimensions = responsive ?? getMediaDimensions(src, fallbackWidth, fallbackHeight);
   const safeAlt = alt ?? "";
 
-  return (
+  const img = (
     <img
       alt={typeof src === "string" ? safeAlt : getMediaAlt(src, safeAlt)}
       className={className}
+      decoding="async"
+      fetchPriority={priority ? "high" : undefined}
       height={fill ? undefined : dimensions.height}
-      loading={_priority ? "eager" : "lazy"}
-      sizes={sizes}
-      src={cloudinaryAutoFormat(resolvedSrc)}
+      loading={priority ? "eager" : "lazy"}
+      sizes={responsive ? (sizes ?? "100vw") : sizes}
+      src={
+        responsive
+          ? `${resolvedSrc}-${responsive.widths.find((w) => w >= 1280) ?? responsive.widths.at(-1)}.webp`
+          : resolvedSrc
+      }
       style={
         fill
           ? { ...style, height: "100%", inset: 0, objectFit: "cover", width: "100%" }
@@ -70,5 +73,23 @@ export default function CldImage({
       width={fill ? undefined : dimensions.width}
       {...props}
     />
+  );
+
+  if (!responsive) return img;
+
+  return (
+    <picture style={{ display: "contents" }}>
+      <source
+        sizes={sizes ?? "100vw"}
+        srcSet={srcSet(resolvedSrc, responsive.widths, "avif")}
+        type="image/avif"
+      />
+      <source
+        sizes={sizes ?? "100vw"}
+        srcSet={srcSet(resolvedSrc, responsive.widths, "webp")}
+        type="image/webp"
+      />
+      {img}
+    </picture>
   );
 }

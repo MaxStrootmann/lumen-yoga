@@ -1,6 +1,7 @@
-import { existsSync, mkdirSync, statSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, statSync } from "node:fs";
 import { appendFile, readFile, writeFile } from "node:fs/promises";
 import { join, normalize, resolve } from "node:path";
+import { brotliCompressSync, constants as zlibConstants, gzipSync } from "node:zlib";
 
 import { Resend } from "resend";
 import { z } from "zod";
@@ -325,6 +326,32 @@ async function handleInstagram(): Promise<Response> {
   }
 }
 
+const COMPRESSIBLE = /\.(html|js|css|svg|json|txt|xml|webmanifest)$/;
+const compressedCache = new Map<string, { body: Uint8Array; mtime: number }>();
+
+function cacheControlFor(pathname: string, filePath: string): string {
+  // Vite zet een hash in de bestandsnamen onder /assets, die veranderen dus nooit.
+  if (pathname.startsWith("/assets/")) return "public, max-age=31536000, immutable";
+  if (pathname.startsWith("/images/")) return "public, max-age=2592000, stale-while-revalidate=86400";
+  if (filePath.endsWith("index.html")) return "no-cache";
+  return "public, max-age=3600";
+}
+
+function compressed(filePath: string, encoding: "br" | "gzip"): Uint8Array {
+  const key = `${encoding}:${filePath}`;
+  const mtime = statSync(filePath).mtimeMs;
+  const cached = compressedCache.get(key);
+  if (cached && cached.mtime === mtime) return cached.body;
+
+  const raw = readFileSync(filePath);
+  const body =
+    encoding === "br"
+      ? brotliCompressSync(raw, { params: { [zlibConstants.BROTLI_PARAM_QUALITY]: 11 } })
+      : gzipSync(raw, { level: 9 });
+  compressedCache.set(key, { body, mtime });
+  return body;
+}
+
 function handleStatic(request: Request): Response {
   const url = new URL(request.url);
   const filePath = resolveStaticPath(url.pathname);
@@ -333,7 +360,23 @@ function handleStatic(request: Request): Response {
     return new Response("Not found", { status: 404 });
   }
 
-  return new Response(Bun.file(filePath));
+  const file = Bun.file(filePath);
+  const headers = new Headers({
+    "Cache-Control": cacheControlFor(url.pathname, filePath),
+    "Content-Type": file.type,
+  });
+
+  if (COMPRESSIBLE.test(filePath)) {
+    headers.set("Vary", "Accept-Encoding");
+    const accepted = request.headers.get("accept-encoding") ?? "";
+    const encoding = /\bbr\b/.test(accepted) ? "br" : /\bgzip\b/.test(accepted) ? "gzip" : null;
+    if (encoding) {
+      headers.set("Content-Encoding", encoding);
+      return new Response(compressed(filePath, encoding), { headers });
+    }
+  }
+
+  return new Response(file, { headers });
 }
 
 Bun.serve({

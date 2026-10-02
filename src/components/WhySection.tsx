@@ -70,9 +70,7 @@ export default function WhySection({
         <CldImage
           src={sideImage}
           alt="Krijgers"
-          width={2000}
-          height={2793}
-          sizes="100vw"
+          sizes="50vw"
           className="h-full object-cover"
         />
       </div>

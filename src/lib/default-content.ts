@@ -18,7 +18,7 @@ export const DEFAULT_SITE_SETTINGS = {
 
 export const DEFAULT_HEADER = {
   logo: {
-    url: 'https://res.cloudinary.com/strootmann/image/upload/v1708871727/lumen-yoga/Lumen-Yoga_logo-vol_xg1uur.svg',
+    url: '/images/logo-vol.svg',
     alt: 'Lumen Yoga logo',
     width: 667,
     height: 430,
@@ -58,7 +58,7 @@ export const DEFAULT_FOOTER = {
 export const DEFAULT_HOME = {
   hero: {
     image: {
-      url: 'https://res.cloudinary.com/strootmann/image/upload/v1708871503/lumen-yoga/Handen_omhoog_4k_k12f9g.jpg',
+      url: '/images/handen-omhoog',
       alt: 'Handen omhoog',
       width: 3840,
       height: 2355,
@@ -78,7 +78,7 @@ export const DEFAULT_HOME = {
     },
     quote: '“Eerst had ik stress en nu voel ik me helemaal rustig”',
     accentImage: {
-      url: 'https://res.cloudinary.com/strootmann/image/upload/v1708871728/lumen-yoga/halve_zon_mfcoaz.svg',
+      url: '/images/halve-zon.svg',
       alt: 'Halve zon',
       width: 239,
       height: 342,
@@ -86,7 +86,7 @@ export const DEFAULT_HOME = {
   },
   intro: {
     image: {
-      url: 'https://res.cloudinary.com/strootmann/image/upload/v1708871503/lumen-yoga/Masseren_4k_mbxhqj.jpg',
+      url: '/images/masseren',
       alt: 'Masseren',
       width: 2800,
       height: 5280,
@@ -148,7 +148,7 @@ export const DEFAULT_HOME = {
   },
   about: {
     image: {
-      url: 'https://res.cloudinary.com/strootmann/image/upload/v1708871503/lumen-yoga/Ellen_binnen_5_4k_ze0iyt.jpg',
+      url: '/images/ellen-binnen',
       alt: 'Ellen Wissink',
       width: 1920,
       height: 2664,
@@ -176,19 +176,19 @@ export const DEFAULT_HOME = {
   },
   kinderyoga: {
     logo: {
-      url: 'https://res.cloudinary.com/strootmann/image/upload/v1708871726/lumen-yoga/Lumen-Yoga_logo-type_kv0iki.svg',
+      url: '/images/logo-type.svg',
       alt: 'Lumen Yoga',
       width: 667,
       height: 122,
     },
     sideImage: {
-      url: 'https://res.cloudinary.com/strootmann/image/upload/v1714821937/lumen-yoga/Krijgers_csawdv.jpg',
+      url: '/images/krijgers',
       alt: 'Krijgers',
       width: 2000,
       height: 2793,
     },
     mobileImage: {
-      url: 'https://res.cloudinary.com/strootmann/image/upload/v1715243821/lumen-yoga/Krijgers-cropped_pgidcb.jpg',
+      url: '/images/krijgers-cropped',
       alt: 'Krijgers',
       width: 1500,
       height: 3000,

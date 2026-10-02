@@ -10,12 +10,8 @@ export default function Ellen({ image }: { image?: MediaLike }) {
         <CldImage
           src={image}
           alt="Ellen Wissink"
-          width={1500}
-          height={3000}
-          sizes="100vw"
-          className="object-cover"
-          crop="fill"
-          gravity="center"
+          loading="eager"
+          sizes="(orientation: portrait) 73vh, 100vw"
         />
       </FixedImage>
     </div>
