@@ -5,16 +5,19 @@ import Contact from "~/components/Contact";
 import Ellen from "~/components/Ellen";
 import Footer from "~/components/Footer";
 import Hero from "~/components/Hero";
+import InstagramFeed from "~/components/InstagramFeed";
 import IntroImages from "~/components/IntroImages";
 import Krijgers from "~/components/Krijgers";
 import { FloatingNav, type NavItem } from "~/components/Nav";
 import Reviews from "~/components/Reviews";
+import WhatsAppButton from "~/components/WhatsAppButton";
 import WhySection from "~/components/WhySection";
 import {
   DEFAULT_FOOTER,
   DEFAULT_HEADER,
   DEFAULT_HOME,
 } from "~/lib/default-content";
+import { GTM_ID } from "~/lib/tracking";
 import { GoogleTagManager } from "~/vite-shims/google";
 
 function mapNavItems(
@@ -43,7 +46,7 @@ export default function App() {
 
   return (
     <>
-      <GoogleTagManager gtmId="GTM-TG5CK2MX" />
+      <GoogleTagManager gtmId={GTM_ID} />
       <FloatingNav
         facebookUrl={DEFAULT_HEADER.facebookUrl}
         instagramUrl={DEFAULT_HEADER.instagramUrl}
@@ -80,6 +83,7 @@ export default function App() {
           <div className="flex-1 bg-green" />
         </div>
         <Reviews heading={home.reviews.heading} />
+        <InstagramFeed />
         <Contact {...home.contact} />
       </main>
       <Footer
@@ -89,8 +93,10 @@ export default function App() {
         instagramUrl={DEFAULT_FOOTER.instagramUrl}
         logo={DEFAULT_FOOTER.logo}
         navItems={footerNavItems}
+        schoolOffer={DEFAULT_FOOTER.schoolOffer}
         termsUrl={DEFAULT_FOOTER.termsUrl}
       />
+      <WhatsAppButton />
     </>
   );
 }

@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { MediaLike } from "~/lib/media";
 
 import CldImage from "./CldImage";
+import ReadMore from "./ReadMore";
 import Quote from "./Quote";
 
 export default function WhySection({
@@ -44,14 +45,16 @@ export default function WhySection({
               <h2 className="px-4 pt-4 text-4xl font-bold">
                 {section.heading}
               </h2>
-              {section.paragraphs.map((paragraph, paragraphIndex) => (
-                <p
-                  key={`${section.heading}-${paragraphIndex}`}
-                  className="px-4 pt-4"
-                >
-                  {paragraph.text}
-                </p>
-              ))}
+              <ReadMore id={`kinderyoga-${index + 1}`} buttonClassName="px-4">
+                {section.paragraphs.map((paragraph, paragraphIndex) => (
+                  <p
+                    key={`${section.heading}-${paragraphIndex}`}
+                    className="px-4 pt-4"
+                  >
+                    {paragraph.text}
+                  </p>
+                ))}
+              </ReadMore>
             </div>
           ))}
         </div>

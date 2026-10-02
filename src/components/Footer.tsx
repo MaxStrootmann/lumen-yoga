@@ -6,6 +6,7 @@ import { FaFacebook, FaInstagram } from "react-icons/fa";
 
 
 import type { MediaLike } from "~/lib/media";
+import { trackEvent } from "~/lib/tracking";
 import CldImage from "./CldImage";
 import type { NavItem } from "./Nav";
 
@@ -16,6 +17,7 @@ export default function Footer({
   instagramUrl,
   logo,
   navItems,
+  schoolOffer,
   termsUrl,
 }: {
   creditLabel: string;
@@ -24,6 +26,7 @@ export default function Footer({
   instagramUrl?: string;
   logo?: MediaLike;
   navItems: NavItem[];
+  schoolOffer?: { text: string; linkLabel: string; url: string };
   termsUrl: string;
 }) {
   return (
@@ -71,6 +74,21 @@ export default function Footer({
           </li>
         ) : null}
       </ul>
+
+      {schoolOffer ? (
+        <p className="mx-auto max-w-[40ch] px-4 pt-8 text-center">
+          <em>{schoolOffer.text}</em>{" "}
+          <a
+            href={schoolOffer.url}
+            target="_blank"
+            rel="noreferrer"
+            onClick={() => trackEvent("basisschool_info_klik")}
+            className="font-bold underline underline-offset-4"
+          >
+            {schoolOffer.linkLabel}
+          </a>
+        </p>
+      ) : null}
 
       <p className="pt-5 text-center">
         © {new Date().getFullYear()} Lumen Yoga{" "}

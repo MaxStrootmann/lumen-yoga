@@ -1,7 +1,10 @@
 import Link from "next/link";
+import { FaWhatsapp } from "react-icons/fa";
 import { MdEmail, MdLocalPhone, MdLocationPin } from "react-icons/md";
 
 import CopyEmail from "~/components/CopyEmail";
+import { WHATSAPP_URL } from "~/components/WhatsAppButton";
+import { trackEvent } from "~/lib/tracking";
 
 import { ContactForm } from "./ContactForm";
 
@@ -34,6 +37,18 @@ export default function Contact({
             <MdLocalPhone size={24} />
             <a className="underline underline-offset-4" href={`tel:${phone}`}>
               {phone}
+            </a>
+          </div>
+          <div className="flex gap-2">
+            <FaWhatsapp size={24} />
+            <a
+              className="underline underline-offset-4"
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => trackEvent("whatsapp_klik", { bron: "contactblok" })}
+            >
+              Stuur een WhatsApp-bericht
             </a>
           </div>
           <div className="flex gap-2">

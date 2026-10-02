@@ -55,9 +55,9 @@ export function OfferCarousel({
               key={index}
               className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
             >
-              <div className="pb-4">
-                <Card className="relative overflow-visible rounded-3xl border-4 border-black">
-                  <CardContent className="flex min-h-[400px] flex-col items-center justify-start px-4 py-6">
+              <div className="h-full pb-4">
+                <Card className="relative h-full overflow-visible rounded-3xl border-4 border-black">
+                  <CardContent className="flex h-full min-h-[400px] flex-col items-center justify-start px-4 py-6">
                     <div className="flex flex-1 flex-col items-center justify-start">
                       <h3 className="mb-6 whitespace-pre-line text-center text-2xl font-bold leading-tight">
                         {card.title}

@@ -27,7 +27,7 @@ export const DEFAULT_HEADER = {
   facebookUrl: 'https://www.facebook.com/profile.php?id=100091839270911',
   primaryCTA: {
     label: 'Aanmelden',
-    url: 'https://docs.google.com/forms/d/e/1FAIpQLSctAPfSQAKw3pdtxlDASPai16SxSO1XGNYz1UBzw5ysTdIIKQ/viewform',
+    url: '/aanmelden/kinderyoga',
   },
   navItems: [
     { label: 'Home', link: '/' },
@@ -35,7 +35,7 @@ export const DEFAULT_HEADER = {
     { label: 'Kinderyoga', link: '#kinderyoga' },
     { label: 'Over mij', link: '#over-mij' },
     { label: 'Ons aanbod', link: '#aanbod' },
-    { label: 'Info', link: '#info' },
+    { label: 'Contact', link: '#contact' },
   ],
 } as const
 
@@ -48,6 +48,11 @@ export const DEFAULT_FOOTER = {
     'https://drive.google.com/file/d/1jyNU2_TVlmN6UK_pNmRDR6kcUKdguYuu/view?ts=673ce9e5',
   creditLabel: 'Mann Digital',
   creditUrl: 'https://www.linkedin.com/in/max-strootmann/',
+  schoolOffer: {
+    text: 'Ben je een basisschool? Ik bied hiervoor een lespakket aan op maat.',
+    linkLabel: 'Bekijk hier alle info',
+    url: 'https://drive.google.com/open?id=1cTG3qLlsL_BKrcSjEv3FPumj3G1yQHBqSLzid2KP-vw',
+  },
 } as const
 
 export const DEFAULT_HOME = {
@@ -65,11 +70,11 @@ export const DEFAULT_HOME = {
       'Laat kinderen kennis maken met yoga, meditatie en mindfulness. Geef kinderen de tools waar ze de rest van hun leven profijt van hebben.',
     primaryCTA: {
       label: 'Aanmelden',
-      url: 'https://docs.google.com/forms/d/e/1FAIpQLSctAPfSQAKw3pdtxlDASPai16SxSO1XGNYz1UBzw5ysTdIIKQ/viewform',
+      url: '/aanmelden/kinderyoga',
     },
     secondaryCTA: {
       label: 'Meer info',
-      url: '#info',
+      url: '#kinderyoga',
     },
     quote: '“Eerst had ik stress en nu voel ik me helemaal rustig”',
     accentImage: {
@@ -99,7 +104,7 @@ export const DEFAULT_HOME = {
           'Op de laatste zaterdag van elke schoolvakantie\n\nLocatie: YPHS Huis / Zijperweg 9 / Schagen\n\nActietarief: €20 per ouder-kind duo\nMet z’n vieren? Betaal samen slechts €30!',
         buttonLabel: 'Aanmelden',
         buttonUrl:
-          'https://docs.google.com/forms/d/e/1FAIpQLScFbOtfK54SVAj_Vtzo3TMh23UTZWkz7sbYqfzp4EcbqeRLpg/viewform',
+          '/aanmelden/ouder-kindyoga?groep=kinderen',
       },
       {
         color: 'magenta',
@@ -109,7 +114,7 @@ export const DEFAULT_HOME = {
           'Elke woensdagmiddag\n\nLocatie: YPHS Huis / Zijperweg 9 / Schagen\n\nTarief: vanaf €9,50 per les',
         buttonLabel: 'Aanmelden',
         buttonUrl:
-          'https://docs.google.com/forms/d/e/1FAIpQLSctAPfSQAKw3pdtxlDASPai16SxSO1XGNYz1UBzw5ysTdIIKQ/viewform',
+          '/aanmelden/kinderyoga',
       },
       {
         color: 'purple',
@@ -119,15 +124,16 @@ export const DEFAULT_HOME = {
           'Elke woensdagmiddag\n\nLocatie: YPHS Huis / Zijperweg 9 / Schagen\n\nTarief: vanaf €9,50 per les',
         buttonLabel: 'Aanmelden',
         buttonUrl:
-          'https://docs.google.com/forms/d/e/1FAIpQLSctAPfSQAKw3pdtxlDASPai16SxSO1XGNYz1UBzw5ysTdIIKQ/viewform',
+          '/aanmelden/kinderyoga',
       },
       {
         color: 'blue',
-        title: 'Schoolverlichting',
-        time: 'op aanvraag',
-        body: 'Lesprogramma voor basisscholen',
-        buttonLabel: 'Meer info',
-        buttonUrl: '#info',
+        title: 'Ouder-kind\npeuteryoga',
+        time: '9.30 - 10.15 uur',
+        body:
+          'Op de laatste zaterdag van elke schoolvakantie\n\nLocatie: YPHS Huis / Zijperweg 9 / Schagen\n\nTarief: €20 per ouder-kind duo\nMet z’n vieren? Betaal samen slechts €30!',
+        buttonLabel: 'Aanmelden',
+        buttonUrl: '/aanmelden/ouder-kindyoga?groep=peuters',
       },
       {
         color: 'green',
@@ -136,7 +142,7 @@ export const DEFAULT_HOME = {
         body: 'Spelenderwijs ontspannen',
         buttonLabel: 'Meer info',
         buttonUrl:
-          'https://docs.google.com/forms/d/e/1FAIpQLSe1UIald50arX6u9Qeov0bc-gCncpNA2QTjGnDK0y_XIL8kOw/viewform?usp=dialog',
+          '/aanmelden/workshop',
       },
     ],
   },

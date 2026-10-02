@@ -3,6 +3,7 @@
 import type { MediaLike } from "~/lib/media";
 
 import CldImage from "./CldImage";
+import ReadMore from "./ReadMore";
 
 export default function About({
   heading,
@@ -46,11 +47,13 @@ export default function About({
           <div id="logo-and-text" className="max-w-[70ch] pb-8 lg:pl-12">
             <div className="px-4 pt-4 lg:px-0 lg:pr-4">
               <h2 className="pt-4 text-4xl font-bold">{heading}</h2>
-              {paragraphs.map((paragraph, index) => (
-                <p key={`${paragraph.text.slice(0, 20)}-${index}`} className="pt-4">
-                  {paragraph.text}
-                </p>
-              ))}
+              <ReadMore id="over-mij">
+                {paragraphs.map((paragraph, index) => (
+                  <p key={`${paragraph.text.slice(0, 20)}-${index}`} className="pt-4">
+                    {paragraph.text}
+                  </p>
+                ))}
+              </ReadMore>
             </div>
           </div>
 
