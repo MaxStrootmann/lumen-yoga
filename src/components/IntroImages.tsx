@@ -31,7 +31,7 @@ export default function IntroImages({
           alt="Masseren"
           loading="eager"
           sizes="(min-width: 1024px) 100vw, (orientation: portrait) 73vh, 100vw"
-          className="lg:object-bottom"
+          className="lg:object-[50%_65%]"
         />
       </FixedImage>
       <div className="px-2 pt-4">

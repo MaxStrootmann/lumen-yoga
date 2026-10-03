@@ -96,7 +96,7 @@ export const REGISTRATION_FORMS: readonly RegistrationForm[] = [
     ],
     details: [
       "Data: zaterdag 17 oktober, zaterdag 2 januari en zaterdag 27 februari",
-      "Peuters (2 t/m 3 jaar): 09.30 – 10.15 uur",
+      "Peuters (2 t/m 4 jaar): 09.30 – 10.15 uur",
       "Kinderen (4 t/m 12 jaar): 10.30 – 11.30 uur",
       "Ouder-kindduo: €20",
       "Kwartetactie: €30 (geef hieronder de extra namen op)",
@@ -112,7 +112,7 @@ export const REGISTRATION_FORMS: readonly RegistrationForm[] = [
         type: "radio",
         required: true,
         options: [
-          "Peuters (2 t/m 3 jaar): 09.30 – 10.15 uur",
+          "Peuters (2 t/m 4 jaar): 09.30 – 10.15 uur",
           "Kinderen (4 t/m 12 jaar): 10.30 – 11.30 uur",
         ],
       },
