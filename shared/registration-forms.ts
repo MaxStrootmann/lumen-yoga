@@ -51,10 +51,9 @@ export const REGISTRATION_FORMS: readonly RegistrationForm[] = [
     ],
     details: [
       "Nieuwe lessenreeks vanaf woensdag 21 oktober 2026",
-      "4 t/m 7 jaar: 14.30 – 15.30 uur",
-      "8 t/m 12 jaar: 15.45 – 16.45 uur",
+      "4 t/m 12 jaar: 15.45 – 16.45 uur, voorlopig samen in één groep",
       "Data: 21 en 28 oktober, 4, 18 en 25 november, 2, 9 en 16 december (11 november geen les)",
-      "Voorlopig samen in één groep van 15.45 tot 16.45 uur. Bij meer aanmeldingen splitsen we de groepen weer op.",
+      "Bij meer aanmeldingen splitsen we de groepen weer op: 4 t/m 7 jaar om 14.30 uur en 8 t/m 12 jaar om 15.45 uur.",
       "Proeflespakket: 2 lessen voor €15",
       "Losse les: €12,50 (bij voldoende plek)",
       "Digitale strippenkaart: 10 lessen voor €115 (€11,50 per les, 6 maanden geldig)",

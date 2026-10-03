@@ -108,20 +108,10 @@ export const DEFAULT_HOME = {
       },
       {
         color: 'magenta',
-        title: 'Kinderyoga\n4 t/m 7 jaar',
-        time: '14.30 - 15.30 uur',
-        body:
-          'Elke woensdagmiddag\n\nLocatie: YPHS Huis / Zijperweg 9 / Schagen\n\nTarief: vanaf €9,50 per les',
-        buttonLabel: 'Aanmelden',
-        buttonUrl:
-          '/aanmelden/kinderyoga',
-      },
-      {
-        color: 'purple',
-        title: 'Kinderyoga\n8 t/m 12 jaar',
+        title: 'Kinderyoga\n4 t/m 12 jaar',
         time: '15.45 - 16.45 uur',
         body:
-          'Elke woensdagmiddag\n\nLocatie: YPHS Huis / Zijperweg 9 / Schagen\n\nTarief: vanaf €9,50 per les',
+          'Elke woensdagmiddag\n\nVoorlopig één groep. Bij meer aanmeldingen splitsen we weer in 4 t/m 7 en 8 t/m 12 jaar.\n\nLocatie: YPHS Huis / Zijperweg 9 / Schagen\n\nTarief: vanaf €9,50 per les',
         buttonLabel: 'Aanmelden',
         buttonUrl:
           '/aanmelden/kinderyoga',
@@ -134,6 +124,15 @@ export const DEFAULT_HOME = {
           'Op de laatste zaterdag van elke schoolvakantie\n\nLocatie: YPHS Huis / Zijperweg 9 / Schagen\n\nTarief: €20 per ouder-kind duo\nMet z’n vieren? Betaal samen slechts €30!',
         buttonLabel: 'Aanmelden',
         buttonUrl: '/aanmelden/ouder-kindyoga?groep=peuters',
+      },
+      {
+        color: 'purple',
+        title: 'Ouder & kind yoga\nbij Toetie & Bo',
+        time: '1 maandagochtend per maand',
+        body:
+          'Ouder & dreumes: 9.15 - 9.45 uur\nOuder & peuter/kleuter: 10.00 - 10.30 uur\n\nLocatie: Toetie & Bo / Schagen\n\nYoga met ontbijt: €25 per duo\nLosse les: €15 per duo',
+        buttonLabel: 'Reserveren',
+        buttonUrl: 'https://www.toetie-bo.nl/ouder-kind-yoga-schagen/',
       },
       {
         color: 'green',
@@ -156,7 +155,7 @@ export const DEFAULT_HOME = {
     heading: 'Welkom bij Lumen Yoga!',
     paragraphs: [
       {
-        text: 'Ik ben Ellen Wissink, trotse eigenaar van Lumen Yoga en woon met mijn man en zoontje in het gezellige Schagen.',
+        text: 'Ik ben Ellen Wissink, trotse eigenaar van Lumen Yoga in het gezellige Schagen.',
       },
       {
         text: 'Yoga heeft mijn leven veranderd. Het heeft me geleerd om zachter voor mezelf te zijn en mijn innerlijke kracht te omarmen. Waar ik voorheen worstelde met strenge verwachtingen en een kritische stem, vind ik nu rust en balans.',
@@ -165,12 +164,17 @@ export const DEFAULT_HOME = {
         text: 'Steeds vaker vroeg ik me af waarom ik deze belangrijke vaardigheden niet als kind had geleerd. Wat als we kinderen al vroeg deze waardevolle tools bijbrengen?',
       },
       {
-        text: 'Sinds 2016 werk ik op de Burgemeester de Wildeschool (cluster 2 onderwijs) en hiervoor heb ik vijf jaar in de buitenschoolse opvang gewerkt. In 2023 volgde ik de cursus schoolverlichting van de nieuwe yogaschool, wat mijn nieuwe avontuur startte. Mijn missie is om kinderen te leren zichzelf te waarderen en hun kwaliteiten te ontdekken.',
+        text: 'Sinds 2016 werk ik op de Burgemeester de Wildeschool (cluster 2 onderwijs) en hiervoor heb ik vijf jaar in de buitenschoolse opvang gewerkt. In 2023 volgde ik de cursus schoolverlichting van de nieuwe yogaschool, wat mijn nieuwe avontuur startte. In 2026 rondde ik de kinderyoga-opleiding van Helen Purperhart af, bij de Kinderyoga Academie. Mijn missie is om kinderen te leren zichzelf te waarderen en hun kwaliteiten te ontdekken.',
       },
       {
         text: 'Ik droom ervan dat kinderyoga een vast onderdeel wordt op basisscholen, zodat elk kind de kans krijgt om deze waardevolle vaardigheden te leren.',
       },
     ],
+    certification: {
+      title: 'Gecertificeerd kinderyogadocent',
+      issuer: 'Kinderyoga Academie · Helen Purperhart',
+      url: 'https://kinderyoga.nl/opleiding/',
+    },
     instagramLabel: 'Volg ons op Instagram',
     instagramUrl: 'https://www.instagram.com/lumen.yoga/',
   },

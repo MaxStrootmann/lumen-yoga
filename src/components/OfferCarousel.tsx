@@ -71,7 +71,7 @@ export function OfferCarousel({
                           {card.time}
                         </span>
                       </div>
-                      <div className="space-y-4 text-sm leading-relaxed">
+                      <div className="space-y-4 pb-4 text-sm leading-relaxed">
                         {formatBody(card.body).map((paragraph, paragraphIndex) => (
                           <p
                             key={`${card.title}-${paragraphIndex}`}
@@ -92,6 +92,9 @@ export function OfferCarousel({
                           });
                         }}
                         href={card.buttonUrl}
+                        {...(card.buttonUrl.startsWith("http")
+                          ? { target: "_blank", rel: "noreferrer" }
+                          : {})}
                         className="block"
                       >
                         <Button

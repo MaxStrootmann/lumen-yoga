@@ -1,17 +1,22 @@
 "use client";
 
+import { FaAward } from "react-icons/fa";
+
 import type { MediaLike } from "~/lib/media";
+import { trackEvent } from "~/lib/tracking";
 
 import CldImage from "./CldImage";
 import ReadMore from "./ReadMore";
 
 export default function About({
+  certification,
   heading,
   image,
   instagramLabel,
   instagramUrl,
   paragraphs,
 }: {
+  certification?: { title: string; issuer: string; url: string };
   heading: string;
   image?: MediaLike;
   instagramLabel: string;
@@ -52,6 +57,23 @@ export default function About({
                   </p>
                 ))}
               </ReadMore>
+              {certification ? (
+                <a
+                  href={certification.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => trackEvent("certificaat_klik")}
+                  className="mt-6 inline-flex items-center gap-3 rounded-2xl border-4 border-black bg-white px-4 py-3 transition hover:bg-yellow/10"
+                >
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-yellow">
+                    <FaAward size={24} aria-hidden="true" />
+                  </span>
+                  <span className="flex flex-col leading-tight">
+                    <span className="font-bold">{certification.title}</span>
+                    <span className="pt-1 text-sm">{certification.issuer}</span>
+                  </span>
+                </a>
+              ) : null}
             </div>
           </div>
 
