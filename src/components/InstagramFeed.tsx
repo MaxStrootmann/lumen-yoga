@@ -188,9 +188,9 @@ export default function InstagramFeed() {
                       target="_blank"
                       rel="noreferrer"
                       onClick={() => trackEvent("instagram_post_klik")}
-                      className="group relative block aspect-[4/5] overflow-hidden rounded-3xl border-4 border-black bg-white transition duration-300 hover:-translate-x-1 hover:-translate-y-1"
+                      className="group relative block aspect-[4/5] overflow-hidden rounded-3xl border-2 border-black bg-white transition duration-300 hover:-translate-x-1 hover:-translate-y-1"
                       style={{
-                        boxShadow: `8px 8px 0 ${SHADOW_COLORS[index % SHADOW_COLORS.length]}`,
+                        boxShadow: `6px 6px 0 ${SHADOW_COLORS[index % SHADOW_COLORS.length]}`,
                       }}
                     >
                       <img

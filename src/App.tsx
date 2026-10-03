@@ -62,6 +62,7 @@ export default function App() {
           quote={home.intro.quote}
           sectionTitle={home.offers.sectionTitle}
         />
+        <InstagramFeed />
         <About {...home.about} />
         <div className="lg:hidden">
           <Ellen image={home.about.image} />
@@ -83,7 +84,6 @@ export default function App() {
           <div className="flex-1 bg-green" />
         </div>
         <Reviews heading={home.reviews.heading} />
-        <InstagramFeed />
         <Contact {...home.contact} />
       </main>
       <Footer
