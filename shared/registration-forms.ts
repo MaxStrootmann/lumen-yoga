@@ -91,6 +91,7 @@ export const REGISTRATION_FORMS: readonly RegistrationForm[] = [
     title: "Ouder-kindyoga",
     intro: [
       "Samen bewegen, ontspannen en plezier maken! In elke schoolvakantie organiseert Lumen Yoga speciale ouder-kindworkshops. Een heerlijk moment van échte aandacht voor elkaar.",
+      "Er is een groep voor peuters (2 t/m 4 jaar) en een groep voor kinderen (4 t/m 12 jaar). Is je kind 4? Kies de groep die het beste past. Twijfel je, app Ellen dan even.",
       "Buiten de vakanties is er elke woensdagmiddag kinderyoga.",
     ],
     details: [

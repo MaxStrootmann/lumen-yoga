@@ -37,7 +37,7 @@ function mapNavItems(
 
 export default function App() {
   useEffect(() => {
-    document.title = "Lumen Yoga | yoga, meditatie & mindfulness voor kinderen";
+    document.title = "Lumen Yoga | Kinderyoga, peuteryoga en ouder-kindyoga in Schagen";
   }, []);
 
   const headerNavItems = mapNavItems(DEFAULT_HEADER.navItems);

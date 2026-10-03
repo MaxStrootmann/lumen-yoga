@@ -250,9 +250,27 @@ async function handleRegistration(request: Request, server: Bun.Server): Promise
 // --- Instagram -------------------------------------------------------------
 // Officiële Instagram API (Instagram Login). Het long-lived token is 60 dagen
 // geldig; we verversen het automatisch en bewaren het in LUMEN_DATA_DIR.
+// Zonder token, of als de API faalt, tonen we de momentopname uit
+// public/instagram (scripts/instagram-snapshot.py).
 
-type InstagramPost = { id: string; permalink: string; imageUrl: string; caption: string };
+type InstagramPost = {
+  id: string;
+  permalink: string;
+  imageUrl: string;
+  caption: string;
+  mediaType: string;
+  timestamp?: string;
+};
 let instagramCache: { at: number; posts: InstagramPost[] } | null = null;
+
+async function instagramSnapshot(): Promise<InstagramPost[]> {
+  try {
+    const data = JSON.parse(await readFile(join(distRoot, "instagram", "snapshot.json"), "utf8"));
+    return Array.isArray(data.posts) ? data.posts : [];
+  } catch {
+    return [];
+  }
+}
 
 async function readInstagramToken(): Promise<{ token: string; refreshedAt: number } | null> {
   if (DATA_DIR) {
@@ -291,12 +309,12 @@ async function handleInstagram(): Promise<Response> {
   }
 
   const stored = await readInstagramToken();
-  if (!stored) return jsonResponse({ posts: [] }, 200, 600);
+  if (!stored) return jsonResponse({ posts: await instagramSnapshot(), source: "snapshot" }, 200, 600);
 
   try {
     const { token } = await refreshInstagramToken(stored);
     const response = await fetch(
-      `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,thumbnail_url,permalink&limit=12&access_token=${encodeURIComponent(token)}`,
+      `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,thumbnail_url,permalink,timestamp&limit=12&access_token=${encodeURIComponent(token)}`,
     );
     if (!response.ok) throw new Error(`Instagram ${response.status}`);
     const data = (await response.json()) as {
@@ -307,6 +325,7 @@ async function handleInstagram(): Promise<Response> {
         media_url?: string;
         thumbnail_url?: string;
         permalink: string;
+        timestamp?: string;
       }>;
     };
     const posts = (data.data ?? [])
@@ -315,14 +334,16 @@ async function handleInstagram(): Promise<Response> {
         permalink: item.permalink,
         imageUrl: (item.media_type === "VIDEO" ? item.thumbnail_url : item.media_url) ?? "",
         caption: item.caption ?? "",
+        mediaType: item.media_type,
+        timestamp: item.timestamp,
       }))
-      .filter((post) => post.imageUrl)
-      .slice(0, 6);
+      .filter((post) => post.imageUrl);
     instagramCache = { at: Date.now(), posts };
-    return jsonResponse({ posts }, 200, 600);
+    return jsonResponse({ posts, source: "live" }, 200, 600);
   } catch (error) {
     console.error("Instagram feed failed", error);
-    return jsonResponse({ posts: instagramCache?.posts ?? [] }, 200, 60);
+    const posts = instagramCache?.posts ?? (await instagramSnapshot());
+    return jsonResponse({ posts, source: instagramCache ? "live" : "snapshot" }, 200, 60);
   }
 }
 
@@ -333,6 +354,7 @@ function cacheControlFor(pathname: string, filePath: string): string {
   // Vite zet een hash in de bestandsnamen onder /assets, die veranderen dus nooit.
   if (pathname.startsWith("/assets/")) return "public, max-age=31536000, immutable";
   if (pathname.startsWith("/images/")) return "public, max-age=2592000, stale-while-revalidate=86400";
+  if (pathname.startsWith("/instagram/")) return "public, max-age=86400";
   if (filePath.endsWith("index.html")) return "no-cache";
   return "public, max-age=3600";
 }

@@ -1,7 +1,7 @@
 export const DEFAULT_SITE_SETTINGS = {
-  siteTitle: 'Lumen Yoga | yoga, meditatie & mindfulness voor kinderen',
+  siteTitle: 'Lumen Yoga | Kinderyoga, peuteryoga en ouder-kindyoga in Schagen',
   metaDescription:
-    'Laat kinderen kennis maken met yoga, meditatie en mindfulness. Geef kinderen de tools waar ze de rest van hun leven profijt van hebben.',
+    'Kinderyoga, peuteryoga en ouder-kindyoga in Schagen voor kinderen van 2 tot en met 12 jaar. Geef kinderen de tools waar ze de rest van hun leven profijt van hebben.',
   favicon: {
     url: 'https://res.cloudinary.com/strootmann/image/upload/v1708871727/lumen-yoga/Favicon_32x32_e6ei0q.svg',
     alt: 'Lumen Yoga favicon',
@@ -49,7 +49,7 @@ export const DEFAULT_FOOTER = {
   creditLabel: 'Mann Digital',
   creditUrl: 'https://www.linkedin.com/in/max-strootmann/',
   schoolOffer: {
-    text: 'Ben je een basisschool? Ik bied hiervoor een lespakket aan op maat.',
+    text: 'Werk je op een basisschool of kinderopvang? Ik bied een lespakket op maat.',
     linkLabel: 'Bekijk hier alle info',
     url: 'https://drive.google.com/open?id=1cTG3qLlsL_BKrcSjEv3FPumj3G1yQHBqSLzid2KP-vw',
   },
@@ -63,11 +63,11 @@ export const DEFAULT_HOME = {
       width: 3840,
       height: 2355,
     },
-    title: 'Kinderyoga in Schagen',
+    title: 'Kinder- en peuteryoga in Schagen',
     locationLabel: 'YPHS Huis, Zijperweg 9, 1742 NE Schagen',
     locationUrl: 'https://maps.google.com/?q=YPHS+Huis,+Zijperweg+9,+1742+NE+Schagen',
     description:
-      'Laat kinderen kennis maken met yoga, meditatie en mindfulness. Geef kinderen de tools waar ze de rest van hun leven profijt van hebben.',
+      'Laat kinderen kennismaken met yoga, meditatie en mindfulness. Geef kinderen de tools waar ze de rest van hun leven profijt van hebben.',
     primaryCTA: {
       label: 'Aanmelden',
       url: '/aanmelden/kinderyoga',
@@ -98,13 +98,22 @@ export const DEFAULT_HOME = {
     items: [
       {
         color: 'yellow',
-        title: 'Ouder-kind yoga',
+        title: 'Ouder-kindyoga\n4 t/m 12 jaar',
         time: '10.30 - 11.30 uur',
         body:
-          'Op de laatste zaterdag van elke schoolvakantie\n\nLocatie: YPHS Huis / Zijperweg 9 / Schagen\n\nActietarief: €20 per ouder-kind duo\nMet z’n vieren? Betaal samen slechts €30!',
+          'Op de laatste zaterdag van elke schoolvakantie\n\nLocatie: YPHS Huis / Zijperweg 9 / Schagen\n\nTarief: €20 per ouder-kindduo\nMet z’n vieren? Betaal samen slechts €30!',
         buttonLabel: 'Aanmelden',
         buttonUrl:
           '/aanmelden/ouder-kindyoga?groep=kinderen',
+      },
+      {
+        color: 'blue',
+        title: 'Ouder-kind peuteryoga\n2 t/m 4 jaar',
+        time: '9.30 - 10.15 uur',
+        body:
+          'Op de laatste zaterdag van elke schoolvakantie\n\nLocatie: YPHS Huis / Zijperweg 9 / Schagen\n\nTarief: €20 per ouder-kindduo\nMet z’n vieren? Betaal samen slechts €30!',
+        buttonLabel: 'Aanmelden',
+        buttonUrl: '/aanmelden/ouder-kindyoga?groep=peuters',
       },
       {
         color: 'magenta',
@@ -117,15 +126,6 @@ export const DEFAULT_HOME = {
           '/aanmelden/kinderyoga',
       },
       {
-        color: 'blue',
-        title: 'Ouder-kind\npeuteryoga',
-        time: '9.30 - 10.15 uur',
-        body:
-          'Op de laatste zaterdag van elke schoolvakantie\n\nLocatie: YPHS Huis / Zijperweg 9 / Schagen\n\nTarief: €20 per ouder-kind duo\nMet z’n vieren? Betaal samen slechts €30!',
-        buttonLabel: 'Aanmelden',
-        buttonUrl: '/aanmelden/ouder-kindyoga?groep=peuters',
-      },
-      {
         color: 'purple',
         title: 'Ouder & kind yoga\nbij Toetie & Bo',
         time: '1 maandagochtend per maand',
@@ -136,9 +136,9 @@ export const DEFAULT_HOME = {
       },
       {
         color: 'green',
-        title: 'Kinderyoga workshop',
+        title: 'Kinderyoga op locatie',
         time: 'op aanvraag',
-        body: 'Spelenderwijs ontspannen',
+        body: 'Voor school, kinderopvang, bibliotheek, boekhandel of kinderfeestje',
         buttonLabel: 'Meer info',
         buttonUrl:
           '/aanmelden/workshop',
@@ -164,10 +164,13 @@ export const DEFAULT_HOME = {
         text: 'Steeds vaker vroeg ik me af waarom ik deze belangrijke vaardigheden niet als kind had geleerd. Wat als we kinderen al vroeg deze waardevolle tools bijbrengen?',
       },
       {
-        text: 'Sinds 2016 werk ik op de Burgemeester de Wildeschool (cluster 2 onderwijs) en hiervoor heb ik vijf jaar in de buitenschoolse opvang gewerkt. In 2023 volgde ik de cursus schoolverlichting van de nieuwe yogaschool, wat mijn nieuwe avontuur startte. In 2026 rondde ik de kinderyoga-opleiding van Helen Purperhart af, bij de Kinderyoga Academie. Mijn missie is om kinderen te leren zichzelf te waarderen en hun kwaliteiten te ontdekken.',
+        text: 'Kinderen kunnen al heel jong beginnen met korte oefeningen: samen diep ademhalen, bewegen als een dier en voor het slapengaan een massageverhaal. Daarom geef ik nu ook yoga voor peuters, samen met papa, mama, opa of oma.',
       },
       {
-        text: 'Ik droom ervan dat kinderyoga een vast onderdeel wordt op basisscholen, zodat elk kind de kans krijgt om deze waardevolle vaardigheden te leren.',
+        text: 'Sinds 2016 werk ik op de Burgemeester de Wildeschool (cluster 2-onderwijs). Daarvoor werkte ik vijf jaar in de buitenschoolse opvang. In 2023 volgde ik de opleiding Schoolverlichting bij De Nieuwe Yogaschool, en daarmee begon Lumen Yoga. In 2026 rondde ik de kinderyoga-opleiding van Helen Purperhart af, bij de Kinderyoga Academie. Mijn missie: kinderen leren zichzelf te waarderen en hun eigen kwaliteiten te ontdekken.',
+      },
+      {
+        text: 'Ik droom ervan dat yoga een vast onderdeel wordt van de kinderopvang en de basisschool, zodat elk kind de kans krijgt om dit te leren.',
       },
     ],
     certification: {
@@ -203,7 +206,7 @@ export const DEFAULT_HOME = {
         heading: 'Yoga, meditatie en mindfulness',
         paragraphs: [
           {
-            text: 'Draagt bij aan meer zelfvertrouwen, lichaamsbesef en helpt kinderen te verbinden met zichzelf en anderen! Yoga is een manier om meer rust te voelen in je lijf en in je hoofd. Je voert de oefeningen uit met aandacht, hierdoor leren kinderen zich beter te concentreren.',
+            text: 'Yoga helpt kinderen om rust te voelen in hun lijf en in hun hoofd. Stilzitten hoeft niet: eerst bewegen, springen en dansen we, daarna komt de rust vanzelf. Omdat kinderen de oefeningen met aandacht doen, leren ze zich beter te concentreren. Het geeft zelfvertrouwen, lichaamsbesef en verbinding met zichzelf en met anderen.',
           },
         ],
       },
@@ -217,15 +220,26 @@ export const DEFAULT_HOME = {
             text: 'De lessen dragen bij aan meer zelfvertrouwen, concentratie en emotionele balans. We besteden aandacht aan thema’s zoals omgaan met spanning, samenwerken, complimenten geven, emoties herkennen en jezelf waarderen.',
           },
           {
-            text: 'Kinderyoga helpt kinderen vaardigheden te ontdekken die ze niet alleen nu, maar ook later in hun leven kunnen gebruiken.',
+            text: 'Niet elk kind houdt van voetbal, hockey of turnen. Bij kinderyoga beweegt je kind op eigen tempo, zonder winnen of prestatiedruk.',
           },
         ],
       },
       {
-        heading: 'Ouder-kind yoga: lol en verbinding',
+        heading: 'Peuteryoga: samen ontdekken',
         paragraphs: [
           {
-            text: 'Tijdens ouder-kind yoga neem je samen de tijd om te bewegen, ontspannen en plezier te maken. Het draait niet om prestatie, maar om verbinding. Met speelse oefeningen, ademhaling en ontspanning leer je je kind én jezelf beter kennen. Een waardevol moment om te lachen, knuffelen en samen te zijn in de drukte van alledag.',
+            text: 'Peuters leren door te doen en na te doen. In de peuteryoga bewegen we als dieren, zingen we liedjes en spelen we korte verhaaltjes na. Jij doet als ouder, opa of oma gezellig mee. Het helpt bij de motorische ontwikkeling, de concentratie, de fantasie en het zelfvertrouwen. En het is vooral een moment met alle aandacht voor elkaar.',
+          },
+        ],
+      },
+      {
+        heading: 'Ouder-kindyoga: lol en verbinding',
+        paragraphs: [
+          {
+            text: 'Tijdens ouder-kindyoga neem je samen de tijd om te bewegen, ontspannen en plezier te maken. Het draait niet om prestatie, maar om verbinding. Met speelse oefeningen, ademhaling en ontspanning leer je je kind én jezelf beter kennen. Een waardevol moment om te lachen, knuffelen en samen te zijn in de drukte van alledag.',
+          },
+          {
+            text: 'Er zijn groepen voor peuters (2 t/m 4 jaar) en voor kinderen (4 t/m 12 jaar), op de laatste zaterdag van elke schoolvakantie. Op één maandagochtend per maand kun je ook terecht bij Toetie & Bo.',
           },
         ],
       },
