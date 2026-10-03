@@ -110,7 +110,7 @@ export default function InstagramFeed() {
     <section
       ref={sectionRef}
       id="instagram"
-      className="overflow-hidden bg-[#FBF5EC] py-16 lg:py-24"
+      className="overflow-hidden bg-white py-16 lg:py-24"
     >
       <div className="flex flex-col items-center gap-6 px-4 text-center lg:container lg:flex-row lg:items-end lg:justify-between lg:text-left">
         <div className="flex max-w-[34rem] flex-col items-center gap-3 lg:items-start">
