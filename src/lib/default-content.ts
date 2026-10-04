@@ -126,15 +126,6 @@ export const DEFAULT_HOME = {
           '/aanmelden/kinderyoga',
       },
       {
-        color: 'purple',
-        title: 'Ouder & kind yoga\nbij Toetie & Bo',
-        time: '1 maandagochtend per maand',
-        body:
-          'Ouder & dreumes: 9.15 - 9.45 uur\nOuder & peuter/kleuter: 10.00 - 10.30 uur\n\nLocatie: Toetie & Bo / Schagen\n\nYoga met ontbijt: €25 per duo\nLosse les: €15 per duo',
-        buttonLabel: 'Reserveren',
-        buttonUrl: 'https://www.toetie-bo.nl/ouder-kind-yoga-schagen/',
-      },
-      {
         color: 'green',
         title: 'Kinderyoga op locatie',
         time: 'op aanvraag',
