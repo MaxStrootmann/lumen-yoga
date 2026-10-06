@@ -51,7 +51,7 @@ export const DEFAULT_FOOTER = {
   schoolOffer: {
     text: 'Werk je op een basisschool of kinderopvang? Ik bied een lespakket op maat.',
     linkLabel: 'Bekijk hier alle info',
-    url: 'https://drive.google.com/open?id=1cTG3qLlsL_BKrcSjEv3FPumj3G1yQHBqSLzid2KP-vw',
+    url: 'https://docs.google.com/forms/d/e/1FAIpQLSd_byu0Yyv9LPFRdgmsp-NuA0UfqWr76ya8LxlC_JYRxIoAbA/viewform',
   },
 } as const
 
@@ -168,6 +168,10 @@ export const DEFAULT_HOME = {
       title: 'Gecertificeerd kinderyogadocent',
       issuer: 'Kinderyoga Academie · Helen Purperhart',
       url: 'https://kinderyoga.nl/opleiding/',
+      seal: {
+        url: '/images/keurmerk-kinderyoga-academie.png',
+        alt: 'Keurmerk Kinderyoga Academie, Helen Purperhart gecertificeerd',
+      },
     },
     instagramLabel: 'Volg ons op Instagram',
     instagramUrl: 'https://www.instagram.com/lumen.yoga/',

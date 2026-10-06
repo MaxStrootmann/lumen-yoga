@@ -1,7 +1,5 @@
 "use client";
 
-import { FaAward } from "react-icons/fa";
-
 import type { MediaLike } from "~/lib/media";
 import { trackEvent } from "~/lib/tracking";
 
@@ -16,7 +14,12 @@ export default function About({
   instagramUrl,
   paragraphs,
 }: {
-  certification?: { title: string; issuer: string; url: string };
+  certification?: {
+    title: string;
+    issuer: string;
+    url: string;
+    seal?: { url: string; alt: string };
+  };
   heading: string;
   image?: MediaLike;
   instagramLabel: string;
@@ -63,14 +66,24 @@ export default function About({
                   target="_blank"
                   rel="noreferrer"
                   onClick={() => trackEvent("certificaat_klik")}
-                  className="mt-6 inline-flex items-center gap-3 rounded-2xl border-4 border-black bg-white px-4 py-3 transition hover:bg-yellow/10"
+                  className="group mt-6 inline-flex items-center gap-4"
                 >
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-yellow">
-                    <FaAward size={24} aria-hidden="true" />
-                  </span>
+                  {certification.seal ? (
+                    <img
+                      src={certification.seal.url}
+                      alt={certification.seal.alt}
+                      width={112}
+                      height={112}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-24 w-24 shrink-0 transition-transform group-hover:scale-105 lg:h-28 lg:w-28"
+                    />
+                  ) : null}
                   <span className="flex flex-col leading-tight">
                     <span className="font-bold">{certification.title}</span>
-                    <span className="pt-1 text-sm">{certification.issuer}</span>
+                    <span className="pt-1 text-sm group-hover:underline">
+                      {certification.issuer}
+                    </span>
                   </span>
                 </a>
               ) : null}
