@@ -24,7 +24,12 @@ export default function ThankYouPage() {
       </p>
       <p className="pt-4">
         Je ontvangt binnen een paar minuten een bevestiging per e-mail. Zie je die niet? Kijk
-        dan even in je spammap of stuur Ellen een berichtje.
+        dan even in je spammap of stuur mij een berichtje.
+      </p>
+      <p className="pt-4">
+        Liefs,
+        <br />
+        Ellen
       </p>
       <div className="flex flex-wrap gap-4 pt-8">
         <a href="/">

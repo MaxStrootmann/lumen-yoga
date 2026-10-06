@@ -115,7 +115,7 @@ export const REGISTRATION_FORMS: readonly RegistrationForm[] = [
     ],
     nameField: "ouder",
     confirmation:
-      "Bedankt voor je aanmelding voor kinderyoga! Ik neem zo snel mogelijk contact met je op om de aanmelding te bevestigen en de betaling te regelen.",
+      "Super leuk dat je jouw kind hebt aangemeld voor kinderyoga op de woensdagmiddag! Ik neem zo snel mogelijk contact met je op voor meer informatie en om de betaling te regelen.",
   },
   {
     slug: "ouder-kindyoga",
@@ -186,7 +186,7 @@ export const REGISTRATION_FORMS: readonly RegistrationForm[] = [
     ],
     nameField: "naam",
     confirmation:
-      "Bedankt voor jullie aanmelding voor ouder-kindyoga! Ik neem zo snel mogelijk contact met je op om de plek te bevestigen en de betaling te regelen.",
+      "Super leuk dat jullie je hebben aangemeld voor ouder-kindyoga! Ik neem zo snel mogelijk contact met je op voor meer informatie en om de betaling te regelen.",
   },
   {
     slug: "workshop",
@@ -223,7 +223,7 @@ export const REGISTRATION_FORMS: readonly RegistrationForm[] = [
     ],
     nameField: "contactpersoon",
     confirmation:
-      "Bedankt voor je aanvraag voor een kinderyogaworkshop! Ik neem zo snel mogelijk contact met je op om de mogelijkheden te bespreken.",
+      "Super leuk dat je een kinderyogaworkshop wilt aanvragen! Ik neem zo snel mogelijk contact met je op voor meer informatie en om de mogelijkheden te bespreken.",
   },
 ];
 

@@ -232,7 +232,8 @@ async function handleRegistration(request: Request, server: Bun.Server): Promise
     const confirmationTo = CONFIRMATION_OVERRIDE
       ? CONFIRMATION_OVERRIDE.split(",").map((address) => address.trim())
       : [email];
-    const intro = `Hoi ${firstName},\n\n${form.confirmation}\n\nHieronder staat wat je hebt ingevuld. Klopt er iets niet? Beantwoord dan gewoon deze e-mail.`;
+    // Tekst van Ellen (6 oktober 2026); de ingevulde gegevens staan eronder.
+    const intro = `Hoi ${firstName},\n\n${form.confirmation}\n\nDit heb je ingevuld:`;
     await sendOrThrow(resend, {
       from: `Lumen Yoga <${MAIL_FROM_ADDRESS}>`,
       to: confirmationTo,
