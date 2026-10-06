@@ -10,6 +10,8 @@ import {
   findRegistrationForm,
   summarizeRegistration,
   validateRegistration,
+  wantsNewsletter,
+  type RegistrationForm,
   type RegistrationValues,
 } from "../shared/registration-forms";
 
@@ -30,6 +32,9 @@ const REPLY_TO = process.env.LUMEN_REPLY_TO ?? "ellen@lumenyoga.nl";
 /** Alleen in de preview: bevestigingsmail niet naar de invuller maar naar deze adressen. */
 const CONFIRMATION_OVERRIDE = process.env.LUMEN_CONFIRMATION_OVERRIDE?.trim() || "";
 const DATA_DIR = process.env.LUMEN_DATA_DIR ?? "";
+/** Apps Script-webapp in Ellens Google-account die nieuwsbriefaanmelders in haar contacten zet. */
+const CONTACTS_WEBHOOK_URL = process.env.LUMEN_CONTACTS_WEBHOOK_URL?.trim() || "";
+const PUBLIC_ORIGIN = process.env.LUMEN_PUBLIC_ORIGIN?.trim() || "https://lumenyoga.nl";
 
 const contactSchema = z.object({
   naam: z.string().min(2).max(120),
@@ -244,7 +249,62 @@ async function handleRegistration(request: Request, server: Bun.Server): Promise
     return jsonResponse({ ok: false, error: "Email send failed" }, 500);
   }
 
+  queueNewsletterContact(form, values, receivedAt);
   return jsonResponse({ ok: true });
+}
+
+// --- Nieuwsbrief naar Google Contacten --------------------------------------
+// We sturen de Apps Script-webapp alleen een willekeurig, eenmalig id. Het
+// script haalt de gegevens daarmee zelf op bij /api/nieuwsbrief-contact/<id>
+// op een vaste lijst domeinen. Zo kan een vervalste aanroep van het script
+// geen contacten toevoegen, zonder dat er een gedeeld geheim nodig is.
+
+type NewsletterContact = { name: string; email: string; phone: string; note: string };
+const pendingContacts = new Map<string, NewsletterContact>();
+const PENDING_CONTACT_TTL_MS = 10 * 60_000;
+
+function queueNewsletterContact(
+  form: RegistrationForm,
+  values: RegistrationValues,
+  receivedAt: string,
+): void {
+  if (!CONTACTS_WEBHOOK_URL || !wantsNewsletter(values)) return;
+
+  const field = (name: string) => {
+    const raw = values[name];
+    return typeof raw === "string" ? raw.trim() : "";
+  };
+  const date = new Date(receivedAt).toLocaleDateString("nl-NL", { timeZone: "Europe/Amsterdam" });
+  const child = form.slug === "kinderyoga" && field("kind") ? ` Kind: ${field("kind")}.` : "";
+  const id = crypto.randomUUID();
+  pendingContacts.set(id, {
+    name: field(form.nameField),
+    email: field("email"),
+    phone: field("telefoon"),
+    note: `Nieuwsbrief via lumenyoga.nl, aanmelding ${form.title} op ${date}.${child}`,
+  });
+  setTimeout(() => pendingContacts.delete(id), PENDING_CONTACT_TTL_MS);
+
+  fetch(CONTACTS_WEBHOOK_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id, origin: PUBLIC_ORIGIN }),
+    signal: AbortSignal.timeout(60_000),
+  })
+    .then(async (response) => {
+      const result = (await response.json().catch(() => null)) as { ok?: boolean } | null;
+      if (!response.ok || !result?.ok) throw new Error(`status ${response.status} ${JSON.stringify(result)}`);
+      console.log("Newsletter contact synced", form.slug, result);
+    })
+    .catch((error) => console.error("Newsletter contact sync failed", form.slug, error));
+}
+
+function handleNewsletterContact(pathname: string): Response {
+  const id = pathname.slice("/api/nieuwsbrief-contact/".length);
+  const contact = pendingContacts.get(id);
+  if (!contact) return jsonResponse({ ok: false }, 404);
+  pendingContacts.delete(id);
+  return jsonResponse({ ok: true, contact });
 }
 
 // --- Instagram -------------------------------------------------------------
@@ -411,6 +471,9 @@ Bun.serve({
     }
     if (url.pathname === "/api/aanmelden") {
       return handleRegistration(request, server);
+    }
+    if (url.pathname.startsWith("/api/nieuwsbrief-contact/")) {
+      return handleNewsletterContact(url.pathname);
     }
     if (url.pathname === "/api/instagram") {
       return handleInstagram();

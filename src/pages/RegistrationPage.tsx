@@ -38,7 +38,7 @@ function FieldInput({
                 name={field.name}
                 value={option}
                 checked={checked}
-                className="mt-1 h-4 w-4 accent-[#B361A4]"
+                className="mt-1 h-4 w-4 shrink-0 accent-[#B361A4]"
                 onChange={() => {
                   if (field.type === "radio") {
                     onChange(option);
@@ -59,6 +59,21 @@ function FieldInput({
     );
   }
 
+  if (field.type === "checkbox") {
+    return (
+      <label className="flex cursor-pointer items-start gap-3">
+        <input
+          id={id}
+          type="checkbox"
+          checked={value === "ja"}
+          className="mt-1 h-4 w-4 shrink-0 accent-[#B361A4]"
+          onChange={(event) => onChange(event.target.checked ? "ja" : "")}
+        />
+        <span>{field.label}</span>
+      </label>
+    );
+  }
+
   if (field.type === "consent") {
     return (
       <label className="flex cursor-pointer items-start gap-3 pt-2">
@@ -66,7 +81,7 @@ function FieldInput({
           id={id}
           type="checkbox"
           checked={value === "ja"}
-          className="mt-1 h-4 w-4 accent-[#B361A4]"
+          className="mt-1 h-4 w-4 shrink-0 accent-[#B361A4]"
           onChange={(event) => onChange(event.target.checked ? "ja" : "")}
         />
         <span>
@@ -86,6 +101,7 @@ function FieldInput({
         id={id}
         name={field.name}
         value={typeof value === "string" ? value : ""}
+        placeholder={field.placeholder}
         onChange={(event) => onChange(event.target.value)}
         className="text-base"
       />
@@ -97,6 +113,7 @@ function FieldInput({
       id={id}
       name={field.name}
       type={field.type}
+      placeholder={field.placeholder}
       autoComplete={
         field.type === "email" ? "email" : field.type === "tel" ? "tel" : undefined
       }
@@ -104,6 +121,71 @@ function FieldInput({
       onChange={(event) => onChange(event.target.value)}
       className="text-base"
     />
+  );
+}
+
+/** Infoblok boven het formulier: wanneer en waar, tarieven en "goed om te weten". */
+function FormInfo({ form }: { form: RegistrationForm }) {
+  if (form.info.length === 0 && form.prices.length === 0 && form.notes.length === 0) {
+    return null;
+  }
+
+  return (
+    <div className="mt-8 overflow-hidden rounded-3xl border-2 border-black">
+      {form.info.length > 0 ? (
+        <dl className="space-y-4 p-6">
+          {form.info.map((row) => (
+            <div key={row.label} className="sm:flex sm:gap-6">
+              <dt className="text-xs font-bold uppercase tracking-wider text-black/60 sm:w-24 sm:shrink-0 sm:pt-1">
+                {row.label}
+              </dt>
+              <dd className="pt-1 leading-snug sm:pt-0">
+                {row.lines.map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      ) : null}
+
+      {form.prices.length > 0 ? (
+        <div className="border-t-2 border-black p-6">
+          <p className="text-xs font-bold uppercase tracking-wider text-black/60">Tarieven</p>
+          <ul className="divide-y divide-black/10 pt-2">
+            {form.prices.map((row) => (
+              <li key={row.label} className="flex items-baseline justify-between gap-4 py-2">
+                <span>
+                  <span className="font-semibold">{row.label}</span>
+                  {row.note ? (
+                    <span className="block text-sm text-black/60">{row.note}</span>
+                  ) : null}
+                </span>
+                <span className="shrink-0 text-right font-bold">{row.price}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+
+      {form.notes.length > 0 ? (
+        <div className="border-t-2 border-black p-6">
+          <p className="text-xs font-bold uppercase tracking-wider text-black/60">
+            Goed om te weten
+          </p>
+          <ul className="space-y-2 pt-2 text-sm">
+            {form.notes.map((note) => (
+              <li key={note} className="flex gap-2">
+                <span aria-hidden="true" className="text-magenta">•</span>
+                <span>{note}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+    </div>
   );
 }
 
@@ -127,6 +209,7 @@ export default function RegistrationPage({ form }: { form: RegistrationForm }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [honeypot, setHoneypot] = useState("");
   const [startedAt] = useState(() => Date.now());
+  const [opened, setOpened] = useState<string[]>([]);
 
   useEffect(() => {
     document.title = `Aanmelden: ${form.title} | Lumen Yoga`;
@@ -187,34 +270,44 @@ export default function RegistrationPage({ form }: { form: RegistrationForm }) {
           <p key={paragraph}>{paragraph}</p>
         ))}
       </div>
-      {form.details.length > 0 ? (
-        <ul className="mt-6 space-y-1 rounded-3xl border-4 border-black p-6 text-sm font-medium">
-          {form.details.map((line) => (
-            <li key={line}>{line}</li>
-          ))}
-        </ul>
-      ) : null}
+      <FormInfo form={form} />
 
       <form onSubmit={handleSubmit} noValidate className="space-y-6 pt-10">
         {form.fields.map((field) => {
           if (!isFieldVisible(field, values)) return null;
-          const isGroup = ["radio", "checkboxes", "consent"].includes(field.type);
+          if (field.toggle && !opened.includes(field.name) && !values[field.name]) {
+            return (
+              <button
+                key={field.name}
+                type="button"
+                className="text-sm font-semibold underline underline-offset-4"
+                onClick={() => setOpened((current) => [...current, field.name])}
+              >
+                {field.toggle}
+              </button>
+            );
+          }
+          const isGroup = ["radio", "checkboxes"].includes(field.type);
+          const hasOwnLabel = field.type === "consent" || field.type === "checkbox";
+          const optional = !field.required && !field.showWhen ? (
+            <span className="font-normal text-black/50"> (optioneel)</span>
+          ) : null;
           return (
             <div key={field.name} id={`blok-${field.name}`}>
-              {field.type !== "consent" ? (
+              {!hasOwnLabel ? (
                 isGroup ? (
                   <p className="font-bold">
                     {field.label}
-                    {field.required ? <span className="text-magenta"> *</span> : null}
+                    {optional}
                   </p>
                 ) : (
                   <label htmlFor={`veld-${field.name}`} className="font-bold">
                     {field.label}
-                    {field.required ? <span className="text-magenta"> *</span> : null}
+                    {optional}
                   </label>
                 )
               ) : null}
-              <div className={isGroup ? "" : "pt-2"}>
+              <div className={isGroup || hasOwnLabel ? "" : "pt-2"}>
                 <FieldInput
                   field={field}
                   value={values[field.name]}

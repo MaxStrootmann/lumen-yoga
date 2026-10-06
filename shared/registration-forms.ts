@@ -8,6 +8,8 @@ export type FieldType =
   | "textarea"
   | "radio"
   | "checkboxes"
+  /** Eén los vinkje, niet verplicht: waarde "ja" of leeg. */
+  | "checkbox"
   | "consent";
 
 export interface FormField {
@@ -19,13 +21,30 @@ export interface FormField {
   placeholder?: string;
   /** Alleen tonen (en verplicht maken) als dit andere veld een waarde heeft. */
   showWhen?: string;
+  /** Verborgen achter een linkje met deze tekst, zodat het formulier kort oogt. */
+  toggle?: string;
+}
+
+/** Een regel in het infoblok, bijvoorbeeld "Wanneer" met de tijden eronder. */
+export interface InfoRow {
+  label: string;
+  lines: readonly string[];
+}
+
+export interface PriceRow {
+  label: string;
+  price: string;
+  note?: string;
 }
 
 export interface RegistrationForm {
   slug: string;
   title: string;
   intro: readonly string[];
-  details: readonly string[];
+  info: readonly InfoRow[];
+  prices: readonly PriceRow[];
+  /** "Goed om te weten": korte zinnen onder het infoblok. */
+  notes: readonly string[];
   fields: readonly FormField[];
   /** Veld met de naam die in de bevestigingsmail wordt gebruikt. */
   nameField: string;
@@ -33,9 +52,13 @@ export interface RegistrationForm {
 }
 
 const PHOTO_CONSENT =
-  "Ik geef Lumen Yoga toestemming voor het maken van foto's of video's tijdens de les en het delen hiervan op social media.";
-const NEWSLETTER =
-  "Wil je op de hoogte blijven van toekomstige activiteiten en lessen? Schrijf je in voor onze nieuwsbrief (4x per jaar)!";
+  "Mag ik tijdens de les foto's of video's maken en die delen op social media?";
+const NEWSLETTER_FIELD: FormField = {
+  name: "nieuwsbrief",
+  label: "Ja, stuur mij de nieuwsbrief (4x per jaar) met nieuwe lessen en activiteiten.",
+  type: "checkbox",
+};
+const LOCATION: InfoRow = { label: "Waar", lines: ["YPHS Huis, Zijperweg 9, Schagen"] };
 const TERMS =
   "Bij het inschrijven ga ik akkoord met de algemene voorwaarden.";
 
@@ -49,25 +72,33 @@ export const REGISTRATION_FORMS: readonly RegistrationForm[] = [
     intro: [
       "Elke woensdagmiddag kinderyoga voor kinderen van 4 t/m 12 jaar in het YPHS Huis in Schagen.",
     ],
-    details: [
-      "Nieuwe lessenreeks vanaf woensdag 21 oktober 2026",
-      "4 t/m 12 jaar: 15.45 – 16.45 uur, voorlopig samen in één groep",
-      "Data: 21 en 28 oktober, 4, 18 en 25 november, 2, 9 en 16 december (11 november geen les)",
-      "Bij meer aanmeldingen splitsen we de groepen weer op: 4 t/m 7 jaar om 14.30 uur en 8 t/m 12 jaar om 15.45 uur.",
-      "Proeflespakket: 2 lessen voor €15",
-      "Losse les: €12,50 (bij voldoende plek)",
-      "Digitale strippenkaart: 10 lessen voor €115 (€11,50 per les, 6 maanden geldig)",
-      "Lessenreeks: €9,50 per les. Instromen kan altijd, het tarief wordt dan aangepast.",
-      "Beperkt aantal plaatsen per groep. De lessenreeks gaat door bij minimaal 3 aanmeldingen.",
+    info: [
+      { label: "Wanneer", lines: ["Woensdag 15.45 – 16.45 uur", "Nieuwe reeks vanaf 21 oktober"] },
+      {
+        label: "Lesdata",
+        lines: ["21 en 28 oktober", "4, 18 en 25 november (niet op 11 november)", "2, 9 en 16 december"],
+      },
+      { label: "Groep", lines: ["4 t/m 12 jaar, samen in één groep"] },
+      LOCATION,
+    ],
+    prices: [
+      { label: "Proeflespakket", note: "2 lessen", price: "€15" },
+      { label: "Losse les", note: "Als er plek is", price: "€12,50" },
+      { label: "Strippenkaart", note: "10 lessen, 6 maanden geldig (€11,50 per les)", price: "€115" },
+      { label: "Lessenreeks", note: "Instromen kan altijd, het tarief passen we dan aan", price: "€9,50 per les" },
+    ],
+    notes: [
+      "Beperkt aantal plaatsen. De reeks gaat door vanaf 3 aanmeldingen.",
+      "Bij meer aanmeldingen splitsen we de groep: 4 t/m 7 jaar om 14.30 uur en 8 t/m 12 jaar om 15.45 uur.",
     ],
     fields: [
-      { name: "kind", label: "Naam kind + leeftijd", type: "text", required: true },
-      { name: "ouder", label: "Naam ouder", type: "text", required: true },
+      { name: "kind", label: "Naam en leeftijd van je kind", type: "text", required: true },
+      { name: "ouder", label: "Jouw naam", type: "text", required: true },
       { name: "email", label: "E-mailadres", type: "email", required: true },
       { name: "telefoon", label: "Telefoonnummer", type: "tel", required: true },
       {
         name: "keuze",
-        label: "Ik kies voor...",
+        label: "Ik kies voor",
         type: "radio",
         required: true,
         options: [
@@ -78,8 +109,8 @@ export const REGISTRATION_FORMS: readonly RegistrationForm[] = [
         ],
       },
       { name: "fotos", label: PHOTO_CONSENT, type: "radio", required: true, options: ["Ja", "Nee"] },
-      { name: "nieuwsbrief", label: NEWSLETTER, type: "radio", required: true, options: ["Ja", "Nee"] },
-      { name: "opmerkingen", label: "Vragen/opmerkingen", type: "textarea" },
+      { name: "opmerkingen", label: "Vragen of opmerkingen", type: "textarea" },
+      NEWSLETTER_FIELD,
       { name: "voorwaarden", label: TERMS, type: "consent", required: true },
     ],
     nameField: "ouder",
@@ -91,16 +122,29 @@ export const REGISTRATION_FORMS: readonly RegistrationForm[] = [
     title: "Ouder-kindyoga",
     intro: [
       "Samen bewegen, ontspannen en plezier maken! In elke schoolvakantie organiseert Lumen Yoga speciale ouder-kindworkshops. Een heerlijk moment van échte aandacht voor elkaar.",
-      "Er is een groep voor peuters (2 t/m 4 jaar) en een groep voor kinderen (4 t/m 12 jaar). Is je kind 4? Kies de groep die het beste past. Twijfel je, app Ellen dan even.",
-      "Buiten de vakanties is er elke woensdagmiddag kinderyoga.",
     ],
-    details: [
-      "Data: zaterdag 17 oktober, zaterdag 2 januari en zaterdag 27 februari",
-      "Peuters (2 t/m 4 jaar): 09.30 – 10.15 uur",
-      "Kinderen (4 t/m 12 jaar): 10.30 – 11.30 uur",
-      "Ouder-kindduo: €20",
-      "Kwartetactie: €30 (geef hieronder de extra namen op)",
-      "Bij minimaal 3 aanmeldingen gaat de les door.",
+    info: [
+      {
+        label: "Wanneer",
+        lines: ["Zaterdag 17 oktober", "Zaterdag 2 januari", "Zaterdag 27 februari"],
+      },
+      {
+        label: "Groepen",
+        lines: [
+          "Peuters (2 t/m 4 jaar): 9.30 – 10.15 uur",
+          "Kinderen (4 t/m 12 jaar): 10.30 – 11.30 uur",
+        ],
+      },
+      LOCATION,
+    ],
+    prices: [
+      { label: "Ouder-kindduo", price: "€20" },
+      { label: "Kwartet", note: "Twee ouder-kindduo's samen", price: "€30" },
+    ],
+    notes: [
+      "Is je kind 4? Kies de groep die het beste past. Twijfel je, app Ellen dan even.",
+      "De les gaat door vanaf 3 aanmeldingen.",
+      "Buiten de vakanties is er elke woensdagmiddag kinderyoga.",
     ],
     fields: [
       { name: "naam", label: "Naam ouder/verzorger en kind", type: "text", required: true },
@@ -108,7 +152,7 @@ export const REGISTRATION_FORMS: readonly RegistrationForm[] = [
       { name: "telefoon", label: "Telefoonnummer", type: "tel", required: true },
       {
         name: "groep",
-        label: "Ik kies voor...",
+        label: "Groep",
         type: "radio",
         required: true,
         options: [
@@ -118,16 +162,15 @@ export const REGISTRATION_FORMS: readonly RegistrationForm[] = [
       },
       {
         name: "workshops",
-        label: "Welke workshop(s) wil je volgen?",
+        label: "Welke zaterdag(en)?",
         type: "checkboxes",
         required: true,
         options: ["Zaterdag 17 oktober", "Zaterdag 2 januari", "Zaterdag 27 februari"],
       },
       {
         name: "kwartet",
-        label: "Ik maak gebruik van de kwartetactie (€30 voor twee duo's)",
-        type: "checkboxes",
-        options: ["Ja, kwartet"],
+        label: "We komen met twee duo's (kwartet, samen €30)",
+        type: "checkbox",
       },
       {
         name: "tweedeDuo",
@@ -136,9 +179,9 @@ export const REGISTRATION_FORMS: readonly RegistrationForm[] = [
         showWhen: "kwartet",
       },
       { name: "fotos", label: PHOTO_CONSENT, type: "radio", required: true, options: ["Ja", "Nee"] },
-      { name: "nieuwsbrief", label: NEWSLETTER, type: "radio", required: true, options: ["Ja", "Nee"] },
-      { name: "opmerkingen", label: "Vragen/opmerkingen", type: "textarea" },
-      { name: "kortingscode", label: "Kortingscode", type: "text" },
+      { name: "opmerkingen", label: "Vragen of opmerkingen", type: "textarea" },
+      { name: "kortingscode", label: "Kortingscode", type: "text", toggle: "Heb je een kortingscode?" },
+      NEWSLETTER_FIELD,
       { name: "voorwaarden", label: TERMS, type: "consent", required: true },
     ],
     nameField: "naam",
@@ -150,22 +193,32 @@ export const REGISTRATION_FORMS: readonly RegistrationForm[] = [
     title: "Kinderyoga workshop op maat",
     intro: [
       "Wat leuk dat je interesse hebt in een kinderyogaworkshop van Lumen Yoga!",
-      "Zoek je een leuke activiteit voor een kinderdagverblijf, school, buurthuis, evenement of kinderfeestje? Laat hieronder je gegevens, ideeën en wensen achter. Ik neem zo snel mogelijk contact met je op.",
+      "Voor een kinderdagverblijf, school, buurthuis, evenement of kinderfeestje. Vertel kort wat je zoekt, dan neem ik zo snel mogelijk contact met je op.",
     ],
-    details: [],
+    info: [],
+    prices: [],
+    notes: [],
     fields: [
-      { name: "contactpersoon", label: "Naam van de contactpersoon", type: "text", required: true },
+      { name: "contactpersoon", label: "Jouw naam", type: "text", required: true },
       { name: "email", label: "E-mailadres", type: "email", required: true },
       { name: "telefoon", label: "Telefoonnummer", type: "tel", required: true },
-      { name: "organisatie", label: "Naam van de organisatie", type: "text" },
-      { name: "adres", label: "Adres van de locatie", type: "text" },
-      { name: "leeftijd", label: "Leeftijdsgroep van de deelnemers", type: "text" },
-      { name: "aantal", label: "Aantal deelnemers", type: "text" },
-      { name: "voorkeur", label: "Voorkeur voor datum(s) en tijd(en)", type: "textarea" },
-      { name: "wensen", label: "Specifieke wensen of ideeën voor de workshop", type: "textarea" },
-      { name: "bijzonderheden", label: "Zijn er bijzonderheden waar ik rekening mee moet houden?", type: "textarea" },
-      { name: "bron", label: "Hoe ben je bij Lumen Yoga terechtgekomen?", type: "textarea", required: true },
-      { name: "nieuwsbrief", label: NEWSLETTER, type: "radio", required: true, options: ["Ja", "Nee"] },
+      { name: "organisatie", label: "Organisatie", type: "text" },
+      { name: "adres", label: "Locatie (plaats of adres)", type: "text" },
+      {
+        name: "groep",
+        label: "Leeftijd en aantal kinderen",
+        type: "text",
+        placeholder: "Bijvoorbeeld: 12 kinderen van 4 tot 6 jaar",
+      },
+      { name: "voorkeur", label: "Voorkeur voor datum en tijd", type: "text" },
+      {
+        name: "wensen",
+        label: "Wensen of bijzonderheden",
+        type: "textarea",
+        placeholder: "Een thema, de ruimte, kinderen die extra aandacht nodig hebben…",
+      },
+      { name: "bron", label: "Hoe ken je Lumen Yoga?", type: "text" },
+      NEWSLETTER_FIELD,
       { name: "voorwaarden", label: TERMS, type: "consent", required: true },
     ],
     nameField: "contactpersoon",
@@ -202,8 +255,9 @@ export function validateRegistration(
     const list = Array.isArray(raw) ? raw : raw ? [raw] : [];
     const text = typeof raw === "string" ? raw.trim() : "";
 
-    if (field.type === "consent") {
+    if (field.type === "consent" || field.type === "checkbox") {
       if (field.required && text !== "ja") errors[field.name] = "Dit is verplicht.";
+      else if (text && text !== "ja") errors[field.name] = "Ongeldige keuze.";
       continue;
     }
 
@@ -243,6 +297,18 @@ export function validateRegistration(
   return errors;
 }
 
+function summaryLabel(field: FormField): string {
+  if (field.type === "consent") return "Algemene voorwaarden";
+  if (field.name === "nieuwsbrief") return "Nieuwsbrief";
+  if (field.name === "kwartet") return "Kwartet";
+  return field.label;
+}
+
+/** Wil de invuller de nieuwsbrief? Dan komt die in Ellens Google-contacten. */
+export function wantsNewsletter(values: RegistrationValues): boolean {
+  return values.nieuwsbrief === "ja";
+}
+
 /** Leesbare regels (label: waarde) voor e-mail en opslag. */
 export function summarizeRegistration(
   form: RegistrationForm,
@@ -254,7 +320,8 @@ export function summarizeRegistration(
       const raw = values[field.name];
       let value = Array.isArray(raw) ? raw.join(", ") : (raw ?? "").trim();
       if (field.type === "consent") value = value === "ja" ? "Akkoord" : "Niet akkoord";
-      return { label: field.type === "consent" ? "Algemene voorwaarden" : field.label, value };
+      if (field.type === "checkbox") value = value === "ja" ? "Ja" : "Nee";
+      return { label: summaryLabel(field), value };
     })
     .filter((row) => row.value);
 }
