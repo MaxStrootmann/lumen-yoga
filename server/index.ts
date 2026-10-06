@@ -209,6 +209,7 @@ async function handleRegistration(request: Request, server: Bun.Server): Promise
   const rows = summarizeRegistration(form, values);
   const email = String(values.email ?? "").trim();
   const name = String(values[form.nameField] ?? "").trim();
+  const noun = form.noun ?? "aanmelding";
   const receivedAt = new Date().toISOString();
 
   try {
@@ -223,9 +224,9 @@ async function handleRegistration(request: Request, server: Bun.Server): Promise
       from: `Lumen Yoga Aanmelding <${MAIL_FROM_ADDRESS}>`,
       to: OWNER_RECIPIENTS,
       reply_to: email,
-      subject: `Nieuwe aanmelding: ${form.title} - ${name}`,
-      html: `<p>Er is een nieuwe aanmelding binnengekomen via lumenyoga.nl.</p>${rowsToHtml(rows)}`,
-      text: `Er is een nieuwe aanmelding binnengekomen via lumenyoga.nl.\n\n${rowsToText(rows)}`,
+      subject: `Nieuwe ${noun}: ${form.title} - ${name}`,
+      html: `<p>Er is een nieuwe ${noun} binnengekomen via lumenyoga.nl.</p>${rowsToHtml(rows)}`,
+      text: `Er is een nieuwe ${noun} binnengekomen via lumenyoga.nl.\n\n${rowsToText(rows)}`,
     });
 
     const firstName = name.split(/\s+/)[0] ?? "";
@@ -238,7 +239,7 @@ async function handleRegistration(request: Request, server: Bun.Server): Promise
       from: `Lumen Yoga <${MAIL_FROM_ADDRESS}>`,
       to: confirmationTo,
       reply_to: REPLY_TO,
-      subject: `Bevestiging van je aanmelding: ${form.title}`,
+      subject: `Bevestiging van je ${noun}: ${form.title}`,
       html: `<div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.5">${intro
         .split("\n\n")
         .map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`)

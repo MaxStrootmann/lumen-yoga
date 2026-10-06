@@ -3,6 +3,7 @@ import { useEffect, useState, type FormEvent } from "react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
+import { DEFAULT_HOME } from "~/lib/default-content";
 import { trackEvent } from "~/lib/tracking";
 import {
   TERMS_URL,
@@ -189,6 +190,34 @@ function FormInfo({ form }: { form: RegistrationForm }) {
   );
 }
 
+/** Keurmerk van de Kinderyoga Academie, hetzelfde als in "Over mij" op de homepage. */
+function Certification() {
+  const certification = DEFAULT_HOME.about.certification;
+  return (
+    <a
+      href={certification.url}
+      target="_blank"
+      rel="noreferrer"
+      onClick={() => trackEvent("certificaat_klik")}
+      className="group mt-6 inline-flex items-center gap-4"
+    >
+      <img
+        src={certification.seal.url}
+        alt={certification.seal.alt}
+        width={96}
+        height={96}
+        loading="lazy"
+        decoding="async"
+        className="h-24 w-24 shrink-0 transition-transform group-hover:scale-105"
+      />
+      <span className="flex flex-col leading-tight">
+        <span className="font-bold">{certification.title}</span>
+        <span className="pt-1 text-sm group-hover:underline">{certification.issuer}</span>
+      </span>
+    </a>
+  );
+}
+
 /** Vooraf kiezen via de URL, bijvoorbeeld ?groep=peuters vanaf de aanbodkaart. */
 function initialValues(form: RegistrationForm): RegistrationValues {
   const params = new URLSearchParams(window.location.search);
@@ -210,9 +239,15 @@ export default function RegistrationPage({ form }: { form: RegistrationForm }) {
   const [honeypot, setHoneypot] = useState("");
   const [startedAt] = useState(() => Date.now());
   const [opened, setOpened] = useState<string[]>([]);
+  const submitLabel = form.noun === "aanvraag" ? "Aanvraag versturen" : "Aanmelding versturen";
 
   useEffect(() => {
-    document.title = `Aanmelden: ${form.title} | Lumen Yoga`;
+    document.title = form.pageTitle ?? `Aanmelden: ${form.title} | Lumen Yoga`;
+    if (form.metaDescription) {
+      document
+        .querySelector('meta[name="description"]')
+        ?.setAttribute("content", form.metaDescription);
+    }
     trackEvent("aanmeldformulier_bekeken", { formulier: form.slug });
   }, [form]);
 
@@ -271,6 +306,17 @@ export default function RegistrationPage({ form }: { form: RegistrationForm }) {
         ))}
       </div>
       <FormInfo form={form} />
+      {form.sections?.map((section) => (
+        <section key={section.heading} className="pt-10">
+          <h2 className="text-2xl font-bold lg:text-3xl">{section.heading}</h2>
+          <div className="space-y-3 pt-4">
+            {section.paragraphs.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+          {section.certification ? <Certification /> : null}
+        </section>
+      ))}
 
       <form onSubmit={handleSubmit} noValidate className="space-y-6 pt-10">
         {form.fields.map((field) => {
@@ -338,7 +384,7 @@ export default function RegistrationPage({ form }: { form: RegistrationForm }) {
 
         <div className="pt-2">
           <Button bgColor="yellow" type="submit" size="min" disabled={isSubmitting}>
-            {isSubmitting ? "Versturen..." : "Aanmelding versturen"}
+            {isSubmitting ? "Versturen..." : submitLabel}
           </Button>
           {submitError ? (
             <p className="pt-3 text-sm font-semibold text-[#c0392b]">{submitError}</p>

@@ -80,8 +80,6 @@ export default function Footer({
           <em>{schoolOffer.text}</em>{" "}
           <a
             href={schoolOffer.url}
-            target="_blank"
-            rel="noreferrer"
             onClick={() => trackEvent("basisschool_info_klik")}
             className="font-bold underline underline-offset-4"
           >

@@ -37,10 +37,26 @@ export interface PriceRow {
   note?: string;
 }
 
+/** Tekstblok op een eigen pagina, tussen het infoblok en het formulier. */
+export interface PageSection {
+  heading: string;
+  paragraphs: readonly string[];
+  /** Toon het keurmerk van de Kinderyoga Academie onder dit blok. */
+  certification?: boolean;
+}
+
 export interface RegistrationForm {
   slug: string;
   title: string;
+  /** Eigen pagina in plaats van /aanmelden/<slug>, bijvoorbeeld voor Google. */
+  path?: string;
+  /** Titel en beschrijving voor Google; standaard "Aanmelden: <title>". */
+  pageTitle?: string;
+  metaDescription?: string;
+  /** "aanvraag" voor scholen en opvang; standaard "aanmelding". */
+  noun?: string;
   intro: readonly string[];
+  sections?: readonly PageSection[];
   info: readonly InfoRow[];
   prices: readonly PriceRow[];
   /** "Goed om te weten": korte zinnen onder het infoblok. */
@@ -225,10 +241,96 @@ export const REGISTRATION_FORMS: readonly RegistrationForm[] = [
     confirmation:
       "Super leuk dat je een kinderyogaworkshop wilt aanvragen! Ik neem zo snel mogelijk contact met je op voor meer informatie en om de mogelijkheden te bespreken.",
   },
+  {
+    slug: "scholen-en-kinderopvang",
+    path: "/scholen-en-kinderopvang",
+    title: "Kinderyoga op school en in de kinderopvang",
+    pageTitle: "Kinderyoga op school en in de kinderopvang in Schagen | Lumen Yoga",
+    metaDescription:
+      "Kinderyoga op maat voor kinderdagverblijf, peuterspeelzaal en basisschool in Schagen. Peuterlessen van 30 minuten die aansluiten op het VVE-programma, en Schoolverlichting in de klas.",
+    noun: "aanvraag",
+    intro: [
+      "Ik kom met kinderyoga naar jullie kinderdagverblijf, peuterspeelzaal of basisschool. Op maat, in jullie eigen ruimte en afgestemd op de groep.",
+    ],
+    info: [
+      { label: "Opvang", lines: ["Peuterlessen van 30 minuten", "Bij elk VVE-thema een passende les"] },
+      { label: "School", lines: ["Schoolverlichting: 6 weken een half uur per week in de klas"] },
+      { label: "Tarief", lines: ["Op maat"] },
+    ],
+    prices: [],
+    notes: [],
+    sections: [
+      {
+        heading: "Waarom kinderyoga in de klas of op de groep?",
+        paragraphs: [
+          "Bij kinderyoga bewegen kinderen als een dier, spelen ze een verhaal na en ademen ze samen rustig in en uit. Zo leren ze spelenderwijs hun lichaam en hun gevoel kennen. Ze ontdekken ook dat er in jezelf altijd een stil plekje is waar je naartoe kunt gaan: als je hoofd vol zit, als je je niet fijn voelt of als je iets spannend vindt.",
+          "Kinderen oefenen zo met wachten, luisteren en hun aandacht ergens bij houden. Onderzoek bij peuters en kleuters laat zien dat yoga daarbij kan helpen, vooral als het regelmatig terugkomt. Het draagt ook bij aan een fijne en veilige sfeer in de groep.",
+        ],
+      },
+      {
+        heading: "Voor de kinderopvang en peuterspeelzaal (2 t/m 4 jaar)",
+        paragraphs: [
+          "Peuters leren door te doen. Een peuterles duurt 30 minuten en is één groot spel, met liedjes, dierenhoudingen, een prentenboek en een kort rustmoment. Ze oefenen hun evenwicht en motoriek, en leren lichaamsdelen en gevoelens benoemen.",
+          "Ik sluit aan bij het lopende VVE-programma van de groep: bij elk thema geef ik een passende les. Een reeks is niet nodig, elke les staat op zichzelf. De pedagogisch medewerkers doen mee, zodat zij de oefeningen daarna zelf kunnen gebruiken, bijvoorbeeld na het buitenspelen of voor het slapen.",
+        ],
+      },
+      {
+        heading: "Voor de basisschool (4 t/m 12 jaar)",
+        paragraphs: [
+          "Op de basisschool geef ik Schoolverlichting, een lesprogramma van De Nieuwe Yogaschool. Zes weken lang kom ik een half uur per week in de klas. Ik leer de kinderen en de leerkracht oefeningen die ze daarna zelf in de klas blijven gebruiken.",
+          "De lessen sluiten aan bij de thema's en leerlijnen van de school, zodat het niet voelt als iets extra's. Ze zijn gewoon in het eigen klaslokaal: tafels en stoelen kunnen blijven staan en een gymzaal is niet nodig.",
+        ],
+      },
+      {
+        heading: "Over mij",
+        paragraphs: [
+          "Ik ben Ellen Wissink. Sinds 2016 werk ik op de Burgemeester de Wildeschool, en daarvoor werkte ik vijf jaar in de buitenschoolse opvang. Ik ben gecertificeerd kinderyogadocent bij de Kinderyoga Academie van Helen Purperhart.",
+        ],
+        certification: true,
+      },
+      {
+        heading: "Kennismaken?",
+        paragraphs: [
+          "Ik kom graag vrijblijvend kennismaken, op school of op de groep. Laat hieronder je gegevens achter, dan neem ik zo snel mogelijk contact met je op.",
+        ],
+      },
+    ],
+    fields: [
+      { name: "naam", label: "Jouw naam", type: "text", required: true },
+      { name: "organisatie", label: "School of kinderopvang", type: "text", required: true },
+      {
+        name: "soort",
+        label: "Waar werk je?",
+        type: "radio",
+        options: [
+          "Basisschool",
+          "Kinderopvang of peuterspeelzaal",
+          "Buitenschoolse opvang",
+          "Anders",
+        ],
+      },
+      { name: "email", label: "E-mailadres", type: "email", required: true },
+      { name: "telefoon", label: "Telefoonnummer", type: "tel" },
+      {
+        name: "bericht",
+        label: "Waar denk je aan?",
+        type: "textarea",
+        placeholder: "Bijvoorbeeld welke groep, hoeveel kinderen of een thema.",
+      },
+    ],
+    nameField: "naam",
+    confirmation:
+      "Super leuk dat je interesse hebt in kinderyoga bij jullie op de groep of in de klas! Ik neem zo snel mogelijk contact met je op om kennis te maken en de mogelijkheden te bespreken.",
+  },
 ];
 
 export function findRegistrationForm(slug: string): RegistrationForm | undefined {
   return REGISTRATION_FORMS.find((form) => form.slug === slug);
+}
+
+/** Formulier met een eigen pagina, zoals /scholen-en-kinderopvang. */
+export function findFormByPath(path: string): RegistrationForm | undefined {
+  return REGISTRATION_FORMS.find((form) => form.path === path);
 }
 
 export function isFieldVisible(

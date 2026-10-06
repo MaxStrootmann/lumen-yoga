@@ -10,14 +10,14 @@ export default function ThankYouPage() {
   const form = findRegistrationForm(slug);
 
   useEffect(() => {
-    document.title = "Bedankt voor je aanmelding | Lumen Yoga";
+    document.title = `Bedankt voor je ${form?.noun ?? "aanmelding"} | Lumen Yoga`;
     // Conversie voor GTM/GA en advertentiecampagnes: één event per bedanktpagina.
     if (form) trackEvent("aanmelding_verstuurd", { formulier: form.slug });
   }, [form]);
 
   return (
     <SubpageLayout>
-      <h1 className="text-4xl font-bold lg:text-5xl">Bedankt voor je aanmelding!</h1>
+      <h1 className="text-4xl font-bold lg:text-5xl">Bedankt voor je {form?.noun ?? "aanmelding"}!</h1>
       <p className="pt-6">
         {form?.confirmation ??
           "Bedankt! Ik neem zo snel mogelijk contact met je op."}

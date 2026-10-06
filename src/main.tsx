@@ -6,7 +6,7 @@ import RegistrationPage from "~/pages/RegistrationPage";
 import ThankYouPage from "~/pages/ThankYouPage";
 import "~/styles/globals.css";
 
-import { findRegistrationForm } from "../shared/registration-forms";
+import { findFormByPath, findRegistrationForm } from "../shared/registration-forms";
 
 function Root() {
   const path = window.location.pathname.replace(/\/+$/, "");
@@ -16,6 +16,8 @@ function Root() {
     const form = findRegistrationForm(registration[1] ?? "");
     if (form) return <RegistrationPage form={form} />;
   }
+  const page = findFormByPath(path);
+  if (page) return <RegistrationPage form={page} />;
   if (path === "/bedankt") return <ThankYouPage />;
 
   return <App />;

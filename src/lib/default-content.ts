@@ -51,7 +51,7 @@ export const DEFAULT_FOOTER = {
   schoolOffer: {
     text: 'Werk je op een basisschool of kinderopvang? Ik bied een lespakket op maat.',
     linkLabel: 'Bekijk hier alle info',
-    url: 'https://docs.google.com/forms/d/e/1FAIpQLSd_byu0Yyv9LPFRdgmsp-NuA0UfqWr76ya8LxlC_JYRxIoAbA/viewform',
+    url: '/scholen-en-kinderopvang',
   },
 } as const
 
