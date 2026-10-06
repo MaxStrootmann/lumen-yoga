@@ -7,19 +7,19 @@
 // Installeren: script.google.com als ellen@lumenyoga.nl, Services > People API,
 // Implementeren > Web-app, uitvoeren als "Ik", toegang "Iedereen".
 
-var ORIGINS = ['https://lumenyoga.nl', 'https://preview.lumenyoga.nl'];
-var LABEL_NAME = 'Nieuwsbrief Lumen yoga';
+var ORIGINS = ["https://lumenyoga.nl", "https://preview.lumenyoga.nl"];
+var LABEL_NAME = "Nieuwsbrief Lumen yoga";
 
 function doPost(e) {
   try {
     var body = JSON.parse(e.postData.contents);
     if (ORIGINS.indexOf(body.origin) < 0 || !/^[0-9a-f-]{36}$/.test(body.id)) {
-      return reply({ ok: false, error: 'invalid' });
+      return reply({ ok: false, error: "invalid" });
     }
-    var res = UrlFetchApp.fetch(body.origin + '/api/nieuwsbrief-contact/' + body.id, {
+    var res = UrlFetchApp.fetch(body.origin + "/api/nieuwsbrief-contact/" + body.id, {
       muteHttpExceptions: true,
     });
-    if (res.getResponseCode() !== 200) return reply({ ok: false, error: 'unknown id' });
+    if (res.getResponseCode() !== 200) return reply({ ok: false, error: "unknown id" });
     var contact = JSON.parse(res.getContentText()).contact;
     return reply(addToNewsletter(contact));
   } catch (err) {
@@ -28,32 +28,32 @@ function doPost(e) {
 }
 
 function addToNewsletter(contact) {
-  var email = String(contact.email || '').trim().toLowerCase();
-  if (!email) return { ok: false, error: 'no email' };
+  var email = String(contact.email || "").trim().toLowerCase();
+  if (!email) return { ok: false, error: "no email" };
   var label = labelResourceName();
 
   var existing = findByEmail(email);
   if (existing) {
     People.ContactGroups.Members.modify({ resourceNamesToAdd: [existing] }, label);
-    return { ok: true, action: 'label added' };
+    return { ok: true, action: "label added" };
   }
 
   var person = {
     emailAddresses: [{ value: contact.email }],
-    biographies: [{ value: contact.note || 'Nieuwsbrief via lumenyoga.nl', contentType: 'TEXT_PLAIN' }],
+    biographies: [{ value: contact.note || "Nieuwsbrief via lumenyoga.nl", contentType: "TEXT_PLAIN" }],
     memberships: [{ contactGroupMembership: { contactGroupResourceName: label } }],
   };
   if (contact.name) person.names = [{ unstructuredName: contact.name }];
   if (contact.phone) person.phoneNumbers = [{ value: contact.phone }];
   People.People.createContact(person);
-  return { ok: true, action: 'created' };
+  return { ok: true, action: "created" };
 }
 
 function findByEmail(email) {
   var pageToken;
   do {
-    var page = People.People.Connections.list('people/me', {
-      personFields: 'emailAddresses',
+    var page = People.People.Connections.list("people/me", {
+      personFields: "emailAddresses",
       pageSize: 1000,
       pageToken: pageToken,
     });
