@@ -15,3 +15,25 @@ export function trackEvent(event: string, params: Record<string, unknown> = {}) 
   }
   sendGTMEvent({ event, ...params });
 }
+
+const SUBMITTED_KEY = "lumen_verzonden_formulier";
+
+/** Onthoud dat dit formulier net is verzonden, zodat de bedankpagina één keer meet. */
+export function markSubmitted(slug: string) {
+  try {
+    sessionStorage.setItem(SUBMITTED_KEY, slug);
+  } catch {
+    // Zonder sessionStorage meet de bedankpagina gewoon bij elk bezoek.
+  }
+}
+
+/** Waar als dit formulier net is verzonden; wist de markering meteen. */
+export function takeSubmitted(slug: string) {
+  try {
+    if (sessionStorage.getItem(SUBMITTED_KEY) !== slug) return false;
+    sessionStorage.removeItem(SUBMITTED_KEY);
+    return true;
+  } catch {
+    return true;
+  }
+}

@@ -4,7 +4,7 @@ import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
 import { DEFAULT_HOME } from "~/lib/default-content";
-import { trackEvent } from "~/lib/tracking";
+import { markSubmitted, trackEvent } from "~/lib/tracking";
 import {
   TERMS_URL,
   isFieldVisible,
@@ -287,6 +287,7 @@ export default function RegistrationPage({ form }: { form: RegistrationForm }) {
         throw new Error(`status ${response.status}`);
       }
 
+      markSubmitted(form.slug);
       window.location.assign(`/bedankt?formulier=${encodeURIComponent(form.slug)}`);
     } catch {
       trackEvent("aanmelding_mislukt", { formulier: form.slug });

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 import { Button } from "~/components/ui/button";
-import { trackEvent } from "~/lib/tracking";
+import { takeSubmitted, trackEvent } from "~/lib/tracking";
 import { findRegistrationForm } from "../../shared/registration-forms";
 import SubpageLayout from "./SubpageLayout";
 
@@ -11,8 +11,13 @@ export default function ThankYouPage() {
 
   useEffect(() => {
     document.title = `Bedankt voor je ${form?.noun ?? "aanmelding"} | Lumen Yoga`;
-    // Conversie voor GTM/GA en advertentiecampagnes: één event per bedanktpagina.
-    if (form) trackEvent("aanmelding_verstuurd", { formulier: form.slug });
+    // Conversie voor GTM/GA en advertentiecampagnes: één keer per verzonden formulier,
+    // dus niet opnieuw bij verversen of een direct bezoek aan /bedankt.
+    if (form && takeSubmitted(form.slug)) {
+      trackEvent("aanmelding_verstuurd", { formulier: form.slug });
+      // De bestaande GTM-container koppelt `form_submit` aan GA4 en de Google Ads-conversie.
+      trackEvent("form_submit", { formulier: form.slug });
+    }
   }, [form]);
 
   return (
