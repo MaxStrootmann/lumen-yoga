@@ -25,15 +25,27 @@ export default function IntroImages({
 }) {
   return (
     <div>
-      <FixedImage>
+      {/* Op mobiel een korte, stilstaande uitsnede rond de handen op de rug,
+          zodat je snel bij Ons aanbod bent (Ellen, 7 okt 2026). */}
+      <div className="h-[42svh] w-full overflow-hidden bg-stone-200 lg:hidden">
         <CldImage
           src={image}
           alt="Masseren"
-          loading="eager"
-          sizes="(min-width: 1024px) 100vw, (orientation: portrait) 73vh, 100vw"
-          className="lg:object-[50%_65%]"
+          sizes="100vw"
+          className="h-full w-full object-cover object-[50%_66%]"
         />
-      </FixedImage>
+      </div>
+      <div className="hidden lg:block">
+        <FixedImage>
+          <CldImage
+            src={image}
+            alt="Masseren"
+            loading="eager"
+            sizes="100vw"
+            className="lg:object-[50%_65%]"
+          />
+        </FixedImage>
+      </div>
       <div className="px-2 pt-4">
         <OfferCarousel cards={offers} sectionTitle={sectionTitle} />
       </div>

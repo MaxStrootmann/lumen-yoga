@@ -55,6 +55,8 @@ export interface RegistrationForm {
   metaDescription?: string;
   /** "aanvraag" voor scholen en opvang; standaard "aanmelding". */
   noun?: string;
+  /** Tekst op de verstuurknop; standaard volgt die uit noun. */
+  submitLabel?: string;
   intro: readonly string[];
   sections?: readonly PageSection[];
   info: readonly InfoRow[];
@@ -83,55 +85,36 @@ export const TERMS_URL =
 
 export const REGISTRATION_FORMS: readonly RegistrationForm[] = [
   {
+    // Was de woensdagles. Ellen stopte daar op 11 okt 2026 mee; het adres
+    // /aanmelden/kinderyoga blijft, zodat bestaande links en campagnes werken.
     slug: "kinderyoga",
-    title: "Kinderyoga op woensdagmiddag",
+    title: "Kinderyoga-workshops",
+    pageTitle: "Kinderyoga-workshops in Schagen | Lumen Yoga",
+    submitLabel: "Hou me op de hoogte",
     intro: [
-      "Elke woensdagmiddag kinderyoga voor kinderen van 4 t/m 12 jaar in het YPHS Huis in Schagen.",
+      "Kinderyoga-workshops voor kinderen van 4 t/m 12 jaar in het YPHS Huis in Schagen. We bewegen, spelen, ademen en ontspannen, zonder winnen of prestatiedruk.",
+      "De nieuwe data volgen binnenkort. Laat je gegevens achter, dan hoor je ze als eerste.",
     ],
     info: [
-      { label: "Wanneer", lines: ["Woensdag 15.45 – 16.45 uur", "Nieuwe reeks vanaf 21 oktober"] },
-      {
-        label: "Lesdata",
-        lines: ["21 en 28 oktober", "4, 18 en 25 november (niet op 11 november)", "2, 9 en 16 december"],
-      },
-      { label: "Groep", lines: ["4 t/m 12 jaar, samen in één groep"] },
+      { label: "Wanneer", lines: ["Nieuwe data volgen binnenkort"] },
+      { label: "Groep", lines: ["4 t/m 12 jaar"] },
       LOCATION,
     ],
-    prices: [
-      { label: "Proeflespakket", note: "2 lessen", price: "€15" },
-      { label: "Losse les", note: "Als er plek is", price: "€12,50" },
-      { label: "Strippenkaart", note: "10 lessen, 6 maanden geldig (€11,50 per les)", price: "€115" },
-      { label: "Lessenreeks", note: "Instromen kan altijd, het tarief passen we dan aan", price: "€9,50 per les" },
-    ],
+    prices: [],
     notes: [
-      "Beperkt aantal plaatsen. De reeks gaat door vanaf 3 aanmeldingen.",
-      "Bij meer aanmeldingen splitsen we de groep: 4 t/m 7 jaar om 14.30 uur en 8 t/m 12 jaar om 15.45 uur.",
+      "Je zit nergens aan vast. Zodra de data bekend zijn, krijg je een berichtje en kies je zelf of je je kind aanmeldt.",
     ],
     fields: [
-      { name: "kind", label: "Naam en leeftijd van je kind", type: "text", required: true },
       { name: "ouder", label: "Jouw naam", type: "text", required: true },
+      { name: "kind", label: "Naam en leeftijd van je kind", type: "text", required: true },
       { name: "email", label: "E-mailadres", type: "email", required: true },
-      { name: "telefoon", label: "Telefoonnummer", type: "tel", required: true },
-      {
-        name: "keuze",
-        label: "Ik kies voor",
-        type: "radio",
-        required: true,
-        options: [
-          "Proeflespakket - 2 lessen voor €15",
-          "Losse les - €12,50 per les",
-          "Strippenkaart - €11,50 per les",
-          "Lessenreeks - €9,50 per les",
-        ],
-      },
-      { name: "fotos", label: PHOTO_CONSENT, type: "radio", required: true, options: ["Ja", "Nee"] },
+      { name: "telefoon", label: "Telefoonnummer", type: "tel" },
       { name: "opmerkingen", label: "Vragen of opmerkingen", type: "textarea" },
       NEWSLETTER_FIELD,
-      { name: "voorwaarden", label: TERMS, type: "consent", required: true },
     ],
     nameField: "ouder",
     confirmation:
-      "Super leuk dat je jouw kind hebt aangemeld voor kinderyoga op de woensdagmiddag! Ik neem zo snel mogelijk contact met je op voor meer informatie en om de betaling te regelen.",
+      "Super leuk dat je interesse hebt in de kinderyoga-workshops! Zodra de data bekend zijn, hoor je het als eerste van mij.",
   },
   {
     slug: "ouder-kindyoga",
@@ -160,7 +143,6 @@ export const REGISTRATION_FORMS: readonly RegistrationForm[] = [
     notes: [
       "Is je kind 4? Kies de groep die het beste past. Twijfel je, app Ellen dan even.",
       "De les gaat door vanaf 3 aanmeldingen.",
-      "Buiten de vakanties is er elke woensdagmiddag kinderyoga.",
     ],
     fields: [
       { name: "naam", label: "Naam ouder/verzorger en kind", type: "text", required: true },

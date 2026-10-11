@@ -319,6 +319,8 @@ type InstagramPost = {
   id: string;
   permalink: string;
   imageUrl: string;
+  /** Alleen bij filmpjes: het mp4-bestand, voor afspelen bij hover. */
+  videoUrl?: string;
   caption: string;
   mediaType: string;
   timestamp?: string;
@@ -395,6 +397,7 @@ async function handleInstagram(): Promise<Response> {
         id: item.id,
         permalink: item.permalink,
         imageUrl: (item.media_type === "VIDEO" ? item.thumbnail_url : item.media_url) ?? "",
+        videoUrl: item.media_type === "VIDEO" ? item.media_url : undefined,
         caption: item.caption ?? "",
         mediaType: item.media_type,
         timestamp: item.timestamp,

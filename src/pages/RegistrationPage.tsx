@@ -3,7 +3,7 @@ import { useEffect, useState, type FormEvent } from "react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Textarea } from "~/components/ui/textarea";
-import { DEFAULT_HOME } from "~/lib/default-content";
+import CertificationBadge from "~/components/CertificationBadge";
 import { markSubmitted, trackEvent } from "~/lib/tracking";
 import {
   TERMS_URL,
@@ -190,34 +190,6 @@ function FormInfo({ form }: { form: RegistrationForm }) {
   );
 }
 
-/** Keurmerk van de Kinderyoga Academie, hetzelfde als in "Over mij" op de homepage. */
-function Certification() {
-  const certification = DEFAULT_HOME.about.certification;
-  return (
-    <a
-      href={certification.url}
-      target="_blank"
-      rel="noreferrer"
-      onClick={() => trackEvent("certificaat_klik")}
-      className="group mt-6 inline-flex items-center gap-4"
-    >
-      <img
-        src={certification.seal.url}
-        alt={certification.seal.alt}
-        width={96}
-        height={96}
-        loading="lazy"
-        decoding="async"
-        className="h-24 w-24 shrink-0 transition-transform group-hover:scale-105"
-      />
-      <span className="flex flex-col leading-tight">
-        <span className="font-bold">{certification.title}</span>
-        <span className="pt-1 text-sm group-hover:underline">{certification.issuer}</span>
-      </span>
-    </a>
-  );
-}
-
 /** Vooraf kiezen via de URL, bijvoorbeeld ?groep=peuters vanaf de aanbodkaart. */
 function initialValues(form: RegistrationForm): RegistrationValues {
   const params = new URLSearchParams(window.location.search);
@@ -239,7 +211,8 @@ export default function RegistrationPage({ form }: { form: RegistrationForm }) {
   const [honeypot, setHoneypot] = useState("");
   const [startedAt] = useState(() => Date.now());
   const [opened, setOpened] = useState<string[]>([]);
-  const submitLabel = form.noun === "aanvraag" ? "Aanvraag versturen" : "Aanmelding versturen";
+  const submitLabel =
+    form.submitLabel ?? (form.noun === "aanvraag" ? "Aanvraag versturen" : "Aanmelding versturen");
 
   useEffect(() => {
     document.title = form.pageTitle ?? `Aanmelden: ${form.title} | Lumen Yoga`;
@@ -315,7 +288,7 @@ export default function RegistrationPage({ form }: { form: RegistrationForm }) {
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
-          {section.certification ? <Certification /> : null}
+          {section.certification ? <CertificationBadge /> : null}
         </section>
       ))}
 

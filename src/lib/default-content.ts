@@ -27,7 +27,7 @@ export const DEFAULT_HEADER = {
   facebookUrl: 'https://www.facebook.com/profile.php?id=100091839270911',
   primaryCTA: {
     label: 'Aanmelden',
-    url: '/aanmelden/kinderyoga',
+    url: '#aanbod',
   },
   navItems: [
     { label: 'Home', link: '/' },
@@ -70,7 +70,7 @@ export const DEFAULT_HOME = {
       'Laat kinderen kennismaken met yoga, meditatie en mindfulness. Geef kinderen de tools waar ze de rest van hun leven profijt van hebben.',
     primaryCTA: {
       label: 'Aanmelden',
-      url: '/aanmelden/kinderyoga',
+      url: '#aanbod',
     },
     secondaryCTA: {
       label: 'Meer info',
@@ -97,42 +97,48 @@ export const DEFAULT_HOME = {
     sectionTitle: 'Ons aanbod',
     items: [
       {
-        color: 'yellow',
-        title: 'Ouder-kindyoga\n4 t/m 12 jaar',
-        time: '10.30 - 11.30 uur',
-        body:
-          'Op de laatste zaterdag van elke schoolvakantie\n\nLocatie: YPHS Huis / Zijperweg 9 / Schagen\n\nTarief: €20 per ouder-kindduo\nMet z’n vieren? Betaal samen slechts €30!',
-        buttonLabel: 'Aanmelden',
-        buttonUrl:
-          '/aanmelden/ouder-kindyoga?groep=kinderen',
-      },
-      {
         color: 'blue',
         title: 'Ouder-kind peuteryoga\n2 t/m 4 jaar',
         time: '9.30 - 10.15 uur',
         body:
-          'Op de laatste zaterdag van elke schoolvakantie\n\nLocatie: YPHS Huis / Zijperweg 9 / Schagen\n\nTarief: €20 per ouder-kindduo\nMet z’n vieren? Betaal samen slechts €30!',
+          'Op de laatste zaterdag van elke schoolvakantie\n\nLocatie: Zijperweg 9 in Schagen\n\nTarief: €20 per ouder-kindduo\nMet z’n vieren?\nBetaal samen slechts €30!',
         buttonLabel: 'Aanmelden',
         buttonUrl: '/aanmelden/ouder-kindyoga?groep=peuters',
       },
       {
-        color: 'magenta',
-        title: 'Kinderyoga\n4 t/m 12 jaar',
-        time: '15.45 - 16.45 uur',
+        color: 'yellow',
+        title: 'Ouder-kindyoga\n4 t/m 12 jaar',
+        time: '10.30 - 11.30 uur',
         body:
-          'Elke woensdagmiddag\n\nVoorlopig één groep. Bij meer aanmeldingen splitsen we weer in 4 t/m 7 en 8 t/m 12 jaar.\n\nLocatie: YPHS Huis / Zijperweg 9 / Schagen\n\nTarief: vanaf €9,50 per les',
+          'Op de laatste zaterdag van elke schoolvakantie\n\nLocatie: Zijperweg 9 in Schagen\n\nTarief: €20 per ouder-kindduo\nMet z’n vieren?\nBetaal samen slechts €30!',
         buttonLabel: 'Aanmelden',
-        buttonUrl:
-          '/aanmelden/kinderyoga',
+        buttonUrl: '/aanmelden/ouder-kindyoga?groep=kinderen',
+      },
+      {
+        color: 'magenta',
+        title: 'Kinderyoga-workshops\n4 t/m 12 jaar',
+        time: 'nieuwe data volgen',
+        body:
+          'Een speelse workshop met yoga, ademhaling en ontspanning\n\nLocatie: Zijperweg 9 in Schagen\n\nLaat je gegevens achter, dan hoor je de data als eerste',
+        buttonLabel: 'Hou me op de hoogte',
+        buttonUrl: '/aanmelden/kinderyoga',
       },
       {
         color: 'green',
         title: 'Kinderyoga op locatie',
         time: 'op aanvraag',
-        body: 'Voor school, kinderopvang, bibliotheek, boekhandel of kinderfeestje',
+        body: 'Voor kinderdagverblijf, school, buurthuis, evenement of kinderfeestje',
         buttonLabel: 'Meer info',
-        buttonUrl:
-          '/aanmelden/workshop',
+        buttonUrl: '/aanmelden/workshop',
+      },
+      {
+        color: 'purple',
+        title: 'Scholen en kinderopvang',
+        time: 'lespakket op maat',
+        body:
+          'Peuterlessen bij het VVE-thema en Schoolverlichting in de klas\n\nIn jullie eigen ruimte, afgestemd op de groep',
+        buttonLabel: 'Meer info',
+        buttonUrl: '/scholen-en-kinderopvang',
       },
     ],
   },
@@ -167,7 +173,6 @@ export const DEFAULT_HOME = {
     certification: {
       title: 'Gecertificeerd kinderyogadocent',
       issuer: 'Kinderyoga Academie · Helen Purperhart',
-      url: 'https://kinderyoga.nl/opleiding/',
       seal: {
         url: '/images/keurmerk-kinderyoga-academie.png',
         alt: 'Keurmerk Kinderyoga Academie, Helen Purperhart gecertificeerd',

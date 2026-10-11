@@ -1,8 +1,7 @@
 "use client";
 
 import type { MediaLike } from "~/lib/media";
-import { trackEvent } from "~/lib/tracking";
-
+import CertificationBadge from "./CertificationBadge";
 import CldImage from "./CldImage";
 import ReadMore from "./ReadMore";
 
@@ -17,7 +16,6 @@ export default function About({
   certification?: {
     title: string;
     issuer: string;
-    url: string;
     seal?: { url: string; alt: string };
   };
   heading: string;
@@ -60,33 +58,7 @@ export default function About({
                   </p>
                 ))}
               </ReadMore>
-              {certification ? (
-                <a
-                  href={certification.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={() => trackEvent("certificaat_klik")}
-                  className="group mt-6 inline-flex items-center gap-4"
-                >
-                  {certification.seal ? (
-                    <img
-                      src={certification.seal.url}
-                      alt={certification.seal.alt}
-                      width={112}
-                      height={112}
-                      loading="lazy"
-                      decoding="async"
-                      className="h-24 w-24 shrink-0 transition-transform group-hover:scale-105 lg:h-28 lg:w-28"
-                    />
-                  ) : null}
-                  <span className="flex flex-col leading-tight">
-                    <span className="font-bold">{certification.title}</span>
-                    <span className="pt-1 text-sm group-hover:underline">
-                      {certification.issuer}
-                    </span>
-                  </span>
-                </a>
-              ) : null}
+              {certification ? <CertificationBadge /> : null}
             </div>
           </div>
 

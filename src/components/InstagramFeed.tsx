@@ -1,7 +1,14 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type MouseEvent } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { FaInstagram } from "react-icons/fa";
-import { IoChevronBack, IoChevronForward, IoCopy, IoPlay } from "react-icons/io5";
+import {
+  IoChevronBack,
+  IoChevronForward,
+  IoCopy,
+  IoPlay,
+  IoVolumeHigh,
+  IoVolumeMute,
+} from "react-icons/io5";
 
 import { trackEvent } from "~/lib/tracking";
 
@@ -11,6 +18,8 @@ type InstagramPost = {
   id: string;
   permalink: string;
   imageUrl: string;
+  /** Alleen bij filmpjes uit de live feed. */
+  videoUrl?: string;
   caption: string;
   mediaType?: "IMAGE" | "VIDEO" | "CAROUSEL_ALBUM";
   timestamp?: string;
@@ -43,6 +52,128 @@ function prefersReducedMotion(): boolean {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
+/** Alleen met een muis: op een telefoon opent een tik gewoon de post. */
+function canHover(): boolean {
+  return window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+}
+
+/**
+ * Een Instagram-kaart. Bij een filmpje speelt de reel zolang de muis erop staat,
+ * met geluid als de browser dat toestaat. Browsers laten geluid pas toe nadat de
+ * bezoeker iets op de pagina heeft aangeklikt; anders speelt hij zonder geluid en
+ * zet de luidsprekerknop het geluid aan (Ellen, 7 okt 2026).
+ */
+function InstagramCard({
+  post,
+  shadowColor,
+  soundWanted,
+  onSoundWantedChange,
+}: {
+  post: InstagramPost;
+  shadowColor: string;
+  soundWanted: boolean;
+  onSoundWantedChange: (wanted: boolean) => void;
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [playing, setPlaying] = useState(false);
+  const [muted, setMuted] = useState(true);
+  const teaser = captionTeaser(post.caption);
+  const age = postAge(post.timestamp);
+  const hasVideo = Boolean(post.videoUrl);
+
+  const start = () => {
+    if (!hasVideo || !canHover()) return;
+    setPlaying(true);
+  };
+
+  const stop = () => {
+    videoRef.current?.pause();
+    setPlaying(false);
+  };
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!playing || !video) return;
+    video.muted = !soundWanted;
+    setMuted(video.muted);
+    video.play().catch(() => {
+      // Geen geluid toegestaan: dan zonder geluid, met de knop om het aan te zetten.
+      video.muted = true;
+      setMuted(true);
+      void video.play().catch(() => setPlaying(false));
+    });
+    trackEvent("instagram_reel_hover");
+  }, [playing, soundWanted]);
+
+  const toggleSound = (event: MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+    const video = videoRef.current;
+    if (!video) return;
+    const next = !video.muted;
+    video.muted = next;
+    setMuted(next);
+    onSoundWantedChange(!next);
+    if (video.paused) void video.play().catch(() => undefined);
+  };
+
+  return (
+    <div
+      className="group relative aspect-[4/5] overflow-hidden rounded-3xl border-2 border-black bg-white transition duration-300 hover:-translate-x-1 hover:-translate-y-1"
+      style={{ boxShadow: `6px 6px 0 ${shadowColor}` }}
+      onMouseEnter={start}
+      onMouseLeave={stop}
+    >
+      <a
+        href={post.permalink}
+        target="_blank"
+        rel="noreferrer"
+        onClick={() => trackEvent("instagram_post_klik")}
+        className="block h-full w-full"
+      >
+        <img
+          src={post.imageUrl}
+          alt={teaser ? teaser.slice(0, 140) : "Instagram-post van Lumen Yoga"}
+          loading="lazy"
+          decoding="async"
+          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+        />
+        {playing && post.videoUrl ? (
+          <video
+            ref={videoRef}
+            src={post.videoUrl}
+            poster={post.imageUrl}
+            loop
+            playsInline
+            preload="auto"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        ) : null}
+        {teaser ? (
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent px-4 pb-4 pt-12 text-white">
+            <p className="line-clamp-2 text-sm font-semibold leading-snug">{teaser}</p>
+            {age ? <p className="pt-1 text-xs text-white/75">{age}</p> : null}
+          </div>
+        ) : null}
+      </a>
+      {playing ? (
+        <button
+          type="button"
+          onClick={toggleSound}
+          aria-label={muted ? "Geluid aan" : "Geluid uit"}
+          className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-sm transition hover:bg-black/80"
+        >
+          {muted ? <IoVolumeMute size={18} /> : <IoVolumeHigh size={18} />}
+        </button>
+      ) : post.mediaType && post.mediaType !== "IMAGE" ? (
+        <span className="pointer-events-none absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-sm">
+          {post.mediaType === "VIDEO" ? <IoPlay size={16} /> : <IoCopy size={16} />}
+        </span>
+      ) : null}
+    </div>
+  );
+}
+
 /**
  * Nieuwste Instagram-posts via /api/instagram. Met token komen ze live uit de
  * officiële Instagram API; zonder token toont de server een momentopname.
@@ -54,6 +185,7 @@ export default function InstagramFeed() {
   const [snapCount, setSnapCount] = useState(0);
   const [paused, setPaused] = useState(false);
   const [inView, setInView] = useState(false);
+  const [soundWanted, setSoundWanted] = useState(true);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -175,48 +307,19 @@ export default function InstagramFeed() {
         >
           <div ref={emblaRef} className="overflow-visible px-4 lg:overflow-hidden lg:px-0">
             <div className="-ml-5 flex touch-pan-y">
-              {posts.map((post, index) => {
-                const teaser = captionTeaser(post.caption);
-                const age = postAge(post.timestamp);
-                return (
-                  <div
-                    key={post.id}
-                    className="min-w-0 shrink-0 grow-0 basis-[78%] pb-3 pl-5 pr-2 sm:basis-[45%] md:basis-[34%] lg:basis-1/4"
-                  >
-                    <a
-                      href={post.permalink}
-                      target="_blank"
-                      rel="noreferrer"
-                      onClick={() => trackEvent("instagram_post_klik")}
-                      className="group relative block aspect-[4/5] overflow-hidden rounded-3xl border-2 border-black bg-white transition duration-300 hover:-translate-x-1 hover:-translate-y-1"
-                      style={{
-                        boxShadow: `6px 6px 0 ${SHADOW_COLORS[index % SHADOW_COLORS.length]}`,
-                      }}
-                    >
-                      <img
-                        src={post.imageUrl}
-                        alt={teaser ? teaser.slice(0, 140) : "Instagram-post van Lumen Yoga"}
-                        loading="lazy"
-                        decoding="async"
-                        className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                      />
-                      {post.mediaType && post.mediaType !== "IMAGE" ? (
-                        <span className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-black/60 text-white backdrop-blur-sm">
-                          {post.mediaType === "VIDEO" ? <IoPlay size={16} /> : <IoCopy size={16} />}
-                        </span>
-                      ) : null}
-                      {teaser ? (
-                        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent px-4 pb-4 pt-12 text-white">
-                          <p className="line-clamp-2 text-sm font-semibold leading-snug">
-                            {teaser}
-                          </p>
-                          {age ? <p className="pt-1 text-xs text-white/75">{age}</p> : null}
-                        </div>
-                      ) : null}
-                    </a>
-                  </div>
-                );
-              })}
+              {posts.map((post, index) => (
+                <div
+                  key={post.id}
+                  className="min-w-0 shrink-0 grow-0 basis-[78%] pb-3 pl-5 pr-2 sm:basis-[45%] md:basis-[34%] lg:basis-1/4"
+                >
+                  <InstagramCard
+                    post={post}
+                    shadowColor={SHADOW_COLORS[index % SHADOW_COLORS.length] ?? "#EFAD5B"}
+                    soundWanted={soundWanted}
+                    onSoundWantedChange={setSoundWanted}
+                  />
+                </div>
+              ))}
             </div>
           </div>
 
